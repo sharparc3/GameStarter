@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GameStarter">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="GameStarter\GameManagers">
+      <UniqueIdentifier>{0fc7e5d6-3d8a-4c72-ae1e-f86b8a0eec63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStarter\GameMaterials">
+      <UniqueIdentifier>{d14adc3a-b3e4-4c05-ba7b-d0a0c79f7517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStarter\GameStates">
+      <UniqueIdentifier>{bfbdde6c-89e2-4b98-850f-ee14e8d69334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStarter\Utilities">
+      <UniqueIdentifier>{5a5732d7-4e51-4d59-93b2-5b5194b8dc76}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameStarter\GameStateBase.cpp">
+      <Filter>GameStarter\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\GameStateMachine.cpp">
+      <Filter>GameStarter\GameManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\main.cpp">
+      <Filter>GameStarter</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\Game.cpp">
+      <Filter>GameStarter</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\GSIntro.cpp">
+      <Filter>GameStarter\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\GSMenu.cpp">
+      <Filter>GameStarter\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\GSPlay.cpp">
+      <Filter>GameStarter\GameStates</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameStarter\GameStateMachine.h">
+      <Filter>GameStarter\GameManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\GameStateBase.h">
+      <Filter>GameStarter\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Global.h">
+      <Filter>GameStarter\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\SingletonDclp.h">
+      <Filter>GameStarter\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Game.h">
+      <Filter>GameStarter</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\GSIntro.h">
+      <Filter>GameStarter\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\GSMenu.h">
+      <Filter>GameStarter\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\GSPlay.h">
+      <Filter>GameStarter\GameStates</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
