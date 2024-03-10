@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_events.h>
 #include "Global.h"
 
 class GameStateBase
@@ -18,10 +18,12 @@ public:
 	virtual void Resume() = 0;
 	virtual void Exit() = 0;
 
-	virtual void OnKey(int keyCode, bool pressed) = 0;
-	virtual void OnMouseClick(int button, bool pressed, int xPos, int yPos) = 0;
-	virtual void OnMouseMove(int xPos, int yPos) = 0;
-	virtual void OnMouseScroll(float dirX, float dirY, int xPos, int yPos) = 0;
+	virtual void OnKeyDown(const SDL_KeyboardEvent& keyevent) = 0;
+	virtual void OnKeyUp(const SDL_KeyboardEvent& keyevent) = 0;
+	virtual void OnMouseDown(const SDL_MouseButtonEvent& mouseevent) = 0;
+	virtual void OnMouseUp(const SDL_MouseButtonEvent& mouseevent) = 0;
+	virtual void OnMouseMove(const SDL_MouseMotionEvent& motionevent) = 0;
+	virtual void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent) = 0;
 
 protected:
 	GameStateType m_GameStateType;

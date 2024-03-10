@@ -59,6 +59,7 @@ void GameStateMachine::Update()
     {
         m_pActiveState->Pause();
         m_pActiveState = m_pNextState;
+        m_pActiveState->Init();
         m_pNextState = nullptr;
     }
     if (m_exit)
@@ -73,6 +74,12 @@ void GameStateMachine::Update()
 void GameStateMachine::Exit()
 {
     m_exit = true;
+}
+
+bool GameStateMachine::HasState()
+{
+    if (m_pActiveState) return true;
+    return false;
 }
 
 std::shared_ptr<GameStateBase> GameStateMachine::GetCurrentState()

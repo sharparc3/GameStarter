@@ -10,6 +10,7 @@ GSMenu::~GSMenu()
 
 void GSMenu::Init()
 {
+	std::cout << "Switched to menu state.\n";
 }
 
 void GSMenu::Update(float deltaTime)
@@ -32,18 +33,36 @@ void GSMenu::Exit()
 {
 }
 
-void GSMenu::OnKey(int keyCode, bool pressed)
+void GSMenu::OnKeyDown(const SDL_KeyboardEvent& keyevent)
 {
 }
 
-void GSMenu::OnMouseClick(int button, bool pressed, int xPos, int yPos)
+void GSMenu::OnKeyUp(const SDL_KeyboardEvent& keyevent)
 {
 }
 
-void GSMenu::OnMouseMove(int xPos, int yPos)
+void GSMenu::OnMouseDown(const SDL_MouseButtonEvent& mouseevent)
 {
 }
 
-void GSMenu::OnMouseScroll(float dirX, float dirY, int xPos, int yPos)
+void GSMenu::OnMouseUp(const SDL_MouseButtonEvent& mouseevent)
+{
+	switch (mouseevent.button)
+	{
+	case SDL_BUTTON_RIGHT:
+		std::cout << "State popped: Menu.\n";
+		GameStateMachine::GetInstance()->PopState();
+		break;
+	default:
+		break;
+	}
+}
+
+void GSMenu::OnMouseMove(const SDL_MouseMotionEvent& motionevent)
 {
 }
+
+void GSMenu::OnMouseScroll(const SDL_MouseWheelEvent& wheelevent)
+{
+}
+

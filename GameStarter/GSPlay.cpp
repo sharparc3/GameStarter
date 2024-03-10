@@ -32,18 +32,26 @@ void GSPlay::Exit()
 {
 }
 
-void GSPlay::OnKey(int keyCode, bool pressed)
+void GSPlay::OnKeyDown(const SDL_KeyboardEvent& keyevent)
 {
 }
 
-void GSPlay::OnMouseClick(int button, bool pressed, int xPos, int yPos)
+void GSPlay::OnKeyUp(const SDL_KeyboardEvent& keyevent)
 {
 }
 
-void GSPlay::OnMouseMove(int xPos, int yPos)
+void GSPlay::OnMouseDown(const SDL_MouseButtonEvent& mouseevent)
 {
 }
 
-void GSPlay::OnMouseScroll(float dirX, float dirY, int xPos, int yPos)
+void GSPlay::OnMouseUp(const SDL_MouseButtonEvent& mouseevent)
+{
+}
+
+void GSPlay::OnMouseMove(const SDL_MouseMotionEvent& motionevent)
+{
+}
+
+void GSPlay::OnMouseScroll(const SDL_MouseWheelEvent& wheelevent)
 {
 }

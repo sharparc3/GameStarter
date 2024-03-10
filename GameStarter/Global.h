@@ -12,7 +12,8 @@ enum class GameStateType
 {
 	STATE_INTRO,
 	STATE_MENU,
-	STATE_PLAY
+	STATE_PLAY,
+	UNDEFINED
 };
 
 namespace MouseButton

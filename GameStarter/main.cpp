@@ -6,25 +6,17 @@
 #include <string>
 #include <chrono>
 #include <glm/glm.hpp>
+#include "GameStateMachine.h"
 
-void DrawSomething()
-{
-    // Clear the screen (with a nice blue color)
-    glClearColor(0.2f, 0.3f, 0.8f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    // --- Your drawing code starts here --- 
-
-    // Example: Draw a white triangle
-    glBegin(GL_TRIANGLES);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex2f(-0.5f, -0.5f);
-    glVertex2f(0.5f, -0.5f);
-    glVertex2f(0.0f, 0.5f);
-    glEnd();
-
-    // --- End of drawing code ---
-}
+void Init();
+void Draw();
+void Update(float deltaTime);
+void OnKeyDown(const SDL_KeyboardEvent& keyevent);
+void OnKeyUp(const SDL_KeyboardEvent& keyevent);
+void OnMouseDown(const SDL_MouseButtonEvent& mouseevent);
+void OnMouseUp(const SDL_MouseButtonEvent& mouseevent);
+void OnMouseMove(const SDL_MouseMotionEvent& motionevent);
+void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent);
 
 void CleanUp(SDL_GLContext glContext, SDL_Window* window)
 {
@@ -38,10 +30,13 @@ void CleanUp(SDL_GLContext glContext, SDL_Window* window)
         SDL_DestroyWindow(window);
     }
 
+    // Free game state machine
+    GameStateMachine::Destruct();
     // Quit SDL
     Mix_Quit();
     TTF_Quit();
     SDL_Quit();
+
 }
 
 int main(int argc, char** argv)
@@ -85,8 +80,10 @@ int main(int argc, char** argv)
     std::cout << "GLAD initialized successfully!" << std::endl;
     std::cout << "OpenGL version: " << (char*)glGetString(GL_VERSION) << std::endl;
 
+    // Init game state machine
+    Init();
+
     // Main loop
-    bool quit = false;
     auto lastTime = std::chrono::steady_clock::now();
     auto curTime = std::chrono::steady_clock::now();
     std::chrono::duration<double, std::milli> durationMicro;
@@ -95,25 +92,136 @@ int main(int argc, char** argv)
 
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-    while (!quit)
+    while (GameStateMachine::GetInstance()->IsRunning())
     {
+        // TODO: event queue
         while (SDL_PollEvent(&event))
         {
-            if (event.type == SDL_QUIT)
-                quit = true;
+            switch (event.type)
+            {
+            case SDL_MOUSEMOTION:
+                // mouse movement
+                OnMouseMove(event.motion);
+                break;
+
+            case SDL_MOUSEBUTTONDOWN:
+                // mouse button pressed
+                OnMouseDown(event.button);
+                break;
+
+            case SDL_MOUSEBUTTONUP:
+                // mouse button released
+                OnMouseUp(event.button);
+                break;
+
+            case SDL_KEYDOWN:
+                // key pressed
+                OnKeyDown(event.key);
+                break;
+
+            case SDL_KEYUP:
+                // key released
+                OnKeyUp(event.key);
+                break;
+
+            case SDL_QUIT:
+                GameStateMachine::GetInstance()->Exit();
+                break;
+
+            default:
+                break;
+            }
         }
         auto curTime = std::chrono::steady_clock::now();
         durationMicro = curTime - lastTime;
         deltaTime = durationMicro.count() / 1000;
         lastTime = curTime;
+
         // Render using OpenGL here
-        //std::cout << 1 / deltaTime << "\n";
-        DrawSomething();
+        Update(deltaTime);
+        Draw();
+
         SDL_GL_SwapWindow(window);
-        glClear(GL_COLOR_BUFFER_BIT);
     }
 
+    GameStateMachine::GetInstance()->CleanUp();
     CleanUp(glContext, window);
 
     return 0;
+}
+
+void Init()
+{
+    GameStateMachine::Construct();
+    GameStateMachine::GetInstance()->Init();
+    GameStateMachine::GetInstance()->PushState(GameStateType::STATE_INTRO);
+}
+
+void Draw()
+{
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->Draw();
+    }
+}
+
+void Update(float deltaTime)
+{
+    // update state change
+    GameStateMachine::GetInstance()->Update();
+    // get current game state and update
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->Update(deltaTime);
+    }
+}
+
+void OnKeyDown(const SDL_KeyboardEvent& keyevent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnKeyDown(keyevent);
+    }
+}
+
+void OnKeyUp(const SDL_KeyboardEvent& keyevent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnKeyUp(keyevent);
+    }
+}
+
+void OnMouseDown(const SDL_MouseButtonEvent& mouseevent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnMouseDown(mouseevent);
+    }
+}
+
+void OnMouseUp(const SDL_MouseButtonEvent& mouseevent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnMouseUp(mouseevent);
+    }
+}
+
+void OnMouseMove(const SDL_MouseMotionEvent& motionevent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnMouseMove(motionevent);
+    }
+}
+
+void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnMouseScroll(wheelevent);
+    }
 }

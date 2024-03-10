@@ -3,6 +3,7 @@
 #include <memory>
 #include "SingletonDclp.h"
 #include "Global.h"
+#include "GameStateBase.h"
 
 class GameStateBase;
 
@@ -15,8 +16,9 @@ public:
 	void PopState();
 	void Update();
 	void Exit();
+	bool HasState();
 	std::shared_ptr<GameStateBase> GetCurrentState();
-	inline bool IsRunning() { return m_exit; };
+	inline bool IsRunning() { return !m_exit; };
 
 private:
 	std::stack<std::shared_ptr<GameStateBase>> m_stateStack;

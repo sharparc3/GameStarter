@@ -3,7 +3,7 @@
 
 GameStateBase::GameStateBase()
 {
-
+	m_GameStateType = GameStateType::UNDEFINED;
 }
 
 GameStateBase::GameStateBase(GameStateType stateType) : m_GameStateType(stateType)
