@@ -2,6 +2,7 @@
 #include "GameStateBase.h"
 #include "GameStateMachine.h"
 #include <iostream>
+#include "glad/glad.h"
 
 class GSMenu final : public GameStateBase
 {

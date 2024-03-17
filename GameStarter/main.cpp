@@ -86,8 +86,8 @@ int main(int argc, char** argv)
     // Main loop
     auto lastTime = std::chrono::steady_clock::now();
     auto curTime = std::chrono::steady_clock::now();
-    std::chrono::duration<double, std::milli> durationMicro;
-    double deltaTime;
+    std::chrono::duration<float, std::milli> durationMicro;
+    float deltaTime;
     SDL_Event event;
 
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);

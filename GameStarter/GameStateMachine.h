@@ -26,7 +26,6 @@ private:
 	std::shared_ptr<GameStateBase> m_pNextState;
 	bool m_exit;
 
-private:
 };
 
 std::shared_ptr<GameStateBase> CreateGameState(GameStateType gameStateType);
