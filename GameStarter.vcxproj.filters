@@ -17,6 +17,18 @@
     <Filter Include="GameStarter\Utilities">
       <UniqueIdentifier>{5a5732d7-4e51-4d59-93b2-5b5194b8dc76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameStarter\GL">
+      <UniqueIdentifier>{97d6675c-b5f4-4e52-9581-960026260989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{47589cab-3a1c-4015-976c-c8baa591453c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Models">
+      <UniqueIdentifier>{cc68db0b-be10-42a2-8943-538c5dc05e5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders">
+      <UniqueIdentifier>{d7399330-afa5-4684-bc64-fb96f6fcb374}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameStarter\GameStateBase.cpp">
@@ -39,6 +51,18 @@
     </ClCompile>
     <ClCompile Include="GameStarter\GSPlay.cpp">
       <Filter>GameStarter\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\ResourcesManager.cpp">
+      <Filter>GameStarter\GameManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\Mesh.cpp">
+      <Filter>GameStarter\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\Shader.cpp">
+      <Filter>GameStarter\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\Texture.cpp">
+      <Filter>GameStarter\GL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,5 +90,31 @@
     <ClInclude Include="GameStarter\GSPlay.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
+    <ClInclude Include="GameStarter\ResourcesManager.h">
+      <Filter>GameStarter\GameManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Mesh.h">
+      <Filter>GameStarter\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Shader.h">
+      <Filter>GameStarter\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Texture.h">
+      <Filter>GameStarter\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Vertex.h">
+      <Filter>GameStarter\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\stb_image.h">
+      <Filter>GameStarter\Utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\sprite2d.frag">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\sprite2d.vert">
+      <Filter>Resources\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

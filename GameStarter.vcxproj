@@ -26,6 +26,10 @@
     <ClCompile Include="GameStarter\GSMenu.cpp" />
     <ClCompile Include="GameStarter\GSPlay.cpp" />
     <ClCompile Include="GameStarter\main.cpp" />
+    <ClCompile Include="GameStarter\Mesh.cpp" />
+    <ClCompile Include="GameStarter\ResourcesManager.cpp" />
+    <ClCompile Include="GameStarter\Shader.cpp" />
+    <ClCompile Include="GameStarter\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStarter\Game.h" />
@@ -35,7 +39,17 @@
     <ClInclude Include="GameStarter\GSIntro.h" />
     <ClInclude Include="GameStarter\GSMenu.h" />
     <ClInclude Include="GameStarter\GSPlay.h" />
+    <ClInclude Include="GameStarter\Mesh.h" />
+    <ClInclude Include="GameStarter\Shader.h" />
     <ClInclude Include="GameStarter\SingletonDclp.h" />
+    <ClInclude Include="GameStarter\ResourcesManager.h" />
+    <ClInclude Include="GameStarter\stb_image.h" />
+    <ClInclude Include="GameStarter\Texture.h" />
+    <ClInclude Include="GameStarter\Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\sprite2d.frag" />
+    <None Include="Resources\Shaders\sprite2d.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
