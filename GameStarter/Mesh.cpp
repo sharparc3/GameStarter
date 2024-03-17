@@ -29,7 +29,7 @@ GLboolean Mesh::LoadMesh(const std::string& filename)
     Vertex tempVertex{};
     for (GLuint i = 0; i < numVertices; i++)
     {
-        fscanf_s(file, "%*d. pos:[%f %f %f], uv:[%f %f]", &tempVertex.position.x, &tempVertex.position.y, &tempVertex.position.z, &tempVertex.uv.x, &tempVertex.uv.y);
+        fscanf_s(file, "%*d. pos:[%f, %f, %f], uv:[%f, %f]", &tempVertex.position.x, &tempVertex.position.y, &tempVertex.position.z, &tempVertex.uv.x, &tempVertex.uv.y);
         m_vertices.push_back(tempVertex);
     }
     
@@ -38,7 +38,7 @@ GLboolean Mesh::LoadMesh(const std::string& filename)
     fscanf_s(file, "%*s %d", &numIndices);
     for (GLuint i = 0; i < numIndices; i++)
     {
-        fscanf_s(file, "%d", &indice);
+        fscanf_s(file, "%d,", &indice);
         m_indices.push_back(indice);
     }
 
