@@ -7,6 +7,7 @@
 #include <cstdio>
 #include "Vertex.h"
 
+
 class Mesh
 {
 public:
@@ -16,6 +17,7 @@ public:
 	GLboolean LoadMesh(const std::string& filename);
 	GLuint GetVBOId() const;
 	GLuint GetIBOId() const;
+	GLuint GetNumIndices() const;
 
 public:
 	std::vector<Vertex> m_vertices;

@@ -1,11 +1,17 @@
 #pragma once
 #include <string>
-#include <SDL2/SDL_mouse.h>
+
+namespace Screen
+{
+	const int WIDTH = 960;
+	const int HEIGHT = 540;
+}
 
 namespace ResourcesPath
 {
-	const std::string TEXTURE = "/Data/Resources/Textures/";
-	const std::string MODEL = "/Data/Resources/Models/";
+	const std::string TEXTURE = "./Resources/Textures/";
+	const std::string MESH = "./Resources/Meshes/";
+	const std::string SHADER = "./Resources/Shaders/";
 }
 
 enum class GameStateType

@@ -1,7 +1,10 @@
 #pragma once
+#include <iostream>
 #include "GameStateBase.h"
 #include "GameStateMachine.h"
-#include <iostream>
+#include "ResourceManager.h"
+#include "Sprite2D.h"
+#include "Renderer.h"
 
 class GSIntro final : public GameStateBase
 {
@@ -25,4 +28,7 @@ public:
 	void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent) override;
 
 private:
+	std::shared_ptr<Sprite2D> m_sprite;
+	Renderer m_renderer;
+	Camera m_camera;
 };

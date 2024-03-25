@@ -7,6 +7,7 @@
 #include <chrono>
 #include <glm/glm.hpp>
 #include "GameStateMachine.h"
+#include "ResourceManager.h"
 
 void Init();
 void Draw();
@@ -42,7 +43,7 @@ void CleanUp(SDL_GLContext glContext, SDL_Window* window)
 int main(int argc, char** argv)
 {
     // Create an SDL window
-    SDL_Window* window = SDL_CreateWindow("GLAD Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("GLAD Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Screen::WIDTH, Screen::HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     if (!window)
     {
         std::cerr << "Failed to create SDL window: " << SDL_GetError() << std::endl;
@@ -136,7 +137,7 @@ int main(int argc, char** argv)
         durationMicro = curTime - lastTime;
         deltaTime = durationMicro.count() / 1000;
         lastTime = curTime;
-
+        
         // Render using OpenGL here
         Update(deltaTime);
         Draw();
@@ -145,6 +146,9 @@ int main(int argc, char** argv)
     }
 
     GameStateMachine::GetInstance()->CleanUp();
+    GameStateMachine::Destruct();
+    ResourceManager::GetInstance()->FreeAllResources();
+    ResourceManager::Destruct();
     CleanUp(glContext, window);
 
     return 0;
@@ -152,6 +156,7 @@ int main(int argc, char** argv)
 
 void Init()
 {
+    ResourceManager::Construct();
     GameStateMachine::Construct();
     GameStateMachine::GetInstance()->Init();
     GameStateMachine::GetInstance()->PushState(GameStateType::STATE_INTRO);

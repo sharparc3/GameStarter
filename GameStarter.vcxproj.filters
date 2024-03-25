@@ -52,9 +52,6 @@
     <ClCompile Include="GameStarter\GSPlay.cpp">
       <Filter>GameStarter\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\ResourcesManager.cpp">
-      <Filter>GameStarter\GameManagers</Filter>
-    </ClCompile>
     <ClCompile Include="GameStarter\Mesh.cpp">
       <Filter>GameStarter\GL</Filter>
     </ClCompile>
@@ -63,6 +60,21 @@
     </ClCompile>
     <ClCompile Include="GameStarter\Texture.cpp">
       <Filter>GameStarter\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\ResourceManager.cpp">
+      <Filter>GameStarter\GameManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\BaseObject.cpp">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\Camera.cpp">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\Renderer.cpp">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStarter\Sprite2D.cpp">
+      <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +102,6 @@
     <ClInclude Include="GameStarter\GSPlay.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\ResourcesManager.h">
-      <Filter>GameStarter\GameManagers</Filter>
-    </ClInclude>
     <ClInclude Include="GameStarter\Mesh.h">
       <Filter>GameStarter\GL</Filter>
     </ClInclude>
@@ -107,6 +116,21 @@
     </ClInclude>
     <ClInclude Include="GameStarter\stb_image.h">
       <Filter>GameStarter\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\ResourceManager.h">
+      <Filter>GameStarter\GameManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\BaseObject.h">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Camera.h">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Renderer.h">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStarter\Sprite2D.h">
+      <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

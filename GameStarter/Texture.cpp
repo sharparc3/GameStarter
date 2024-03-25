@@ -1,6 +1,5 @@
+#define STB_IMAGE_IMPLEMENTATION
 #include "Texture.h"
-
-
 
 Texture::Texture(const std::string& filePath) 
 {
@@ -10,6 +9,7 @@ Texture::Texture(const std::string& filePath)
 
 Texture::~Texture()
 {
+    glDeleteTextures(1, &m_iTextureID);
 }
 
 void Texture::Bind(GLuint textureUnit) 
@@ -39,7 +39,8 @@ void Texture::LoadImage(const std::string& filePath)
         {
             format = GL_RED;
         }
-        else if (nrChannels == 3)
+        else 
+        if (nrChannels == 3)
         {
             format = GL_RGB;
         }
@@ -55,6 +56,12 @@ void Texture::LoadImage(const std::string& filePath)
         // Load image data into the texture
         glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
+
+        GLenum error = glGetError();
+        if (error != GL_NO_ERROR)
+        {
+            std::cerr << "glTexImage2D error: " << error << std::endl;
+        }
 
         // Unbind texture
         glBindTexture(GL_TEXTURE_2D, 0);

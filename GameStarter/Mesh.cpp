@@ -9,6 +9,8 @@ Mesh::Mesh()
 
 Mesh::~Mesh()
 {
+    glDeleteBuffers(1, &m_iVBO);
+    glDeleteBuffers(1, &m_iIBO);
 }
 
 GLboolean Mesh::LoadMesh(const std::string& filename)
@@ -66,4 +68,9 @@ GLuint Mesh::GetVBOId() const
 GLuint Mesh::GetIBOId() const
 {
     return m_iIBO;
+}
+
+GLuint Mesh::GetNumIndices() const
+{
+    return m_numIndices;
 }

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameStarter\BaseObject.cpp" />
+    <ClCompile Include="GameStarter\Camera.cpp" />
     <ClCompile Include="GameStarter\Game.cpp" />
     <ClCompile Include="GameStarter\GameStateBase.cpp" />
     <ClCompile Include="GameStarter\GameStateMachine.cpp" />
@@ -27,11 +29,15 @@
     <ClCompile Include="GameStarter\GSPlay.cpp" />
     <ClCompile Include="GameStarter\main.cpp" />
     <ClCompile Include="GameStarter\Mesh.cpp" />
-    <ClCompile Include="GameStarter\ResourcesManager.cpp" />
+    <ClCompile Include="GameStarter\Renderer.cpp" />
+    <ClCompile Include="GameStarter\ResourceManager.cpp" />
     <ClCompile Include="GameStarter\Shader.cpp" />
+    <ClCompile Include="GameStarter\Sprite2D.cpp" />
     <ClCompile Include="GameStarter\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameStarter\BaseObject.h" />
+    <ClInclude Include="GameStarter\Camera.h" />
     <ClInclude Include="GameStarter\Game.h" />
     <ClInclude Include="GameStarter\GameStateBase.h" />
     <ClInclude Include="GameStarter\GameStateMachine.h" />
@@ -40,9 +46,11 @@
     <ClInclude Include="GameStarter\GSMenu.h" />
     <ClInclude Include="GameStarter\GSPlay.h" />
     <ClInclude Include="GameStarter\Mesh.h" />
+    <ClInclude Include="GameStarter\Renderer.h" />
+    <ClInclude Include="GameStarter\ResourceManager.h" />
     <ClInclude Include="GameStarter\Shader.h" />
     <ClInclude Include="GameStarter\SingletonDclp.h" />
-    <ClInclude Include="GameStarter\ResourcesManager.h" />
+    <ClInclude Include="GameStarter\Sprite2D.h" />
     <ClInclude Include="GameStarter\stb_image.h" />
     <ClInclude Include="GameStarter\Texture.h" />
     <ClInclude Include="GameStarter\Vertex.h" />

@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include <vector>
 
 Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
 {
@@ -9,6 +10,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
 
 Shader::~Shader()
 {
+	glDeleteProgram(m_iProgramId);
 }
 
 void Shader::Compile(const std::string& vertexSource, const std::string& fragmentSource)
@@ -38,17 +40,43 @@ void Shader::Compile(const std::string& vertexSource, const std::string& fragmen
 	// Attach compiled shaders to the program
 	glAttachShader(m_iProgramId, vertexShader);
 	glAttachShader(m_iProgramId, fragmentShader);
+
 	// Link the shader program
 	glLinkProgram(m_iProgramId);
 
-	// Delete the vertex and fragment shaders after linking
+	// Check for shader linking errors 
+	GLint isLinked = 0;
+	glGetProgramiv(m_iProgramId, GL_LINK_STATUS, &isLinked);
+	if (isLinked == GL_FALSE)
+	{
+		GLint maxLength = 0;
+		glGetProgramiv(m_iProgramId, GL_INFO_LOG_LENGTH, &maxLength);
+
+		std::vector<GLchar> infoLog(maxLength);
+		glGetProgramInfoLog(m_iProgramId, maxLength, &maxLength, &infoLog[0]);
+
+		// Print or log the shader linker errors 
+		std::cerr << "Shader linking failed: " << &infoLog[0] << std::endl;
+
+		glDeleteProgram(m_iProgramId);
+		glDeleteShader(vertexShader);
+		glDeleteShader(fragmentShader);
+	}
+
+	// Delete the vertex and fragment shaders after linking (if successful)
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+
 }
 
 void Shader::Use()
 {
 	glUseProgram(m_iProgramId);
+}
+
+GLuint Shader::GetProgramID() const
+{
+	return m_iProgramId;
 }
 
 std::string Shader::ReadShaderFile(const std::string& filePath)
@@ -78,6 +106,6 @@ void Shader::CheckCompileErrors(GLuint shader, GLenum shaderType)
 	{
 		GLchar infoLog[512];
 		glGetShaderInfoLog(shader, 512, NULL, infoLog);
-		std::cerr << "ERROR: shader compilation of type: " << shaderType << "\n" << infoLog << std::endl;
+		std::cerr << "ERROR: shader compilation failed: " << shaderType << "\n" << infoLog << std::endl;
 	}
 }

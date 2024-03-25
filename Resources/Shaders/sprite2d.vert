@@ -1,20 +1,19 @@
-#version 330 core
+#version 330 core 
 
-layout (location = 0) in vec2 a_position;
-layout (location = 1) in vec2 a_uv;
+layout (location = 0) in vec3 vertexPosition; 
+layout (location = 1) in vec2 texCoord;
 
-out vec2 v_uv;
-out vec4 v_color; // Optional: Add a uniform for setting a base color
+out vec2 varyingTexCoord;
 
-uniform mat4 u_mvpMatrix; // Model-View-Projection Matrix
+uniform mat4 worldMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat4 wvpMatrix;
 
-void main() 
+void main()
 {
-  // Transform vertex position to clip space using MVP matrix
-  gl_Position = u_mvpMatrix * vec4(a_position, 0.0, 1.0);
-  // Pass UV coordinates to fragment shader
-  v_uv = a_uv;
-
-  // Optional: Set vertex color (if using uniform)
-  // v_color = vec4(1.0, 1.0, 1.0, 1.0); // White color (example)
+    varyingTexCoord = texCoord;
+    //mat4 wvp = projectionMatrix * viewMatrix * worldMatrix;
+    //gl_Position = wvp * vec4(vertexPosition, 1.0); 
+    gl_Position = wvpMatrix * vec4(vertexPosition, 1.0);
 }

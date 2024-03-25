@@ -14,6 +14,7 @@ public:
 
 	void Compile(const std::string& vertexSource, const std::string& fragmentSource);
 	void Use();
+	GLuint GetProgramID() const;
 
 private:
 	GLuint m_iProgramId;

@@ -1,5 +1,6 @@
 #include "GSMenu.h"
 
+
 GSMenu::GSMenu()
 {
 }
@@ -19,28 +20,28 @@ void GSMenu::Update(float deltaTime)
 
 void GSMenu::Draw()
 {
-	// Specify vertex positions (2D coordinates)
-	GLfloat vertices[] = {
-		-0.5f,  0.5f,  // Top-left vertex
-		 0.5f,  0.5f,  // Top-right vertex
-		 0.5f, -0.5f,  // Bottom-right vertex
-		-0.5f, -0.5f   // Bottom-left vertex
-	};
+	//// Specify vertex positions (2D coordinates)
+	//GLfloat vertices[] = {
+	//	-0.5f,  0.5f,  // Top-left vertex
+	//	 0.5f,  0.5f,  // Top-right vertex
+	//	 0.5f, -0.5f,  // Bottom-right vertex
+	//	-0.5f, -0.5f   // Bottom-left vertex
+	//};
 
-	// Set the color to green
-	glColor3f(0.0f, 1.0f, 0.0f);
+	//// Set the color to green
+	//glColor3f(0.0f, 1.0f, 0.0f);
 
-	// Begin drawing a primitive
-	glBegin(GL_QUADS); // Indicate we want to draw a quad (rectangle)
+	//// Begin drawing a primitive
+	//glBegin(GL_QUADS); // Indicate we want to draw a quad (rectangle)
 
-	// Specify vertices for the rectangle 
-	glVertex2f(vertices[0], vertices[1]);
-	glVertex2f(vertices[2], vertices[3]);
-	glVertex2f(vertices[4], vertices[5]);
-	glVertex2f(vertices[6], vertices[7]);
+	//// Specify vertices for the rectangle 
+	//glVertex2f(vertices[0], vertices[1]);
+	//glVertex2f(vertices[2], vertices[3]);
+	//glVertex2f(vertices[4], vertices[5]);
+	//glVertex2f(vertices[6], vertices[7]);
 
-	// Finish drawing
-	glEnd();
+	//// Finish drawing
+	//glEnd();
 
 }
 
