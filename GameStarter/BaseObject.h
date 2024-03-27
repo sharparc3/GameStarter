@@ -23,7 +23,6 @@ public:
 	glm::vec3 GetRotation() const;
 	glm::mat4 GetWorldMatrix() const;
 	GLuint GetID() const;
-	virtual GLuint GetVAO() = 0;
 
 	bool needMatrixCalc;
 	friend class Renderer;
@@ -37,5 +36,4 @@ protected:
 	std::shared_ptr<Mesh> m_mesh;
 	std::shared_ptr<Shader> m_shader;
 	std::shared_ptr<Texture> m_texture;
-	GLuint m_VAO;
 };
