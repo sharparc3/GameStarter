@@ -17,6 +17,7 @@ public:
 	GLboolean LoadMesh(const std::string& filename);
 	GLuint GetVBOId() const;
 	GLuint GetIBOId() const;
+	GLuint GetVAOId() const;
 	GLuint GetNumIndices() const;
 
 public:
@@ -24,6 +25,6 @@ public:
 	std::vector<GLuint> m_indices;
 
 private:
-	GLuint m_iVBO, m_iIBO;
+	GLuint m_iVBO, m_iIBO, m_iVAO;
 	GLuint m_numIndices;
 };

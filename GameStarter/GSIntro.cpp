@@ -25,9 +25,6 @@ void GSIntro::Init()
     // set up camera
     m_camera = Camera();
     m_camera.SetOrthographicProjection();
-    //m_camera.SetPosition(glm::vec3(0.f, 0.f, 0.f));
-    //m_camera.SetTarget(glm::vec3(0.f, 0.f, -1.f));
-    //m_camera.SetUpVector(glm::vec3(0.f, 1.f, 0.f));
 
     // set up renderer
     m_renderer.SetCamera(std::make_shared<Camera>(m_camera));
@@ -38,11 +35,17 @@ void GSIntro::Init()
     // set up sprite
     m_sprite->SetPosition(0.f, 0.f, 0.0f);
     m_sprite->SetRotation(0.0f);
-    //m_sprite->SetScale(413.0f * 2, 360.0f * 2);
-    m_sprite->SetScale(400.f, 400.f);
+    m_sprite->SetScale(413.0f, 360.0f);
 
     // add to renderer 
     m_renderer.AddObject(m_sprite);
+
+    m_sprite2 = std::make_shared<Sprite2D>(1, mesh, shader, texture);
+    m_sprite2->SetPosition(400.f, 0.f, 0.f);
+    m_sprite2->SetRotation(0.0f);
+    m_sprite2->SetScale(413.0f, 360.0f);
+
+    m_renderer.AddObject(m_sprite2);
 }
 
 void GSIntro::Update(float deltaTime)
