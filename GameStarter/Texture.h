@@ -20,6 +20,7 @@ public:
 
 	void Bind(GLuint textureUnit = 0);
 	void SetFilter(TextureFilterMode mode);
+	GLuint GetTextureID() const;
 
 private:
 	GLuint m_iTextureID;

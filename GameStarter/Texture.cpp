@@ -26,6 +26,11 @@ void Texture::SetFilter(TextureFilterMode mode)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+GLuint Texture::GetTextureID() const
+{
+    return m_iTextureID;
+}
+
 void Texture::LoadImage(const std::string& filePath) 
 {
     int width, height, nrChannels;

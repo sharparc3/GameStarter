@@ -4,6 +4,7 @@ Sprite2D::Sprite2D(GLuint id, const std::shared_ptr<Mesh>& mesh, const std::shar
 	BaseObject(id, mesh, shader, texture)
 {
 	// set up VAO
+	glBindBuffer(GL_ARRAY_BUFFER, m_mesh->GetVBOId());
 	glGenVertexArrays(1, &m_VAO);
 	glBindVertexArray(m_VAO);
 
@@ -13,8 +14,9 @@ Sprite2D::Sprite2D(GLuint id, const std::shared_ptr<Mesh>& mesh, const std::shar
 
 	// Texture coordinate attribute (location = 1)
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, uv)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(float)));
 	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
 

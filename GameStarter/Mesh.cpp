@@ -23,7 +23,7 @@ GLboolean Mesh::LoadMesh(const std::string& filename)
         std::cerr << "Couldn't open file " << filename << " for reading.\n";
         return GL_FALSE;
     }
-    GLuint numVertices, numIndices;
+    GLuint numVertices;
     std::string buff;
 
     // read vertices
@@ -37,8 +37,8 @@ GLboolean Mesh::LoadMesh(const std::string& filename)
     
     // read indices
     GLuint indice;
-    fscanf_s(file, "%*s %d", &numIndices);
-    for (GLuint i = 0; i < numIndices; i++)
+    fscanf_s(file, "%*s %d", &m_numIndices);
+    for (GLuint i = 0; i < m_numIndices; i++)
     {
         fscanf_s(file, "%d,", &indice);
         m_indices.push_back(indice);
@@ -47,13 +47,24 @@ GLboolean Mesh::LoadMesh(const std::string& filename)
     // send VBO to GPU
     glGenBuffers(1, &m_iVBO);
     glBindBuffer(GL_ARRAY_BUFFER, m_iVBO);
-    glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), m_vertices.data(), GL_STATIC_DRAW);
+    auto size = sizeof(Vertex);
+    glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(Vertex), m_vertices.data(), GL_STATIC_DRAW);
+    GLenum error = glGetError();
+    if (error != GL_NO_ERROR)
+    {
+        std::cerr << "OpenGL Error during glBufferData: " << error << std::endl;
+    }
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     // send IBO data to GPU
     glGenBuffers(1, &m_iIBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iIBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(GLuint), m_indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices.data(), GL_STATIC_DRAW);
+    error = glGetError();
+    if (error != GL_NO_ERROR)
+    {
+        std::cerr << "OpenGL Error during glBufferData: " << error << std::endl;
+    }
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     fclose(file);

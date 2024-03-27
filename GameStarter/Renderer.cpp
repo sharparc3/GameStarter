@@ -51,22 +51,24 @@ void Renderer::Render()
 		}
 
 		// use shader
+		GLint program = obj.second->m_shader->GetProgramID();
+		glUseProgram(program);
 		//obj.second->m_shader->Use();
 		// bind VBO
 		glBindBuffer(GL_ARRAY_BUFFER, obj.second->m_mesh->GetVBOId());
 		// bind IBO
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj.second->m_mesh->GetIBOId());
 		// bind texture
-		obj.second->m_texture->Bind();
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, obj.second->m_texture->GetTextureID());
+		//obj.second->m_texture->Bind();
 		// bind VAO
-		glBindVertexArray(obj.second->GetVAO());
+		//glBindVertexArray(obj.second->GetVAO());
 
 		// get the world matrix
 		auto worldMatrix = obj.second->GetWorldMatrix();
 
 		// get uniform location
-		GLint program = obj.second->m_shader->GetProgramID();
-		glUseProgram(program);
 		GLint worldLoc = glGetUniformLocation(program, "worldMatrix");
 		GLint viewLoc = glGetUniformLocation(program, "viewMatrix");
 		GLint projectionLoc = glGetUniformLocation(program, "projectionMatrix");
