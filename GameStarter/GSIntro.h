@@ -28,7 +28,7 @@ public:
 	void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent) override;
 
 private:
-	std::shared_ptr<Sprite2D> m_sprite;
+	std::shared_ptr<Sprite2D> m_sprite, m_sprite2;
 	Renderer m_renderer;
 	Camera m_camera;
 };
