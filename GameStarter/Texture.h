@@ -20,6 +20,10 @@ public:
 
 	void Bind(GLuint textureUnit = 0);
 	void SetFilter(TextureFilterMode mode);
+
+	// 0 - NEAREST
+	// 1 - LINEAR
+	void SetFilter(GLint mode);
 	GLuint GetTextureID() const;
 
 private:

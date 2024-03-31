@@ -1,9 +1,11 @@
 #pragma once
 
+#include <glad/glad.h>
+#include <memory>
 #include <map>
 
-#include "BaseObject.h"
-#include "Camera.h"
+class BaseObject;
+class Camera;
 
 class Renderer
 {

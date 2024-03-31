@@ -3,6 +3,12 @@
 
 Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
 {
+	m_uniformNames.push_back("worldMatrix");
+	m_uniformNames.push_back("viewMatrix");
+	m_uniformNames.push_back("projectionMatrix");
+	m_uniformNames.push_back("currentFrame");
+	m_uniformNames.push_back("frameCount");
+
 	std::string vertexSource = ReadShaderFile(vertexPath);
 	std::string fragmentSource = ReadShaderFile(fragmentPath);
 	Compile(vertexSource, fragmentSource);
@@ -61,11 +67,24 @@ void Shader::Compile(const std::string& vertexSource, const std::string& fragmen
 		glDeleteProgram(m_iProgramId);
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
+		return;
+	}
+	else
+	{
+		glUseProgram(m_iProgramId);
+
+		// get uniforms location
+		for (const auto& it : m_uniformNames)
+		{
+			m_uniformLocations[it.c_str()] = glGetUniformLocation(m_iProgramId, it.c_str());
+		}
+
+		glUseProgram(0);
+		// Delete the vertex and fragment shaders after linking (if successful)
+		glDeleteShader(vertexShader);
+		glDeleteShader(fragmentShader);
 	}
 
-	// Delete the vertex and fragment shaders after linking (if successful)
-	glDeleteShader(vertexShader);
-	glDeleteShader(fragmentShader);
 
 }
 

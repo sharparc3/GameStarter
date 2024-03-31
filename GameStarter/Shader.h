@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <map>
+#include <vector>
 
 class Shader
 {
@@ -16,9 +18,13 @@ public:
 	void Use();
 	GLuint GetProgramID() const;
 
+public:
+	std::map<std::string, GLint> m_uniformLocations;
+
 private:
 	GLuint m_iProgramId;
 
 	std::string ReadShaderFile(const std::string& filePath);
 	void CheckCompileErrors(GLuint shader, GLenum shaderType);
+	std::vector<std::string> m_uniformNames;
 };

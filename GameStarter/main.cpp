@@ -171,6 +171,10 @@ void Init()
     GameStateMachine::Construct();
     GameStateMachine::GetInstance()->Init();
     GameStateMachine::GetInstance()->PushState(GameStateType::STATE_INTRO);
+
+    // enable blend for transparent texture
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Draw()

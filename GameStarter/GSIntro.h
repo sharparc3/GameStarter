@@ -5,6 +5,7 @@
 #include "ResourceManager.h"
 #include "Sprite2D.h"
 #include "Renderer.h"
+#include "Camera.h"
 
 class GSIntro final : public GameStateBase
 {

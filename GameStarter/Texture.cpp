@@ -26,6 +26,22 @@ void Texture::SetFilter(TextureFilterMode mode)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void Texture::SetFilter(GLint mode)
+{
+    glBindTexture(GL_TEXTURE_2D, m_iTextureID);
+    if (mode == 0)
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    }
+    else if (mode == 1)
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
 GLuint Texture::GetTextureID() const
 {
     return m_iTextureID;

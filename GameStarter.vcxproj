@@ -33,6 +33,7 @@
     <ClCompile Include="GameStarter\ResourceManager.cpp" />
     <ClCompile Include="GameStarter\Shader.cpp" />
     <ClCompile Include="GameStarter\Sprite2D.cpp" />
+    <ClCompile Include="GameStarter\SpriteAnimation.cpp" />
     <ClCompile Include="GameStarter\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -51,11 +52,14 @@
     <ClInclude Include="GameStarter\Shader.h" />
     <ClInclude Include="GameStarter\SingletonDclp.h" />
     <ClInclude Include="GameStarter\Sprite2D.h" />
+    <ClInclude Include="GameStarter\SpriteAnimation.h" />
     <ClInclude Include="GameStarter\stb_image.h" />
     <ClInclude Include="GameStarter\Texture.h" />
     <ClInclude Include="GameStarter\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shaders\animation.frag" />
+    <None Include="Resources\Shaders\animation.vert" />
     <None Include="Resources\Shaders\sprite2d.frag" />
     <None Include="Resources\Shaders\sprite2d.vert" />
   </ItemGroup>

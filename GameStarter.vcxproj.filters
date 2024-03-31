@@ -76,6 +76,9 @@
     <ClCompile Include="GameStarter\Sprite2D.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
+    <ClCompile Include="GameStarter\SpriteAnimation.cpp">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStarter\GameStateMachine.h">
@@ -132,12 +135,21 @@
     <ClInclude Include="GameStarter\Sprite2D.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
+    <ClInclude Include="GameStarter\SpriteAnimation.h">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\sprite2d.frag">
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="Resources\Shaders\sprite2d.vert">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\animation.frag">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\animation.vert">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>

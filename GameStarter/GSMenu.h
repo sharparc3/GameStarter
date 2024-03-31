@@ -4,6 +4,10 @@
 #include <iostream>
 #include "glad/glad.h"
 
+class SpriteAnimation;
+class Renderer;
+class Camera;
+
 class GSMenu final : public GameStateBase
 {
 public:
@@ -26,4 +30,7 @@ public:
 	void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent) override;
 
 private:
+	std::shared_ptr<SpriteAnimation> m_animation;
+	std::shared_ptr<Renderer> m_renderer;
+	std::shared_ptr<Camera> m_camera;
 };

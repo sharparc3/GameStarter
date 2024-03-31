@@ -9,7 +9,7 @@ class BaseObject
 {
 public:
 	BaseObject(GLuint id, std::shared_ptr<Mesh> mesh, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture);
-	~BaseObject();
+	virtual ~BaseObject();
 	void SetPosition(GLfloat x, GLfloat y, GLfloat z = 0.f);
 	void SetPosition(const glm::vec3& position);
 	void SetRotation(const glm::vec3& rotation);
