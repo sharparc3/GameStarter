@@ -1,8 +1,6 @@
 #pragma once
-#include "GameStateBase.h"
-#include "GameStateMachine.h"
 #include <iostream>
-#include "glad/glad.h"
+#include "GameStateBase.h"
 
 class SpriteAnimation;
 class Renderer;

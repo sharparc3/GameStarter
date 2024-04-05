@@ -2,8 +2,14 @@
 #include "BaseObject.h"
 #include "Camera.h"
 #include "SpriteAnimation.h"
+#include "Shader.h"
 
 Renderer::Renderer()
+{
+}
+
+Renderer::Renderer(const std::shared_ptr<Camera> camera, const std::shared_ptr<Shader> shader) : 
+	m_camera(camera), m_shader(shader)
 {
 }
 
@@ -12,17 +18,17 @@ Renderer::~Renderer()
 	m_RenderObjects.clear();
 }
 
-void Renderer::SetCamera(const std::shared_ptr<Camera>& camera)
+void Renderer::SetCamera(const std::shared_ptr<Camera> camera)
 {
 	m_camera = camera;
 }
 
-void Renderer::AddObject(const std::shared_ptr<BaseObject>& object)
+void Renderer::AddObject(const std::shared_ptr<BaseObject> object)
 {
 	m_RenderObjects[object->GetID()] = object;
 }
 
-void Renderer::RemoveObject(const std::shared_ptr<BaseObject>& object)
+void Renderer::RemoveObject(const std::shared_ptr<BaseObject> object)
 {
 	m_RenderObjects.erase(object->GetID());
 }
@@ -52,9 +58,7 @@ void Renderer::Render()
 		}
 
 		// use shader
-		GLint program = obj.second->m_shader->GetProgramID();
-		//obj.second->m_shader->Use();
-		glUseProgram(program);
+		glUseProgram(m_shader->GetProgramID());
 
 		// bind VBO
 		GLuint VBOid = obj.second->m_mesh->GetVBOId();
@@ -69,7 +73,7 @@ void Renderer::Render()
 		obj.second->m_texture->Bind();
 
 		// send uniform data
-		auto uniformLocs = obj.second->m_shader->m_uniformLocations;
+		auto uniformLocs = m_shader->m_uniformLocations;
 		if (uniformLocs["worldMatrix"] != -1)
 		{
 			// get the world matrix

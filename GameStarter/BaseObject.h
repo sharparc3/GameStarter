@@ -8,7 +8,7 @@
 class BaseObject
 {
 public:
-	BaseObject(GLuint id, std::shared_ptr<Mesh> mesh, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture);
+	BaseObject(GLuint id, std::shared_ptr<Mesh> mesh, std::shared_ptr<Texture> texture);
 	virtual ~BaseObject();
 	void SetPosition(GLfloat x, GLfloat y, GLfloat z = 0.f);
 	void SetPosition(const glm::vec3& position);
@@ -34,6 +34,5 @@ protected:
 	glm::vec3 m_scale;
 	glm::mat4 m_worldMatrix;
 	std::shared_ptr<Mesh> m_mesh;
-	std::shared_ptr<Shader> m_shader;
 	std::shared_ptr<Texture> m_texture;
 };

@@ -4,7 +4,7 @@
 class SpriteAnimation : public BaseObject
 {
 public:
-	SpriteAnimation(GLuint id, const std::shared_ptr<Mesh>& mesh, const std::shared_ptr<Shader>& shader, const std::shared_ptr<Texture>& texture, float frameTime, int frameCount);
+	SpriteAnimation(GLuint id, const std::shared_ptr<Mesh> mesh, const std::shared_ptr<Texture> texture, float frameTime, int frameCount);
 	inline GLuint GetNumFrames() const { return m_frameCount; }
 	inline GLuint GetCurrentFrameIndex() const { return m_currentFrame; }
 	void Update(GLfloat deltaTime);

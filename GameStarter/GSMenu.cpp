@@ -3,6 +3,7 @@
 #include "SpriteAnimation.h"
 #include "Renderer.h"
 #include "Camera.h"
+#include "GameStateMachine.h"
 
 GSMenu::GSMenu()
 {
@@ -25,12 +26,11 @@ void GSMenu::Init()
 	auto texture = ResourceManager::GetInstance()->GetTexture("cat_anim.png");
 	texture->SetFilter(1);
 
-	m_animation = std::make_shared<SpriteAnimation>(2, mesh, shader, texture, 0.1f, 6);
+	m_animation = std::make_shared<SpriteAnimation>(2, mesh, texture, 0.1f, 6);
 	m_camera = std::make_shared<Camera>();
 	m_camera->SetOrthographicProjection();
 
-	m_renderer = std::make_shared<Renderer>();
-	m_renderer->SetCamera(m_camera);
+	m_renderer = std::make_shared<Renderer>(m_camera, shader);
 
 	m_animation->SetPosition(0.f, 0.f, 0.f);
 	m_animation->SetRotation(0.f, 0.f);

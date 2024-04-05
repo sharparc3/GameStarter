@@ -1,4 +1,9 @@
 #include "GSIntro.h"
+#include "Renderer.h"
+#include "Camera.h"
+#include "GameStateMachine.h"
+#include "ResourceManager.h"
+#include "Sprite2D.h"
 
 GSIntro::GSIntro()
 {
@@ -23,14 +28,14 @@ void GSIntro::Init()
     auto texture = ResourceManager::GetInstance()->GetTexture("compiling.png");
     
     // set up camera
-    m_camera = Camera();
-    m_camera.SetOrthographicProjection();
+    m_camera = std::make_shared<Camera>();
+    m_camera->SetOrthographicProjection();
 
     // set up renderer
-    m_renderer.SetCamera(std::make_shared<Camera>(m_camera));
+    m_renderer = std::make_shared<Renderer>(m_camera, shader);
 
     // create a sprite 
-    m_sprite = std::make_shared<Sprite2D>(0, mesh, shader, texture);
+    m_sprite = std::make_shared<Sprite2D>(0, mesh, texture);
 
     // set up sprite
     m_sprite->SetPosition(0.f, 0.f, 0.0f);
@@ -38,14 +43,14 @@ void GSIntro::Init()
     m_sprite->SetScale(413.0f, 360.0f);
 
     // add to renderer 
-    m_renderer.AddObject(m_sprite);
+    m_renderer->AddObject(m_sprite);
 
-    m_sprite2 = std::make_shared<Sprite2D>(1, mesh, shader, texture);
+    m_sprite2 = std::make_shared<Sprite2D>(1, mesh, texture);
     m_sprite2->SetPosition(480.f, 270.f, 0.f);
     m_sprite2->SetRotation(0.0f);
     m_sprite2->SetScale(206.f, 180.f);
 
-    m_renderer.AddObject(m_sprite2);
+    m_renderer->AddObject(m_sprite2);
 }
 
 void GSIntro::Update(float deltaTime)
@@ -55,7 +60,7 @@ void GSIntro::Update(float deltaTime)
 
 void GSIntro::Draw()
 {
-    m_renderer.Render();
+    m_renderer->Render();
 }
 
 void GSIntro::Pause()
