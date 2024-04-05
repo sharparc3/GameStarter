@@ -1,11 +1,10 @@
 #pragma once
 #include <iostream>
 #include "GameStateBase.h"
-#include "GameStateMachine.h"
-#include "ResourceManager.h"
-#include "Sprite2D.h"
-#include "Renderer.h"
-#include "Camera.h"
+
+class Renderer;
+class Camera;
+class Sprite2D;
 
 class GSIntro final : public GameStateBase
 {
@@ -30,6 +29,6 @@ public:
 
 private:
 	std::shared_ptr<Sprite2D> m_sprite, m_sprite2;
-	Renderer m_renderer;
-	Camera m_camera;
+	std::shared_ptr<Renderer> m_renderer;
+	std::shared_ptr<Camera> m_camera;
 };

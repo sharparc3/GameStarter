@@ -2,16 +2,19 @@
 #include "BaseObject.h"
 
 
-BaseObject::BaseObject(GLuint id, std::shared_ptr<Mesh> mesh, std::shared_ptr<Shader> shader, std::shared_ptr<Texture> texture) : 
-	m_mesh(mesh), m_shader(shader), m_texture(texture), m_objectId(id)
+BaseObject::BaseObject(GLuint id, std::shared_ptr<Mesh> mesh, std::shared_ptr<Texture> texture) : 
+	m_mesh(mesh), m_texture(texture), m_objectId(id)
 {
+	m_position = glm::vec3(0.f, 0.f, 0.f);
+	m_rotationAngle = glm::vec3(0.f, 0.f, 0.f);
+	m_scale = glm::vec3(0.f, 0.f, 0.f);
+	m_worldMatrix = glm::mat4(1.f);
 	needMatrixCalc = true;
 }
 
 BaseObject::~BaseObject()
 {
 	m_mesh = nullptr;
-	m_shader = nullptr;
 	m_texture = nullptr;
 }
 
