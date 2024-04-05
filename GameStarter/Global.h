@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+#define FPS 60
+
 namespace Screen
 {
 	const int WIDTH = 960;

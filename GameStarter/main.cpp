@@ -73,10 +73,10 @@ int main(int argc, char** argv)
     }
 
     // Enable VSync (Swap Interval = 1)
-    if (SDL_GL_SetSwapInterval(1) < 0)
-    {
-        SDL_Log("Failed to set VSync: %s", SDL_GetError());
-    }
+    //if (SDL_GL_SetSwapInterval(1) < 0)
+    //{
+    //    SDL_Log("Failed to set VSync: %s", SDL_GetError());
+    //}
 
     // Initialize GLAD
     if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
@@ -96,9 +96,11 @@ int main(int argc, char** argv)
     Init();
 
     // Main loop
+
     auto lastTime = std::chrono::steady_clock::now();
     auto curTime = std::chrono::steady_clock::now();
     std::chrono::duration<float, std::milli> durationMicro;
+
     float deltaTime;
     SDL_Event event;
 
@@ -146,13 +148,26 @@ int main(int argc, char** argv)
         }
         auto curTime = std::chrono::steady_clock::now();
         durationMicro = curTime - lastTime;
+
+        // Limit the FPS
+        if (durationMicro.count() <= 1000.f / FPS)
+        {
+            //// some dirty hack to reduce CPU usage
+            //float expected = 1000.f / FPS;
+            //if (durationMicro.count() < expected / 2)
+            //{
+            //    auto amount = static_cast<Uint32>((expected - durationMicro.count()) / 2);
+            //    SDL_Delay(static_cast<Uint32>((expected - durationMicro.count()) / 2));
+            //}
+            continue;
+        }
         deltaTime = durationMicro.count() / 1000;
         lastTime = curTime;
         
         // Render using OpenGL here
         Update(deltaTime);
         Draw();
-
+        //std::cout << 1.f / deltaTime << "\n";
         SDL_GL_SwapWindow(window);
     }
 

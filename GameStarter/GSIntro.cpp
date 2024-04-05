@@ -41,9 +41,9 @@ void GSIntro::Init()
     m_renderer.AddObject(m_sprite);
 
     m_sprite2 = std::make_shared<Sprite2D>(1, mesh, shader, texture);
-    m_sprite2->SetPosition(400.f, 0.f, 0.f);
+    m_sprite2->SetPosition(480.f, 270.f, 0.f);
     m_sprite2->SetRotation(0.0f);
-    m_sprite2->SetScale(413.0f, 360.0f);
+    m_sprite2->SetScale(206.f, 180.f);
 
     m_renderer.AddObject(m_sprite2);
 }

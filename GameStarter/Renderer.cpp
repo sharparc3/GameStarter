@@ -68,10 +68,6 @@ void Renderer::Render()
 		GLuint textureID = obj.second->m_texture->GetTextureID();
 		obj.second->m_texture->Bind();
 
-		// bind VAO
-		GLuint VAOid = obj.second->m_mesh->GetVAOId();
-		glBindVertexArray(VAOid);
-
 		// send uniform data
 		auto uniformLocs = obj.second->m_shader->m_uniformLocations;
 		if (uniformLocs["worldMatrix"] != -1)
@@ -100,6 +96,10 @@ void Renderer::Render()
 			auto anim = std::dynamic_pointer_cast<SpriteAnimation>(obj.second);
 			glUniform1f(uniformLocs["frameCount"], static_cast<GLfloat>(anim->GetNumFrames()));
 		}
+
+		// bind VAO
+		GLuint VAOid = obj.second->m_mesh->GetVAOId();
+		glBindVertexArray(VAOid);
 
 		// Draw	
 		glDrawElements(GL_TRIANGLES, obj.second->m_mesh->GetNumIndices(), GL_UNSIGNED_INT, 0);
