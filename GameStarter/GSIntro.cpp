@@ -71,7 +71,6 @@ void GSIntro::Init()
     {
         auto sprite = std::make_shared<Sprite2D>(i, mesh, texture);
         sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
-        //sprite->SetPosition(480.f, 270.f, 0.f);
         sprite->SetRotation(0.0f);
         sprite->SetScale(412.f, 360.f);
         m_renderer->AddObject(sprite);

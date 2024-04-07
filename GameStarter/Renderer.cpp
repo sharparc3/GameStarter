@@ -67,6 +67,10 @@ void Renderer::Render()
 			obj.second->RecalculateWorldMatrix();
 		}
 
+		// bind VAO
+		GLuint VAOid = obj.second->m_mesh->GetVAOId();
+		glBindVertexArray(VAOid);
+
 		// bind VBO
 		GLuint VBOid = obj.second->m_mesh->GetVBOId();
 		glBindBuffer(GL_ARRAY_BUFFER, VBOid);
@@ -109,10 +113,6 @@ void Renderer::Render()
 			auto anim = std::dynamic_pointer_cast<SpriteAnimation>(obj.second);
 			glUniform1f(uniformLocs["frameCount"], static_cast<GLfloat>(anim->GetNumFrames()));
 		}
-
-		// bind VAO
-		GLuint VAOid = obj.second->m_mesh->GetVAOId();
-		glBindVertexArray(VAOid);
 
 		// Draw	
 		glDrawElements(GL_TRIANGLES, obj.second->m_mesh->GetNumIndices(), GL_UNSIGNED_INT, 0);

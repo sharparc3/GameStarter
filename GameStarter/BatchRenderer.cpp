@@ -12,6 +12,8 @@ BatchRenderer::BatchRenderer()
 	m_IBO = 0;
 	m_VAO = 0;
 	m_maxVerticesCount = 0;
+	m_needRebuildBuffer = true;
+	m_needSendData = true;
 }
 
 BatchRenderer::BatchRenderer(GLuint maxVerticesCount, const std::shared_ptr<Camera> camera, const std::shared_ptr<Shader> shader) :
@@ -39,6 +41,9 @@ BatchRenderer::BatchRenderer(GLuint maxVerticesCount, const std::shared_ptr<Came
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	m_needRebuildBuffer = true;
+	m_needSendData = true;
 }
 
 BatchRenderer::~BatchRenderer()
@@ -59,21 +64,31 @@ void BatchRenderer::AddObject(const std::shared_ptr<BaseObject> obj)
 {
 	GLuint id = obj->GetID();
 	m_RenderObjects.insert(std::make_pair(id, obj));
+	m_needRebuildBuffer = true;
+	m_needSendData = true;
 }
 
 void BatchRenderer::RemoveObject(const std::shared_ptr<BaseObject> obj)
 {
 	GLuint id = obj->GetID();
 	m_RenderObjects.erase(id);
+	m_needRebuildBuffer = true;
+	m_needSendData = true;
 }
 
 void BatchRenderer::RemoveObject(GLuint id)
 {
 	m_RenderObjects.erase(id);
+	m_needRebuildBuffer = true;
+	m_needSendData = true;
 }
 
-void BatchRenderer::Render()
+void BatchRenderer::BuildBuffer()
 {
+	if (!m_needRebuildBuffer)
+	{
+		return;
+	}
 	if (!m_shader || !m_camera)
 	{
 		std::cout << "ERROR: invalid shader or camera";
@@ -84,23 +99,23 @@ void BatchRenderer::Render()
 	glm::mat4 viewMatrix = m_camera->GetViewMatrix();
 	glm::mat4 projectionMatrix = m_camera->GetProjectionMatrix();
 
-	m_lastTexture = m_RenderObjects.begin()->second->m_texture;
+	// flush buffers
+	m_vertexBuffer.clear();
+	m_indexBuffer.clear();
+
+	m_texture = m_RenderObjects.begin()->second->m_texture;
 
 	for (const auto& obj : m_RenderObjects)
 	{
-		// when buffer limit reaches -> draw then flush buffer
+		// when buffer limit reaches
 		if (m_vertexBuffer.size() + 4 > m_maxVerticesCount)
 		{
-			FlushBuffer();
-		}
-		// when texture change -> draw then change texture
-		if (m_lastTexture != obj.second->m_texture)
-		{
-			FlushBuffer();
-			m_lastTexture = obj.second->m_texture;
+			std::cout << "Batch renderer buffer limit reached. Discarding subsequence objects";
+			m_needRebuildBuffer = false;
+			return;
 		}
 
-		if (obj.second->needMatrixCalc)
+		if (obj.second->needMatrixCalc) 
 		{
 			obj.second->RecalculateWorldMatrix();
 		}
@@ -130,36 +145,54 @@ void BatchRenderer::Render()
 			vertexCount++;
 		}
 	}
-	FlushBuffer();
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	m_needRebuildBuffer = false;
 }
 
-void BatchRenderer::FlushBuffer()
+void BatchRenderer::Render()
 {
+	for (const auto& obj : m_RenderObjects)
+	{
+		if (obj.second->needMatrixCalc)
+		{
+			m_needRebuildBuffer = true;
+			break;
+		}
+	}
+
+	if (m_needRebuildBuffer)
+	{
+		BuildBuffer();
+	}
+
 	// use shader
 	glUseProgram(m_shader->GetProgramID());
-
-	// setup VBO
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(m_vertexBuffer.size() * sizeof(Vertex)), m_vertexBuffer.data());
-	
-	// setup IBO
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(m_indexBuffer.size() * sizeof(GLuint)), m_indexBuffer.data());
-
-	// bind texture
-	m_lastTexture->Bind();
 
 	// bind VAO
 	glBindVertexArray(m_VAO);
 
+	// setup VBO
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+	if (m_needSendData)
+	{
+		glBufferSubData(GL_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(m_vertexBuffer.size() * sizeof(Vertex)), m_vertexBuffer.data());
+	}
+	
+	// setup IBO
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
+	if (m_needSendData)
+	{
+		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, static_cast<GLsizeiptr>(m_indexBuffer.size() * sizeof(GLuint)), m_indexBuffer.data());
+	}
+
+	// bind texture
+	m_texture->Bind();
+
 	glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_indexBuffer.size()), GL_UNSIGNED_INT, 0);
 
-	// flush buffers
-	m_vertexBuffer.clear();
-	m_indexBuffer.clear();
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	m_needSendData = false;
 }
 
 void BatchRenderer::PushVertex(const Vertex& vertex)

@@ -58,13 +58,11 @@ void GSMenu::Init()
 
 	m_renderer->AddObject(m_animation);
 
-	m_batchRenderer = std::make_shared<BatchRenderer>(10000, m_camera, batchshader);
-
-	for (int i = 0; i < 1000; i++)
+	m_batchRenderer = std::make_shared<BatchRenderer>(20000, m_camera, batchshader);
+	for (int i = 0; i < 2000; i++)
 	{
 		auto sprite = std::make_shared<Sprite2D>(i, mesh, texture2);
 		sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
-		//sprite->SetPosition(0.f, 0.f, 0.f);
 		sprite->SetRotation(0.0f);
 		sprite->SetScale(412.f, 360.f);
 		m_batchRenderer->AddObject(sprite);

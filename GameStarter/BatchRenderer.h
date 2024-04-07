@@ -23,10 +23,10 @@ public:
 	void AddObject(const std::shared_ptr<BaseObject> obj);
 	void RemoveObject(const std::shared_ptr<BaseObject> obj);
 	void RemoveObject(GLuint id);
+	void BuildBuffer();
 	void Render();
 
 private:
-	void FlushBuffer();
 	void PushVertex(const Vertex& vertex);
 
 private:
@@ -40,8 +40,10 @@ private:
 
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<Shader> m_shader;
-	std::shared_ptr<Texture> m_lastTexture;
+	std::shared_ptr<Texture> m_texture;
 	GLuint m_maxVerticesCount;
 
 	GLuint m_VBO, m_IBO, m_VAO;
+	bool m_needRebuildBuffer;
+	bool m_needSendData;
 };

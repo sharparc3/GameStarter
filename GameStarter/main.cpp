@@ -164,7 +164,7 @@ int main(int argc, char** argv)
         deltaTime = durationMicro.count() / 1000;
         lastTime = curTime;
         
-        // Render using OpenGL here
+        // BuildBuffer using OpenGL here
         Update(deltaTime);
         Draw();
         std::cout << 1.f / deltaTime << "\n";
