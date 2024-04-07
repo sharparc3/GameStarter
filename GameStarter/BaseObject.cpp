@@ -56,19 +56,19 @@ void BaseObject::SetScale(GLfloat x, GLfloat y, GLfloat z)
 
 void BaseObject::RecalculateWorldMatrix()
 {
-	//m_worldMatrix = glm::mat4(1.0f);
-	//m_worldMatrix = glm::translate(m_worldMatrix, m_position);
-	//m_worldMatrix = glm::rotate(m_worldMatrix, glm::radians(m_rotationAngle.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	//m_worldMatrix = glm::rotate(m_worldMatrix, glm::radians(m_rotationAngle.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	//m_worldMatrix = glm::rotate(m_worldMatrix, glm::radians(m_rotationAngle.z), glm::vec3(0.0f, 0.0f, 1.0f));
-	//m_worldMatrix = glm::scale(m_worldMatrix, m_scale);
-	glm::mat4 translationMat = glm::translate(glm::mat4(1.0f), m_position);
-	glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), m_scale);
-	glm::mat4 rotationMatrixX = glm::rotate(glm::mat4(1.0f), glm::radians(m_rotationAngle.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	glm::mat4 rotationMatrixY = glm::rotate(glm::mat4(1.0f), glm::radians(m_rotationAngle.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 rotationMatrixZ = glm::rotate(glm::mat4(1.0f), glm::radians(m_rotationAngle.z), glm::vec3(0.0f, 0.0f, 1.0f));
-	glm::mat4 rotationMat = rotationMatrixZ * rotationMatrixY * rotationMatrixX;
-	m_worldMatrix = translationMat * rotationMat * scaleMat;
+	m_worldMatrix = glm::mat4(1.0f);
+	m_worldMatrix = glm::translate(m_worldMatrix, m_position);
+	m_worldMatrix = glm::rotate(m_worldMatrix, glm::radians(m_rotationAngle.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	m_worldMatrix = glm::rotate(m_worldMatrix, glm::radians(m_rotationAngle.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	m_worldMatrix = glm::rotate(m_worldMatrix, glm::radians(m_rotationAngle.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	m_worldMatrix = glm::scale(m_worldMatrix, m_scale);
+	//glm::mat4 translationMat = glm::translate(glm::mat4(1.0f), m_position);
+	//glm::mat4 scaleMat = glm::scale(glm::mat4(1.0f), m_scale);
+	//glm::mat4 rotationMatrixX = glm::rotate(glm::mat4(1.0f), glm::radians(m_rotationAngle.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	//glm::mat4 rotationMatrixY = glm::rotate(glm::mat4(1.0f), glm::radians(m_rotationAngle.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	//glm::mat4 rotationMatrixZ = glm::rotate(glm::mat4(1.0f), glm::radians(m_rotationAngle.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	//glm::mat4 rotationMat = rotationMatrixZ * rotationMatrixY * rotationMatrixX;
+	//m_worldMatrix = translationMat * rotationMat * scaleMat;
 
 	needMatrixCalc = false;
 }

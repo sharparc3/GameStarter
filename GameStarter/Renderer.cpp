@@ -18,6 +18,11 @@ Renderer::~Renderer()
 	m_RenderObjects.clear();
 }
 
+void Renderer::SetShader(const std::shared_ptr<Shader> shader)
+{
+	m_shader = shader;
+}
+
 void Renderer::SetCamera(const std::shared_ptr<Camera> camera)
 {
 	m_camera = camera;
@@ -50,15 +55,17 @@ void Renderer::Render()
 		m_camera->CalculateViewMatrix();
 	}
 
+	// use shader
+	glUseProgram(m_shader->GetProgramID());
+
+	std::shared_ptr<Texture> lastTexture;
+
 	for (auto& obj : m_RenderObjects)
 	{
 		if (obj.second->needMatrixCalc)
 		{
 			obj.second->RecalculateWorldMatrix();
 		}
-
-		// use shader
-		glUseProgram(m_shader->GetProgramID());
 
 		// bind VBO
 		GLuint VBOid = obj.second->m_mesh->GetVBOId();
@@ -68,9 +75,11 @@ void Renderer::Render()
 		GLuint IBOid = obj.second->m_mesh->GetIBOId();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBOid);
 
-		// bind texture
-		GLuint textureID = obj.second->m_texture->GetTextureID();
-		obj.second->m_texture->Bind();
+		if (lastTexture != obj.second->m_texture)
+		{
+			// bind texture
+			obj.second->m_texture->Bind();
+		}
 
 		// send uniform data
 		auto uniformLocs = m_shader->m_uniformLocations;
@@ -108,5 +117,9 @@ void Renderer::Render()
 		// Draw	
 		glDrawElements(GL_TRIANGLES, obj.second->m_mesh->GetNumIndices(), GL_UNSIGNED_INT, 0);
 	}
+
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 

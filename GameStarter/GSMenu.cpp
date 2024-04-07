@@ -4,6 +4,24 @@
 #include "Renderer.h"
 #include "Camera.h"
 #include "GameStateMachine.h"
+#include "BatchRenderer.h"
+#include "Sprite2D.h"
+
+#include <random>
+#include <chrono>
+
+static int GetInt(int from, int to) {
+	// Initialize random number engine with a non-deterministic seed 
+	static std::random_device rd;
+	static std::mt19937 generator(rd());
+
+	// Define the distribution
+	std::uniform_int_distribution<> distribution(from, to);
+
+	// Generate a random number within the range
+	return distribution(generator);
+}
+
 
 GSMenu::GSMenu()
 {
@@ -20,12 +38,14 @@ void GSMenu::Init()
 	std::cout << "Switched to menu state.\n";
 	ResourceManager::GetInstance()->LoadShader("animation");
 	ResourceManager::GetInstance()->LoadTexture("cat_anim.png");
+	ResourceManager::GetInstance()->LoadShader("sprite2d_batch");
 
 	auto mesh = ResourceManager::GetInstance()->GetMesh("sprite2d.nfg");
 	auto shader = ResourceManager::GetInstance()->GetShader("animation");
 	auto texture = ResourceManager::GetInstance()->GetTexture("cat_anim.png");
 	texture->SetFilter(1);
-
+	auto batchshader = ResourceManager::GetInstance()->GetShader("sprite2d_batch");
+	auto texture2 = ResourceManager::GetInstance()->GetTexture("compiling.png");
 	m_animation = std::make_shared<SpriteAnimation>(2, mesh, texture, 0.1f, 6);
 	m_camera = std::make_shared<Camera>();
 	m_camera->SetOrthographicProjection();
@@ -37,6 +57,18 @@ void GSMenu::Init()
 	m_animation->SetScale(250.f, 200.f);
 
 	m_renderer->AddObject(m_animation);
+
+	m_batchRenderer = std::make_shared<BatchRenderer>(10000, m_camera, batchshader);
+
+	for (int i = 0; i < 1000; i++)
+	{
+		auto sprite = std::make_shared<Sprite2D>(i, mesh, texture2);
+		sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
+		//sprite->SetPosition(0.f, 0.f, 0.f);
+		sprite->SetRotation(0.0f);
+		sprite->SetScale(412.f, 360.f);
+		m_batchRenderer->AddObject(sprite);
+	}
 }
 
 void GSMenu::Update(float deltaTime)
@@ -46,29 +78,8 @@ void GSMenu::Update(float deltaTime)
 
 void GSMenu::Draw()
 {
-	//// Specify vertex positions (2D coordinates)
-	//GLfloat vertices[] = {
-	//	-0.5f,  0.5f,  // Top-left vertex
-	//	 0.5f,  0.5f,  // Top-right vertex
-	//	 0.5f, -0.5f,  // Bottom-right vertex
-	//	-0.5f, -0.5f   // Bottom-left vertex
-	//};
-
-	//// Set the color to green
-	//glColor3f(0.0f, 1.0f, 0.0f);
-
-	//// Begin drawing a primitive
-	//glBegin(GL_QUADS); // Indicate we want to draw a quad (rectangle)
-
-	//// Specify vertices for the rectangle 
-	//glVertex2f(vertices[0], vertices[1]);
-	//glVertex2f(vertices[2], vertices[3]);
-	//glVertex2f(vertices[4], vertices[5]);
-	//glVertex2f(vertices[6], vertices[7]);
-
-	//// Finish drawing
-	//glEnd();
 	m_renderer->Render();
+	m_batchRenderer->Render();
 }
 
 void GSMenu::Pause()

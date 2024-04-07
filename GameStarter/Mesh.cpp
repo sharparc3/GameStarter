@@ -47,8 +47,8 @@ GLboolean Mesh::LoadMesh(const std::string& filename)
     // send VBO to GPU and generate the VAO
     glGenBuffers(1, &m_iVBO);
     glGenVertexArrays(1, &m_iVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, m_iVBO);
     glBindVertexArray(m_iVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_iVBO);
 
     // VBO setup
     glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(Vertex), m_vertices.data(), GL_STATIC_DRAW);

@@ -5,6 +5,21 @@
 #include "ResourceManager.h"
 #include "Sprite2D.h"
 
+#include <random>
+#include <chrono>
+
+static int GetInt(int from, int to) {
+    // Initialize random number engine with a non-deterministic seed 
+    static std::random_device rd;
+    static std::mt19937 generator(rd());
+
+    // Define the distribution
+    std::uniform_int_distribution<> distribution(from, to);
+
+    // Generate a random number within the range
+    return distribution(generator);
+}
+
 GSIntro::GSIntro()
 {
 }
@@ -51,6 +66,16 @@ void GSIntro::Init()
     m_sprite2->SetScale(206.f, 180.f);
 
     m_renderer->AddObject(m_sprite2);
+
+    for (int i = 2; i < 1000; i++)
+    {
+        auto sprite = std::make_shared<Sprite2D>(i, mesh, texture);
+        sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
+        //sprite->SetPosition(480.f, 270.f, 0.f);
+        sprite->SetRotation(0.0f);
+        sprite->SetScale(412.f, 360.f);
+        m_renderer->AddObject(sprite);
+    }
 }
 
 void GSIntro::Update(float deltaTime)

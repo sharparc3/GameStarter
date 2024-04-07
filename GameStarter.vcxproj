@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameStarter\BaseObject.cpp" />
+    <ClCompile Include="GameStarter\BatchRenderer.cpp" />
     <ClCompile Include="GameStarter\Camera.cpp" />
     <ClCompile Include="GameStarter\Game.cpp" />
     <ClCompile Include="GameStarter\GameStateBase.cpp" />
@@ -38,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStarter\BaseObject.h" />
+    <ClInclude Include="GameStarter\BatchRenderer.h" />
     <ClInclude Include="GameStarter\Camera.h" />
     <ClInclude Include="GameStarter\Game.h" />
     <ClInclude Include="GameStarter\GameStateBase.h" />
@@ -62,6 +64,8 @@
     <None Include="Resources\Shaders\animation.vert" />
     <None Include="Resources\Shaders\sprite2d.frag" />
     <None Include="Resources\Shaders\sprite2d.vert" />
+    <None Include="Resources\Shaders\sprite2d_batch.frag" />
+    <None Include="Resources\Shaders\sprite2d_batch.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -167,7 +167,7 @@ int main(int argc, char** argv)
         // Render using OpenGL here
         Update(deltaTime);
         Draw();
-        //std::cout << 1.f / deltaTime << "\n";
+        std::cout << 1.f / deltaTime << "\n";
         SDL_GL_SwapWindow(window);
     }
 

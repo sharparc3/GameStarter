@@ -26,6 +26,7 @@ public:
 
 	bool needMatrixCalc;
 	friend class Renderer;
+	friend class BatchRenderer;
 protected:
 	GLuint m_objectId;
 
