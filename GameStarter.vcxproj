@@ -19,45 +19,45 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameStarter\BaseObject.cpp" />
-    <ClCompile Include="GameStarter\BatchRenderer.cpp" />
-    <ClCompile Include="GameStarter\Camera.cpp" />
-    <ClCompile Include="GameStarter\Game.cpp" />
-    <ClCompile Include="GameStarter\GameStateBase.cpp" />
-    <ClCompile Include="GameStarter\GameStateMachine.cpp" />
-    <ClCompile Include="GameStarter\GSIntro.cpp" />
-    <ClCompile Include="GameStarter\GSMenu.cpp" />
-    <ClCompile Include="GameStarter\GSPlay.cpp" />
-    <ClCompile Include="GameStarter\main.cpp" />
-    <ClCompile Include="GameStarter\Mesh.cpp" />
-    <ClCompile Include="GameStarter\Renderer.cpp" />
-    <ClCompile Include="GameStarter\ResourceManager.cpp" />
-    <ClCompile Include="GameStarter\Shader.cpp" />
-    <ClCompile Include="GameStarter\Sprite2D.cpp" />
-    <ClCompile Include="GameStarter\SpriteAnimation.cpp" />
-    <ClCompile Include="GameStarter\Texture.cpp" />
+    <ClCompile Include="src\BaseObject.cpp" />
+    <ClCompile Include="src\BatchRenderer.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameStateBase.cpp" />
+    <ClCompile Include="src\GameStateMachine.cpp" />
+    <ClCompile Include="src\GSIntro.cpp" />
+    <ClCompile Include="src\GSMenu.cpp" />
+    <ClCompile Include="src\GSPlay.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
+    <ClCompile Include="src\ResourceManager.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\Sprite2D.cpp" />
+    <ClCompile Include="src\SpriteAnimation.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameStarter\BaseObject.h" />
-    <ClInclude Include="GameStarter\BatchRenderer.h" />
-    <ClInclude Include="GameStarter\Camera.h" />
-    <ClInclude Include="GameStarter\Game.h" />
-    <ClInclude Include="GameStarter\GameStateBase.h" />
-    <ClInclude Include="GameStarter\GameStateMachine.h" />
-    <ClInclude Include="GameStarter\Global.h" />
-    <ClInclude Include="GameStarter\GSIntro.h" />
-    <ClInclude Include="GameStarter\GSMenu.h" />
-    <ClInclude Include="GameStarter\GSPlay.h" />
-    <ClInclude Include="GameStarter\Mesh.h" />
-    <ClInclude Include="GameStarter\Renderer.h" />
-    <ClInclude Include="GameStarter\ResourceManager.h" />
-    <ClInclude Include="GameStarter\Shader.h" />
-    <ClInclude Include="GameStarter\SingletonDclp.h" />
-    <ClInclude Include="GameStarter\Sprite2D.h" />
-    <ClInclude Include="GameStarter\SpriteAnimation.h" />
-    <ClInclude Include="GameStarter\stb_image.h" />
-    <ClInclude Include="GameStarter\Texture.h" />
-    <ClInclude Include="GameStarter\Vertex.h" />
+    <ClInclude Include="src\BaseObject.h" />
+    <ClInclude Include="src\BatchRenderer.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\GameStateBase.h" />
+    <ClInclude Include="src\GameStateMachine.h" />
+    <ClInclude Include="src\Global.h" />
+    <ClInclude Include="src\GSIntro.h" />
+    <ClInclude Include="src\GSMenu.h" />
+    <ClInclude Include="src\GSPlay.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\Renderer.h" />
+    <ClInclude Include="src\ResourceManager.h" />
+    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\SingletonDclp.h" />
+    <ClInclude Include="src\Sprite2D.h" />
+    <ClInclude Include="src\SpriteAnimation.h" />
+    <ClInclude Include="src\stb_image.h" />
+    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\animation.frag" />
@@ -164,7 +164,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_mixer.lib;SDL2_ttf.lib;glad.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>soloud_static.lib;box2d.lib;SDL2_mixer.lib;SDL2_ttf.lib;glad.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -31,116 +31,118 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameStarter\GameStateBase.cpp">
+    <ClCompile Include="src\GameStateBase.cpp">
       <Filter>GameStarter\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\GameStateMachine.cpp">
+    <ClCompile Include="src\GameStateMachine.cpp">
       <Filter>GameStarter\GameManagers</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>GameStarter</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\Game.cpp">
+    <ClCompile Include="src\Game.cpp">
       <Filter>GameStarter</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\GSIntro.cpp">
+    <ClCompile Include="src\GSIntro.cpp">
       <Filter>GameStarter\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\GSMenu.cpp">
+    <ClCompile Include="src\GSMenu.cpp">
       <Filter>GameStarter\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\GSPlay.cpp">
+    <ClCompile Include="src\GSPlay.cpp">
       <Filter>GameStarter\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\Mesh.cpp">
+    <ClCompile Include="src\Mesh.cpp">
       <Filter>GameStarter\GL</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\Shader.cpp">
+    <ClCompile Include="src\Shader.cpp">
       <Filter>GameStarter\GL</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\Texture.cpp">
+    <ClCompile Include="src\Texture.cpp">
       <Filter>GameStarter\GL</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\ResourceManager.cpp">
+    <ClCompile Include="src\ResourceManager.cpp">
       <Filter>GameStarter\GameManagers</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\BaseObject.cpp">
+    <ClCompile Include="src\BaseObject.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\Camera.cpp">
+    <ClCompile Include="src\Camera.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\Renderer.cpp">
+    <ClCompile Include="src\Renderer.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\Sprite2D.cpp">
+    <ClCompile Include="src\Sprite2D.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\SpriteAnimation.cpp">
+    <ClCompile Include="src\SpriteAnimation.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
-    <ClCompile Include="GameStarter\BatchRenderer.cpp" />
+    <ClCompile Include="src\BatchRenderer.cpp">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameStarter\GameStateMachine.h">
+    <ClInclude Include="src\GameStateMachine.h">
       <Filter>GameStarter\GameManagers</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\GameStateBase.h">
+    <ClInclude Include="src\GameStateBase.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Global.h">
+    <ClInclude Include="src\Global.h">
       <Filter>GameStarter\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\SingletonDclp.h">
+    <ClInclude Include="src\SingletonDclp.h">
       <Filter>GameStarter\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Game.h">
+    <ClInclude Include="src\Game.h">
       <Filter>GameStarter</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\GSIntro.h">
+    <ClInclude Include="src\GSIntro.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\GSMenu.h">
+    <ClInclude Include="src\GSMenu.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\GSPlay.h">
+    <ClInclude Include="src\GSPlay.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Mesh.h">
+    <ClInclude Include="src\Mesh.h">
       <Filter>GameStarter\GL</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Shader.h">
+    <ClInclude Include="src\Shader.h">
       <Filter>GameStarter\GL</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Texture.h">
+    <ClInclude Include="src\Texture.h">
       <Filter>GameStarter\GL</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Vertex.h">
+    <ClInclude Include="src\Vertex.h">
       <Filter>GameStarter\GL</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\stb_image.h">
+    <ClInclude Include="src\stb_image.h">
       <Filter>GameStarter\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\ResourceManager.h">
+    <ClInclude Include="src\ResourceManager.h">
       <Filter>GameStarter\GameManagers</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\BaseObject.h">
+    <ClInclude Include="src\BaseObject.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Camera.h">
+    <ClInclude Include="src\Camera.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Renderer.h">
+    <ClInclude Include="src\Renderer.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\Sprite2D.h">
+    <ClInclude Include="src\Sprite2D.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\SpriteAnimation.h">
+    <ClInclude Include="src\SpriteAnimation.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
-    <ClInclude Include="GameStarter\BatchRenderer.h">
-      <Filter>GameStarter</Filter>
+    <ClInclude Include="src\BatchRenderer.h">
+      <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
