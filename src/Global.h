@@ -2,6 +2,8 @@
 #include <string>
 
 #define FPS 60
+#define OPENGL_MAJOR_VERSION 4
+#define OPENGL_MINOR_VERSION 6
 
 namespace Screen
 {

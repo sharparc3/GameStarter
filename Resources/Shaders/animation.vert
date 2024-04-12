@@ -1,6 +1,7 @@
 #version 330 core
 
 layout (location = 0) in vec3 vertexPosition;  // Vertex location
+layout (location = 1) in vec2 texCoord;
 
 uniform mat4 worldMatrix;
 uniform mat4 viewMatrix;
@@ -9,7 +10,7 @@ uniform mat4 projectionMatrix;
 uniform float currentFrame;
 uniform float frameCount;
 
-out vec2 texCoord;  // Output texture coordinate
+out vec2 v_texCoord;  // Output texture coordinate
 
 void main() 
 {
@@ -21,5 +22,5 @@ void main()
     float frameX = mod(currentFrame, frameCount) * frameWidth;  
 
     // Assume texture coordinates lie within a single row of spritesheet
-    texCoord = vec2(frameX + frameWidth * vertexPosition.x, vertexPosition.y);
+    v_texCoord = vec2(frameX + frameWidth * texCoord.x, texCoord.y);
 }

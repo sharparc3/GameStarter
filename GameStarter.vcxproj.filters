@@ -146,10 +146,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shaders\sprite2d.frag">
+    <None Include="Resources\Shaders\quad.frag">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="Resources\Shaders\sprite2d.vert">
+    <None Include="Resources\Shaders\quad.vert">
       <Filter>Resources\Shaders</Filter>
     </None>
     <None Include="Resources\Shaders\animation.frag">
@@ -158,10 +158,10 @@
     <None Include="Resources\Shaders\animation.vert">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="Resources\Shaders\sprite2d_batch.frag">
+    <None Include="Resources\Shaders\quad_batch.frag">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="Resources\Shaders\sprite2d_batch.vert">
+    <None Include="Resources\Shaders\quad_batch.vert">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>

@@ -150,10 +150,13 @@ void BatchRenderer::BuildBuffer()
 
 void BatchRenderer::Render()
 {
+	bool doneCheckObj = false;
+#pragma omp parallel for
 	for (const auto& obj : m_RenderObjects)
 	{
-		if (obj.second->needMatrixCalc)
+		if (obj.second->needMatrixCalc && !doneCheckObj)
 		{
+			doneCheckObj = true;
 			m_needRebuildBuffer = true;
 			break;
 		}

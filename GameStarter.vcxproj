@@ -62,10 +62,10 @@
   <ItemGroup>
     <None Include="Resources\Shaders\animation.frag" />
     <None Include="Resources\Shaders\animation.vert" />
-    <None Include="Resources\Shaders\sprite2d.frag" />
-    <None Include="Resources\Shaders\sprite2d.vert" />
-    <None Include="Resources\Shaders\sprite2d_batch.frag" />
-    <None Include="Resources\Shaders\sprite2d_batch.vert" />
+    <None Include="Resources\Shaders\quad.frag" />
+    <None Include="Resources\Shaders\quad.vert" />
+    <None Include="Resources\Shaders\quad_batch.frag" />
+    <None Include="Resources\Shaders\quad_batch.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

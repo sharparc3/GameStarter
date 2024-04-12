@@ -33,13 +33,15 @@ void GSIntro::Init()
     std::cout << "Switched to intro state.\n";
 
     // load resources
-    ResourceManager::GetInstance()->LoadMesh("sprite2d.nfg");
-    ResourceManager::GetInstance()->LoadShader("sprite2d");
+    ResourceManager::GetInstance()->LoadMesh("quad.nfg");
+    ResourceManager::GetInstance()->LoadMesh("quad_center.nfg");
+    ResourceManager::GetInstance()->LoadShader("quad");
     ResourceManager::GetInstance()->LoadTexture("compiling.png");
 
     // get resources
-    auto mesh = ResourceManager::GetInstance()->GetMesh("sprite2d.nfg");
-    auto shader = ResourceManager::GetInstance()->GetShader("sprite2d");
+    auto mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+    auto mesh_center = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+    auto shader = ResourceManager::GetInstance()->GetShader("quad");
     auto texture = ResourceManager::GetInstance()->GetTexture("compiling.png");
     
     // set up camera
@@ -67,9 +69,9 @@ void GSIntro::Init()
 
     m_renderer->AddObject(m_sprite2);
 
-    for (int i = 2; i < 1000; i++)
+    for (int i = 2; i < 1500; i++)
     {
-        auto sprite = std::make_shared<Sprite2D>(i, mesh, texture);
+        auto sprite = std::make_shared<Sprite2D>(i, mesh_center, texture);
         sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
         sprite->SetRotation(0.0f);
         sprite->SetScale(412.f, 360.f);

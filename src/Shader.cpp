@@ -3,9 +3,7 @@
 
 Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
 {
-	m_uniformNames.push_back("worldMatrix");
-	m_uniformNames.push_back("viewMatrix");
-	m_uniformNames.push_back("projectionMatrix");
+	m_uniformNames.push_back("u_mvpMatrix");
 	m_uniformNames.push_back("currentFrame");
 	m_uniformNames.push_back("frameCount");
 

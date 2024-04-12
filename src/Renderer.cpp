@@ -87,21 +87,14 @@ void Renderer::Render()
 
 		// send uniform data
 		auto uniformLocs = m_shader->m_uniformLocations;
-		if (uniformLocs["worldMatrix"] != -1)
+		if (uniformLocs["u_mvpMatrix"] != -1)
 		{
 			// get the world matrix
 			auto worldMatrix = obj.second->GetWorldMatrix();
-			glUniformMatrix4fv(uniformLocs["worldMatrix"], 1, GL_FALSE, &worldMatrix[0][0]);
-		}
-		if (uniformLocs["viewMatrix"] != -1)
-		{
 			auto viewMatrix = m_camera->GetViewMatrix();
-			glUniformMatrix4fv(uniformLocs["viewMatrix"], 1, GL_FALSE, &viewMatrix[0][0]);
-		}
-		if (uniformLocs["projectionMatrix"] != -1)
-		{
 			auto projectionMatrix = m_camera->GetProjectionMatrix();
-			glUniformMatrix4fv(uniformLocs["projectionMatrix"], 1, GL_FALSE, &projectionMatrix[0][0]);
+			worldMatrix = projectionMatrix * viewMatrix * worldMatrix;
+			glUniformMatrix4fv(uniformLocs["u_mvpMatrix"], 1, GL_FALSE, &worldMatrix[0][0]);
 		}
 		if (uniformLocs["currentFrame"] != -1)
 		{

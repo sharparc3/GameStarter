@@ -38,15 +38,17 @@ void GSMenu::Init()
 	std::cout << "Switched to menu state.\n";
 	ResourceManager::GetInstance()->LoadShader("animation");
 	ResourceManager::GetInstance()->LoadTexture("cat_anim.png");
-	ResourceManager::GetInstance()->LoadShader("sprite2d_batch");
+	ResourceManager::GetInstance()->LoadShader("quad_batch");
+	//ResourceManager::GetInstance()->LoadMesh("quad_center.nfg");
 
-	auto mesh = ResourceManager::GetInstance()->GetMesh("sprite2d.nfg");
+	auto mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+	auto mesh_center = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 	auto shader = ResourceManager::GetInstance()->GetShader("animation");
 	auto texture = ResourceManager::GetInstance()->GetTexture("cat_anim.png");
 	texture->SetFilter(1);
-	auto batchshader = ResourceManager::GetInstance()->GetShader("sprite2d_batch");
+	auto batchshader = ResourceManager::GetInstance()->GetShader("quad_batch");
 	auto texture2 = ResourceManager::GetInstance()->GetTexture("compiling.png");
-	m_animation = std::make_shared<SpriteAnimation>(2, mesh, texture, 0.1f, 6);
+	m_animation = std::make_shared<SpriteAnimation>(2, mesh_center, texture, 0.1f, 6);
 	m_camera = std::make_shared<Camera>();
 	m_camera->SetOrthographicProjection();
 
@@ -59,9 +61,9 @@ void GSMenu::Init()
 	m_renderer->AddObject(m_animation);
 
 	m_batchRenderer = std::make_shared<BatchRenderer>(20000, m_camera, batchshader);
-	for (int i = 0; i < 2500; i++)
+	for (int i = 0; i < 1500; i++)
 	{
-		auto sprite = std::make_shared<Sprite2D>(i, mesh, texture2);
+		auto sprite = std::make_shared<Sprite2D>(i, mesh_center, texture2);
 		sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
 		sprite->SetRotation(0.0f);
 		sprite->SetScale(412.f, 360.f);
