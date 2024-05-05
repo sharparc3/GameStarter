@@ -62,7 +62,7 @@ void Renderer::Render()
 
 	for (auto& obj : m_RenderObjects)
 	{
-		if (obj.second->needMatrixCalc)
+		if (obj.second->m_needCalculateWorldMatrix)
 		{
 			obj.second->RecalculateWorldMatrix();
 		}

@@ -8,6 +8,7 @@
 #include "Sprite2D.h"
 #include "Sound.h"
 #include "SoundPlayer.h"
+#include "Text.h"
 
 #include <random>
 #include <chrono>
@@ -31,7 +32,7 @@ GSMenu::GSMenu()
 
 GSMenu::~GSMenu()
 {
-	m_renderer = nullptr;
+	m_animationRenderer = nullptr;
 	m_camera = nullptr;
 }
 
@@ -45,27 +46,30 @@ void GSMenu::Init()
 	ResourceManager::GetInstance()->LoadSound("mouse_down.wav");
 	ResourceManager::GetInstance()->LoadSound("mouse_up.wav");
 	ResourceManager::GetInstance()->LoadSound("click.mp3");
+	ResourceManager::GetInstance()->LoadShader("quad");
 	//ResourceManager::GetInstance()->LoadMesh("quad_center.nfg");
 
 	auto mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
 	auto mesh_center = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
-	auto shader = ResourceManager::GetInstance()->GetShader("animation");
+	auto shader_anm = ResourceManager::GetInstance()->GetShader("animation");
+	auto shader_sprite = ResourceManager::GetInstance()->GetShader("quad");
 	auto texture = ResourceManager::GetInstance()->GetTexture("cat_anim.png");
 
 	texture->SetFilter(1);
 	auto batchshader = ResourceManager::GetInstance()->GetShader("quad_batch");
 	auto texture2 = ResourceManager::GetInstance()->GetTexture("compiling.png");
-	m_animation = std::make_shared<SpriteAnimation>(2, mesh_center, texture, 0.1f, 6);
+	m_animation = std::make_shared<SpriteAnimation>(2, mesh, texture, 0.1f, 6);
 	m_camera = std::make_shared<Camera>();
 	m_camera->SetOrthographicProjection();
 
-	m_renderer = std::make_shared<Renderer>(m_camera, shader);
+	m_animationRenderer = std::make_shared<Renderer>(m_camera, shader_anm);
+	m_spriteRenderer = std::make_shared<Renderer>(m_camera, shader_sprite);
 
 	m_animation->SetPosition(0.f, 0.f, 0.f);
 	m_animation->SetRotation(0.f, 0.f);
 	m_animation->SetScale(250.f, 200.f);
 
-	m_renderer->AddObject(m_animation);
+	m_animationRenderer->AddObject(m_animation);
 
 	m_batchRenderer = std::make_shared<BatchRenderer>(20000, m_camera, batchshader);
 	for (int i = 0; i < 1500; i++)
@@ -80,17 +84,26 @@ void GSMenu::Init()
 	m_soundMouseDown = ResourceManager::GetInstance()->GetSound("mouse_down.wav");
 	m_soundMouseUp = ResourceManager::GetInstance()->GetSound("mouse_up.wav");
 	m_firstMouseDown = false;
+
+	//ResourceManager::GetInstance()->LoadFont("Roboto-Regular.ttf");
+	//auto font = ResourceManager::GetInstance()->GetFont("Roboto-Regular.ttf");
+	SDL_Color textColor = { 255, 0, 0, 255 };
+	m_textObj = std::make_shared<Text>(0, "Hello\nThis text is rendered as a 2D sprite", "Roboto-Regular.ttf", 48, textColor);
+	m_textObj->SetPosition(100.f, 100.f);
+	m_spriteRenderer->AddObject(m_textObj);
 }
 
 void GSMenu::Update(float deltaTime)
 {
 	m_animation->Update(deltaTime);
+	m_textObj->UpdateText();
 }
 
 void GSMenu::Draw()
 {
-	//m_renderer->Render();
 	//m_batchRenderer->Render();
+	//m_animationRenderer->Render();
+	m_spriteRenderer->Render();
 }
 
 void GSMenu::Pause()

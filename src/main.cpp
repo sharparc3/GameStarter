@@ -61,6 +61,12 @@ int main(int argc, char** argv)
         return -1;
     }
 
+    // init sdl ttf
+    if (TTF_Init() < 0)
+    {
+        std::cerr << "Failed to initialize SDL ttf: " << SDL_GetError() << std::endl;
+    }
+
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, OPENGL_MAJOR_VERSION);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, OPENGL_MINOR_VERSION);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);

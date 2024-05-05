@@ -8,6 +8,7 @@ class Camera;
 class BatchRenderer;
 class SoundPlayer;
 class Sound;
+class Text;
 
 class GSMenu final : public GameStateBase
 {
@@ -32,9 +33,10 @@ public:
 
 private:
 	std::shared_ptr<SpriteAnimation> m_animation;
-	std::shared_ptr<Renderer> m_renderer;
+	std::shared_ptr<Renderer> m_animationRenderer, m_spriteRenderer;
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<BatchRenderer> m_batchRenderer;
 	std::shared_ptr<Sound> m_soundMouseDown, m_soundMouseUp;
+	std::shared_ptr<Text> m_textObj;
 	bool m_firstMouseDown;
 };

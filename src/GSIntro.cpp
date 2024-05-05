@@ -86,7 +86,7 @@ void GSIntro::Update(float deltaTime)
 
 void GSIntro::Draw()
 {
-    //m_renderer->Render();
+    m_renderer->Render();
 }
 
 void GSIntro::Pause()

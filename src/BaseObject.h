@@ -24,7 +24,7 @@ public:
 	glm::mat4 GetWorldMatrix() const;
 	GLuint GetID() const;
 
-	bool needMatrixCalc;
+	bool m_needCalculateWorldMatrix;
 	friend class Renderer;
 	friend class BatchRenderer;
 protected:

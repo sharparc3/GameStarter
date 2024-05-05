@@ -9,7 +9,7 @@ BaseObject::BaseObject(GLuint id, std::shared_ptr<Mesh> mesh, std::shared_ptr<Te
 	m_rotationAngle = glm::vec3(0.f, 0.f, 0.f);
 	m_scale = glm::vec3(0.f, 0.f, 0.f);
 	m_worldMatrix = glm::mat4(1.f);
-	needMatrixCalc = true;
+	m_needCalculateWorldMatrix = true;
 }
 
 BaseObject::~BaseObject()
@@ -21,37 +21,37 @@ BaseObject::~BaseObject()
 void BaseObject::SetPosition(GLfloat x, GLfloat y, GLfloat z)
 {
 	m_position = glm::vec3(x, y, z);
-	needMatrixCalc = true;
+	m_needCalculateWorldMatrix = true;
 }
 
 void BaseObject::SetPosition(const glm::vec3& position)
 {
 	m_position = position;
-	needMatrixCalc = true;
+	m_needCalculateWorldMatrix = true;
 }
 
 void BaseObject::SetRotation(const glm::vec3& rotation)
 {
 	m_rotationAngle = rotation;
-	needMatrixCalc = true;
+	m_needCalculateWorldMatrix = true;
 }
 
 void BaseObject::SetRotation(GLfloat z, GLfloat x, GLfloat y)
 {
 	m_rotationAngle = glm::vec3(x, y, z);
-	needMatrixCalc = true;
+	m_needCalculateWorldMatrix = true;
 }
 
 void BaseObject::SetScale(const glm::vec3& scale)
 {
 	m_scale = scale;
-	needMatrixCalc = true;
+	m_needCalculateWorldMatrix = true;
 }
 
 void BaseObject::SetScale(GLfloat x, GLfloat y, GLfloat z)
 {
 	m_scale = glm::vec3(x, y, z);
-	needMatrixCalc = true;
+	m_needCalculateWorldMatrix = true;
 }
 
 void BaseObject::RecalculateWorldMatrix()
@@ -70,7 +70,7 @@ void BaseObject::RecalculateWorldMatrix()
 	//glm::mat4 rotationMat = rotationMatrixZ * rotationMatrixY * rotationMatrixX;
 	//m_worldMatrix = translationMat * rotationMat * scaleMat;
 
-	needMatrixCalc = false;
+	m_needCalculateWorldMatrix = false;
 }
 
 glm::vec3 BaseObject::GetPosition() const

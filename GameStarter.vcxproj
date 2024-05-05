@@ -37,6 +37,7 @@
     <ClCompile Include="src\SoundPlayer.cpp" />
     <ClCompile Include="src\Sprite2D.cpp" />
     <ClCompile Include="src\SpriteAnimation.cpp" />
+    <ClCompile Include="src\Text.cpp" />
     <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +61,7 @@
     <ClInclude Include="src\Sprite2D.h" />
     <ClInclude Include="src\SpriteAnimation.h" />
     <ClInclude Include="src\stb_image.h" />
+    <ClInclude Include="src\Text.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Vertex.h" />
   </ItemGroup>

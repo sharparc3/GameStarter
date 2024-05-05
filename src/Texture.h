@@ -16,6 +16,7 @@ class Texture
 {
 public:
 	Texture(const std::string& filePath);
+	Texture();
 	~Texture();
 
 	void Bind(GLuint textureUnit = 0);
@@ -25,7 +26,8 @@ public:
 	// 1 - LINEAR
 	void SetFilter(GLint mode);
 	GLuint GetTextureID() const;
-
+	
+	friend class Text;
 private:
 	GLuint m_iTextureID;
 

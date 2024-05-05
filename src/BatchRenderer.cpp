@@ -115,7 +115,7 @@ void BatchRenderer::BuildBuffer()
 			return;
 		}
 
-		if (obj.second->needMatrixCalc) 
+		if (obj.second->m_needCalculateWorldMatrix) 
 		{
 			obj.second->RecalculateWorldMatrix();
 		}
@@ -156,7 +156,7 @@ void BatchRenderer::Render()
 #pragma omp for
 		for (const auto& obj : m_RenderObjects)
 		{
-			if (obj.second->needMatrixCalc && !doneCheckObj)
+			if (obj.second->m_needCalculateWorldMatrix && !doneCheckObj)
 			{
 				doneCheckObj = true;
 				m_needRebuildBuffer = true;

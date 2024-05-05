@@ -7,6 +7,11 @@ Texture::Texture(const std::string& filePath)
     LoadImage(filePath);
 }
 
+Texture::Texture()
+{
+
+}
+
 Texture::~Texture()
 {
     glDeleteTextures(1, &m_iTextureID);

@@ -1,5 +1,6 @@
 #include "ResourceManager.h"
 
+//#include <SDL2/SDL_ttf.h>
 #include "Mesh.h"
 #include "Shader.h"
 #include "Texture.h"
@@ -53,6 +54,21 @@ void ResourceManager::LoadSound(const std::string& name)
     }
 }
 
+//void ResourceManager::LoadFont(const std::string& name)
+//{
+//    std::string path = ResourcesPath::FONT + name;
+//
+//    if (m_FontList.count(name) == 0)
+//    {
+//        std::shared_ptr<TTF_Font> font = std::make_shared<TTF_Font>(path);
+//        if (!font)
+//        {
+//            std::cerr << "Error loading font " << name << ": " << TTF_GetError();
+//        }
+//        m_FontList[name] = font;
+//    }
+//}
+
 std::shared_ptr<Mesh> ResourceManager::GetMesh(const std::string& name)
 {
     auto it = m_MeshList.find(name);
@@ -92,6 +108,16 @@ std::shared_ptr<Sound> ResourceManager::GetSound(const std::string& name)
     }
     return nullptr;
 }
+
+//std::shared_ptr<TTF_Font> ResourceManager::GetFont(const std::string& name)
+//{
+//    auto it = m_FontList.find(name);
+//    if (it != m_FontList.end())
+//    {
+//        return it->second;
+//    }
+//    return nullptr;
+//}
 
 void ResourceManager::FreeMesh(const std::string& name)
 {
