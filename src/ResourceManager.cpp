@@ -1,5 +1,11 @@
 #include "ResourceManager.h"
 
+#include "Mesh.h"
+#include "Shader.h"
+#include "Texture.h"
+#include "Global.h"
+#include "Sound.h"
+
 void ResourceManager::LoadMesh(const std::string& name)
 {
     std::string path = ResourcesPath::MESH + name;
@@ -36,6 +42,17 @@ void ResourceManager::LoadTexture(const std::string& name)
     }
 }
 
+void ResourceManager::LoadSound(const std::string& name)
+{
+    std::string path = ResourcesPath::SOUND + name;
+
+    if (m_SoundList.count(name) == 0)
+    {
+        std::shared_ptr<Sound> sound = std::make_shared<Sound>(path);
+        m_SoundList[name] = sound;
+    }
+}
+
 std::shared_ptr<Mesh> ResourceManager::GetMesh(const std::string& name)
 {
     auto it = m_MeshList.find(name);
@@ -66,6 +83,16 @@ std::shared_ptr<Texture> ResourceManager::GetTexture(const std::string& name)
     return nullptr;
 }
 
+std::shared_ptr<Sound> ResourceManager::GetSound(const std::string& name)
+{
+    auto it = m_SoundList.find(name);
+    if (it != m_SoundList.end())
+    {
+        return it->second;
+    }
+    return nullptr;
+}
+
 void ResourceManager::FreeMesh(const std::string& name)
 {
     m_MeshList.erase(name);
@@ -81,9 +108,15 @@ void ResourceManager::FreeTexture(const std::string& name)
     m_TextureList.erase(name);
 }
 
+void ResourceManager::FreeSound(const std::string& name)
+{
+    m_SoundList.erase(name);
+}
+
 void ResourceManager::FreeAllResources()
 {
     m_MeshList.clear();
     m_ShaderList.clear();
     m_TextureList.clear();
+    m_SoundList.clear();
 }

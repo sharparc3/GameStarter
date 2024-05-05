@@ -72,8 +72,8 @@ void Renderer::Render()
 		glBindVertexArray(VAOid);
 
 		// bind VBO
-		GLuint VBOid = obj.second->m_mesh->GetVBOId();
-		glBindBuffer(GL_ARRAY_BUFFER, VBOid);
+		//GLuint VBOid = obj.second->m_mesh->GetVBOId();
+		//glBindBuffer(GL_ARRAY_BUFFER, VBOid);
 
 		// bind IBO
 		GLuint IBOid = obj.second->m_mesh->GetIBOId();

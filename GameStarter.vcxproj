@@ -33,6 +33,8 @@
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\Sound.cpp" />
+    <ClCompile Include="src\SoundPlayer.cpp" />
     <ClCompile Include="src\Sprite2D.cpp" />
     <ClCompile Include="src\SpriteAnimation.cpp" />
     <ClCompile Include="src\Texture.cpp" />
@@ -53,6 +55,8 @@
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\SingletonDclp.h" />
+    <ClInclude Include="src\Sound.h" />
+    <ClInclude Include="src\SoundPlayer.h" />
     <ClInclude Include="src\Sprite2D.h" />
     <ClInclude Include="src\SpriteAnimation.h" />
     <ClInclude Include="src\stb_image.h" />

@@ -38,9 +38,9 @@ BatchRenderer::BatchRenderer(GLuint maxVerticesCount, const std::shared_ptr<Came
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * m_maxVerticesCount * 4, NULL, GL_DYNAMIC_DRAW);
 	
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 
 	m_needRebuildBuffer = true;
 	m_needSendData = true;
@@ -151,14 +151,17 @@ void BatchRenderer::BuildBuffer()
 void BatchRenderer::Render()
 {
 	bool doneCheckObj = false;
-#pragma omp parallel for
-	for (const auto& obj : m_RenderObjects)
+#pragma omp parallel
 	{
-		if (obj.second->needMatrixCalc && !doneCheckObj)
+#pragma omp for
+		for (const auto& obj : m_RenderObjects)
 		{
-			doneCheckObj = true;
-			m_needRebuildBuffer = true;
-			break;
+			if (obj.second->needMatrixCalc && !doneCheckObj)
+			{
+				doneCheckObj = true;
+				m_needRebuildBuffer = true;
+				break;
+			}
 		}
 	}
 

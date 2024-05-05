@@ -82,6 +82,12 @@
     <ClCompile Include="src\BatchRenderer.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sound.cpp">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundPlayer.cpp">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameStateMachine.h">
@@ -142,6 +148,12 @@
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
     <ClInclude Include="src\BatchRenderer.h">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sound.h">
+      <Filter>GameStarter\GameMaterials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundPlayer.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
   </ItemGroup>

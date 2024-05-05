@@ -6,6 +6,8 @@
 #include "GameStateMachine.h"
 #include "BatchRenderer.h"
 #include "Sprite2D.h"
+#include "Sound.h"
+#include "SoundPlayer.h"
 
 #include <random>
 #include <chrono>
@@ -36,15 +38,20 @@ GSMenu::~GSMenu()
 void GSMenu::Init()
 {
 	std::cout << "Switched to menu state.\n";
+
 	ResourceManager::GetInstance()->LoadShader("animation");
 	ResourceManager::GetInstance()->LoadTexture("cat_anim.png");
 	ResourceManager::GetInstance()->LoadShader("quad_batch");
+	ResourceManager::GetInstance()->LoadSound("mouse_down.wav");
+	ResourceManager::GetInstance()->LoadSound("mouse_up.wav");
+	ResourceManager::GetInstance()->LoadSound("click.mp3");
 	//ResourceManager::GetInstance()->LoadMesh("quad_center.nfg");
 
 	auto mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
 	auto mesh_center = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 	auto shader = ResourceManager::GetInstance()->GetShader("animation");
 	auto texture = ResourceManager::GetInstance()->GetTexture("cat_anim.png");
+
 	texture->SetFilter(1);
 	auto batchshader = ResourceManager::GetInstance()->GetShader("quad_batch");
 	auto texture2 = ResourceManager::GetInstance()->GetTexture("compiling.png");
@@ -69,6 +76,10 @@ void GSMenu::Init()
 		sprite->SetScale(412.f, 360.f);
 		m_batchRenderer->AddObject(sprite);
 	}
+
+	m_soundMouseDown = ResourceManager::GetInstance()->GetSound("mouse_down.wav");
+	m_soundMouseUp = ResourceManager::GetInstance()->GetSound("mouse_up.wav");
+	m_firstMouseDown = false;
 }
 
 void GSMenu::Update(float deltaTime)
@@ -78,8 +89,8 @@ void GSMenu::Update(float deltaTime)
 
 void GSMenu::Draw()
 {
-	m_renderer->Render();
-	m_batchRenderer->Render();
+	//m_renderer->Render();
+	//m_batchRenderer->Render();
 }
 
 void GSMenu::Pause()
@@ -104,6 +115,11 @@ void GSMenu::OnKeyUp(const SDL_KeyboardEvent& keyevent)
 
 void GSMenu::OnMouseDown(const SDL_MouseButtonEvent& mouseevent)
 {
+	if (!m_firstMouseDown)
+	{
+		m_firstMouseDown = true;
+		SoundPlayer::GetInstance()->Play(m_soundMouseDown);
+	}
 }
 
 void GSMenu::OnMouseUp(const SDL_MouseButtonEvent& mouseevent)
@@ -117,6 +133,8 @@ void GSMenu::OnMouseUp(const SDL_MouseButtonEvent& mouseevent)
 	default:
 		break;
 	}
+	SoundPlayer::GetInstance()->Play(m_soundMouseUp);
+	m_firstMouseDown = false;
 }
 
 void GSMenu::OnMouseMove(const SDL_MouseMotionEvent& motionevent)

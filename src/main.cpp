@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include "GameStateMachine.h"
 #include "ResourceManager.h"
+#include "SoundPlayer.h"
 
 void Init();
 void Draw();
@@ -31,8 +32,14 @@ void CleanUp(SDL_GLContext glContext, SDL_Window* window)
         SDL_DestroyWindow(window);
     }
 
-    // Free game state machine
+    // free singleton classes
+    GameStateMachine::GetInstance()->CleanUp();
     GameStateMachine::Destruct();
+    ResourceManager::GetInstance()->FreeAllResources();
+    ResourceManager::Destruct();
+    SoundPlayer::GetInstance()->Deinit();
+    SoundPlayer::Destruct();
+
     // Quit SDL
     Mix_Quit();
     TTF_Quit();
@@ -44,7 +51,13 @@ int main(int argc, char** argv)
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
+        std::cerr << "Failed to initialize SDL video: " << SDL_GetError() << std::endl;
+        return -1;
+    }
+
+    if (SDL_Init(SDL_INIT_AUDIO) < 0)
+    {
+        std::cerr << "Failed to initialize SDL audio: " << SDL_GetError() << std::endl;
         return -1;
     }
 
@@ -171,10 +184,6 @@ int main(int argc, char** argv)
         SDL_GL_SwapWindow(window);
     }
 
-    GameStateMachine::GetInstance()->CleanUp();
-    GameStateMachine::Destruct();
-    ResourceManager::GetInstance()->FreeAllResources();
-    ResourceManager::Destruct();
     CleanUp(glContext, window);
 
     return 0;
@@ -184,9 +193,12 @@ void Init()
 {
     ResourceManager::Construct();
     GameStateMachine::Construct();
+    SoundPlayer::Construct();
+    SoundPlayer::GetInstance()->Init();
     GameStateMachine::GetInstance()->Init();
     GameStateMachine::GetInstance()->PushState(GameStateType::STATE_INTRO);
 
+    
     // enable blend for transparent texture
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

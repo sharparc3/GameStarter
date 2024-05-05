@@ -16,6 +16,7 @@ namespace ResourcesPath
 	const std::string TEXTURE = "./Resources/Textures/";
 	const std::string MESH = "./Resources/Meshes/";
 	const std::string SHADER = "./Resources/Shaders/";
+	const std::string SOUND = "./Resources/Sounds/";
 }
 
 enum class GameStateType
