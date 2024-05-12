@@ -1,3 +1,7 @@
+#if defined(_WIN64) || defined(_WIN32)
+#include <Windows.h>
+#endif // _WIN64 || _WIN32 
+
 #include <glad/glad.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -7,6 +11,7 @@
 #include <chrono>
 #include <algorithm>
 #include <glm/glm.hpp>
+
 #include "GameStateMachine.h"
 #include "ResourceManager.h"
 #include "SoundPlayer.h"
@@ -88,6 +93,13 @@ int main(int argc, char** argv)
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, OPENGL_MAJOR_VERSION);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, OPENGL_MINOR_VERSION);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+#if defined(_WIN64) || defined(_WIN32)
+    if (SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE))
+    {
+        std::cout << "Ignored window scaling\n";
+    }
+#endif // _WIN64 || _WIN32
 
     // Create an SDL window
     SDL_Window* window = SDL_CreateWindow("GLAD Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Screen::WIDTH, Screen::HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);

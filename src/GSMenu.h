@@ -47,6 +47,6 @@ private:
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<BatchRenderer> m_batchRenderer;
 	std::shared_ptr<Sound> m_soundMouseDown, m_soundMouseUp;
-	std::shared_ptr<Text> m_textObj;
+	std::shared_ptr<Text> m_textObj, m_text2;
 	bool m_firstMouseDown;
 };

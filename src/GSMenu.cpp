@@ -88,9 +88,13 @@ void GSMenu::Init()
 	//ResourceManager::GetInstance()->LoadFont("Roboto-Regular.ttf");
 	//auto font = ResourceManager::GetInstance()->GetFont("Roboto-Regular.ttf");
 	SDL_Color textColor = { 255, 0, 0, 255 };
-	m_textObj = std::make_shared<Text>(0, "Hello\nThis text is rendered as a 2D sprite", "Roboto-Regular.ttf", 48, textColor);
+	m_textObj = std::make_shared<Text>(0, "Hello\nThis is text using font \nRoboto-Regular.ttf (size 48)", "Roboto-Regular.ttf", 48, textColor);
+	textColor = { 0, 0, 255, 255 };
+	m_text2 = std::make_shared<Text>(1, "This is another text using Roboto-Thin.ttf (size 36)", "Roboto-Thin.ttf", 36, textColor);
+	m_text2->SetPosition(100.f, 300.f);
 	m_textObj->SetPosition(100.f, 100.f);
 	m_spriteRenderer->AddObject(m_textObj);
+	m_spriteRenderer->AddObject(m_text2);
 }
 
 void GSMenu::Update(float deltaTime)
@@ -103,7 +107,7 @@ void GSMenu::Draw()
 {
 	//m_batchRenderer->Render();
 	//m_animationRenderer->Render();
-	//m_spriteRenderer->Render();
+	m_spriteRenderer->Render();
 }
 
 void GSMenu::Pause()

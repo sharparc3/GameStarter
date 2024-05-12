@@ -69,14 +69,14 @@ void GSIntro::Init()
 
     m_renderer->AddObject(m_sprite2);
 
-    for (int i = 2; i < 1500; i++)
-    {
-        auto sprite = std::make_shared<Sprite2D>(i, mesh_center, texture);
-        sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
-        sprite->SetRotation(0.0f);
-        sprite->SetScale(412.f, 360.f);
-        m_renderer->AddObject(sprite);
-    }
+    //for (int i = 2; i < 1500; i++)
+    //{
+    //    auto sprite = std::make_shared<Sprite2D>(i, mesh_center, texture);
+    //    sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
+    //    sprite->SetRotation(0.0f);
+    //    sprite->SetScale(412.f, 360.f);
+    //    m_renderer->AddObject(sprite);
+    //}
 
     joyLeftX = joyLeftY = joyRightX = joyRightY = 0;
 }

@@ -7,8 +7,8 @@
 
 namespace Screen
 {
-	const int WIDTH = 960;
-	const int HEIGHT = 540;
+	const int WIDTH = 1600;
+	const int HEIGHT = 900;
 }
 
 namespace ResourcesPath
