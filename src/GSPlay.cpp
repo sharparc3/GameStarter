@@ -55,3 +55,43 @@ void GSPlay::OnMouseMove(const SDL_MouseMotionEvent& motionevent)
 void GSPlay::OnMouseScroll(const SDL_MouseWheelEvent& wheelevent)
 {
 }
+
+void GSPlay::OnControllerConnected()
+{
+}
+
+void GSPlay::OnControllerDisconnected()
+{
+}
+
+void GSPlay::OnControllerLeftJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
+{
+}
+
+void GSPlay::OnControllerLeftJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
+{
+}
+
+void GSPlay::OnControllerRightJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
+{
+}
+
+void GSPlay::OnControllerRightJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
+{
+}
+
+void GSPlay::OnControllerButtonDown(const SDL_ControllerButtonEvent& buttonEvent)
+{
+}
+
+void GSPlay::OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonEvent)
+{
+}
+
+void GSPlay::OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
+{
+}
+
+void GSPlay::OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
+{
+}

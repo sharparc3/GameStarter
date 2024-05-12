@@ -103,7 +103,7 @@ void GSMenu::Draw()
 {
 	//m_batchRenderer->Render();
 	//m_animationRenderer->Render();
-	m_spriteRenderer->Render();
+	//m_spriteRenderer->Render();
 }
 
 void GSMenu::Pause()
@@ -155,6 +155,46 @@ void GSMenu::OnMouseMove(const SDL_MouseMotionEvent& motionevent)
 }
 
 void GSMenu::OnMouseScroll(const SDL_MouseWheelEvent& wheelevent)
+{
+}
+
+void GSMenu::OnControllerConnected()
+{
+}
+
+void GSMenu::OnControllerDisconnected()
+{
+}
+
+void GSMenu::OnControllerLeftJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
+{
+}
+
+void GSMenu::OnControllerLeftJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
+{
+}
+
+void GSMenu::OnControllerRightJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
+{
+}
+
+void GSMenu::OnControllerRightJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
+{
+}
+
+void GSMenu::OnControllerButtonDown(const SDL_ControllerButtonEvent& buttonEvent)
+{
+}
+
+void GSMenu::OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonEvent)
+{
+}
+
+void GSMenu::OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
+{
+}
+
+void GSMenu::OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
 {
 }
 

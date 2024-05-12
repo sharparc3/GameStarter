@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <algorithm>
 #include <glm/glm.hpp>
 #include "GameStateMachine.h"
 #include "ResourceManager.h"
@@ -19,6 +20,17 @@ void OnMouseDown(const SDL_MouseButtonEvent& mouseevent);
 void OnMouseUp(const SDL_MouseButtonEvent& mouseevent);
 void OnMouseMove(const SDL_MouseMotionEvent& motionevent);
 void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent);
+void OnControllerButtonDown(const SDL_ControllerButtonEvent& buttonevent);
+void OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonevent);
+void OnControllerLeftJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent);
+void OnControllerLeftJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent);
+void OnControllerRightJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent);
+void OnControllerRightJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent);
+void OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent);
+void OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent);
+
+void OnControllerConnected();
+void OnControllerDisconnected();
 
 void CleanUp(SDL_GLContext glContext, SDL_Window* window)
 {
@@ -65,6 +77,12 @@ int main(int argc, char** argv)
     if (TTF_Init() < 0)
     {
         std::cerr << "Failed to initialize SDL ttf: " << SDL_GetError() << std::endl;
+    }
+
+    // init game controller subsystem
+    if (SDL_Init(SDL_INIT_GAMECONTROLLER))
+    {
+        std::cerr << "SDL game controller subsystem failed to initialize";
     }
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, OPENGL_MAJOR_VERSION);
@@ -125,6 +143,11 @@ int main(int argc, char** argv)
 
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
+    int numJoystick = 0;
+
+    std::vector<SDL_GameController*> controllerArray;
+    numJoystick = SDL_NumJoysticks();
+
     while (GameStateMachine::GetInstance()->IsRunning())
     {
         // TODO: event queue
@@ -161,6 +184,78 @@ int main(int argc, char** argv)
                 GameStateMachine::GetInstance()->Exit();
                 break;
 
+            case SDL_CONTROLLERDEVICEADDED:
+                if (SDL_IsGameController(event.cdevice.which)) 
+                {
+                    SDL_GameController* controller = SDL_GameControllerOpen(event.cdevice.which);
+                    if (controller) 
+                    {
+                        controllerArray.push_back(controller);
+                    }
+                }
+                OnControllerConnected();
+                break;
+
+            case SDL_CONTROLLERDEVICEREMOVED:
+            {
+                int controllerID = event.cdevice.which;
+                // Find the controller
+                auto it = std::find_if(controllerArray.begin(), controllerArray.end(),
+                    [controllerID](SDL_GameController* controller)
+                    {
+                        return SDL_GameControllerFromInstanceID(controllerID) == controller;
+                    });
+                // Check if controller found
+                if (it != controllerArray.end())
+                {
+                    // Close the controller before removal
+                    SDL_GameControllerClose(*it);
+                    // Remove the controller
+                    controllerArray.erase(it);
+                }
+                OnControllerDisconnected();
+            }
+                break;
+
+            case SDL_CONTROLLERBUTTONDOWN:
+                OnControllerButtonDown(event.cbutton);
+                break;
+
+            case SDL_CONTROLLERBUTTONUP:
+                OnControllerButtonUp(event.cbutton);
+                break;
+
+            case SDL_CONTROLLERAXISMOTION:
+            {
+                switch (event.caxis.axis)
+                {
+                case SDL_CONTROLLER_AXIS_LEFTX:
+                    OnControllerLeftJoystickMotionX(event.caxis);
+                    break;
+
+                case SDL_CONTROLLER_AXIS_LEFTY:
+                    OnControllerLeftJoystickMotionY(event.caxis);
+                    break;
+
+                case SDL_CONTROLLER_AXIS_RIGHTX:
+                    OnControllerRightJoystickMotionX(event.caxis);
+                    break;
+
+                case SDL_CONTROLLER_AXIS_RIGHTY:
+                    OnControllerRightJoystickMotionY(event.caxis);
+                    break;
+
+                case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+                    OnLeftTriggerMotion(event.caxis);
+                    break;
+
+                case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
+                    OnRightTriggerMotion(event.caxis);
+                    break;
+                }
+            }
+                break;
+
             default:
                 break;
             }
@@ -186,7 +281,7 @@ int main(int argc, char** argv)
         // BuildBuffer using OpenGL here
         Update(deltaTime);
         Draw();
-        std::cout << 1.f / deltaTime << "\n";
+        //std::cout << 1.f / deltaTime << "\n";
         SDL_GL_SwapWindow(window);
     }
 
@@ -276,5 +371,85 @@ void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent)
     if (GameStateMachine::GetInstance()->HasState())
     {
         GameStateMachine::GetInstance()->GetCurrentState()->OnMouseScroll(wheelevent);
+    }
+}
+
+void OnControllerButtonDown(const SDL_ControllerButtonEvent& buttonevent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerButtonDown(buttonevent);
+    }
+}
+
+void OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonevent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerButtonUp(buttonevent);
+    }
+}
+
+void OnControllerLeftJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerLeftJoystickMotionX(joystickEvent);
+    }
+}
+
+void OnControllerLeftJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerLeftJoystickMotionY(joystickEvent);
+    }
+}
+
+void OnControllerRightJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerRightJoystickMotionX(joystickEvent);
+    }
+}
+
+void OnControllerRightJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerRightJoystickMotionY(joystickEvent);
+    }
+}
+
+void OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnLeftTriggerMotion(triggerEvent);
+    }
+}
+
+void OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnRightTriggerMotion(triggerEvent);
+    }
+}
+
+void OnControllerConnected()
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerConnected();
+    }
+}
+
+void OnControllerDisconnected()
+{
+    if (GameStateMachine::GetInstance()->HasState())
+    {
+        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerDisconnected();
     }
 }

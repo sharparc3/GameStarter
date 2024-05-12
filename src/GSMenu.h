@@ -30,6 +30,16 @@ public:
 	void OnMouseUp(const SDL_MouseButtonEvent& mouseevent) override;
 	void OnMouseMove(const SDL_MouseMotionEvent& motionevent) override;
 	void OnMouseScroll(const SDL_MouseWheelEvent& wheelevent) override;
+	void OnControllerConnected() override;
+	void OnControllerDisconnected() override;
+	void OnControllerLeftJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent) override;
+	void OnControllerLeftJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent) override;
+	void OnControllerRightJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent) override;
+	void OnControllerRightJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent) override;
+	void OnControllerButtonDown(const SDL_ControllerButtonEvent& buttonEvent) override;
+	void OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonEvent) override;
+	void OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent) override;
+	void OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent) override;
 
 private:
 	std::shared_ptr<SpriteAnimation> m_animation;

@@ -77,6 +77,8 @@ void GSIntro::Init()
         sprite->SetScale(412.f, 360.f);
         m_renderer->AddObject(sprite);
     }
+
+    joyLeftX = joyLeftY = joyRightX = joyRightY = 0;
 }
 
 void GSIntro::Update(float deltaTime)
@@ -135,4 +137,208 @@ void GSIntro::OnMouseMove(const SDL_MouseMotionEvent& motionevent)
 
 void GSIntro::OnMouseScroll(const SDL_MouseWheelEvent& wheelevent)
 {
+}
+
+void GSIntro::OnControllerConnected()
+{
+    std::cout << "A controller connected\n";
+}
+
+void GSIntro::OnControllerDisconnected()
+{
+    std::cout << "A controller disconnected\n";
+}
+
+void GSIntro::OnControllerLeftJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
+{
+    joyLeftX = joystickEvent.value;
+    glm::vec2 directionVec(joyLeftX, joyLeftY);
+    directionVec = glm::normalize(directionVec);
+    //std::cout << "Left joystick: " << directionVec.x << ", " << directionVec.y << "\n";
+    std::cout << "Left joystick: " << joyLeftX << ", " << joyLeftY << "\n";
+}
+
+void GSIntro::OnControllerLeftJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
+{
+    joyLeftY = joystickEvent.value;
+    glm::vec2 directionVec(joyLeftX, joyLeftY);
+    directionVec = glm::normalize(directionVec);
+    //std::cout << "Left joystick: " << directionVec.x << ", " << directionVec.y << "\n";
+    std::cout << "Left joystick: " << joyLeftX << ", " << joyLeftY << "\n";
+}
+
+void GSIntro::OnControllerRightJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
+{
+    joyRightX = joystickEvent.value;
+    glm::vec2 directionVec(joyRightX, joyRightY);
+    directionVec = glm::normalize(directionVec);
+    //std::cout << "Right joystick: " << directionVec.x << ", " << directionVec.y << "\n";
+    std::cout << "Right joystick: " << joyRightX << ", " << joyRightY << "\n";
+}
+
+void GSIntro::OnControllerRightJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
+{
+    joyRightY = joystickEvent.value;
+    glm::vec2 directionVec(joyRightX, joyRightY);
+    directionVec = glm::normalize(directionVec);
+    //std::cout << "Right joystick: " << directionVec.x << ", " << directionVec.y << "\n";
+    std::cout << "Right joystick: " << joyRightX << ", " << joyRightY << "\n";
+}
+
+void GSIntro::OnControllerButtonDown(const SDL_ControllerButtonEvent& buttonEvent)
+{
+    switch (buttonEvent.button)
+    {
+    case SDL_CONTROLLER_BUTTON_A:
+        // Handle A button press
+        std::cout << "A button down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_B:
+        // Handle B button press
+        std::cout << "B button down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_X:
+        // Handle X button press
+        std::cout << "X button down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_Y:
+        // Handle Y button press
+        std::cout << "Y button down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
+        // Handle left bumper press
+        std::cout << "LB down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
+        // Handle right bumper press
+        std::cout << "RB down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_BACK:
+        // Handle back button press
+        std::cout << "BACK button down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_START:
+        // Handle start button press
+        std::cout << "START button down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_GUIDE:
+        // Handle guide button press
+        std::cout << "GUIDE button down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_LEFTSTICK:
+        // Handle left stick click
+        std::cout << "LSB down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_RIGHTSTICK:
+        // Handle right stick click
+        std::cout << "RSB down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_DPAD_UP:
+        // Handle D-pad up press
+        std::cout << "DPAD-UP down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+        // Handle D-pad down press
+        std::cout << "DPAD-DOWN down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+        // Handle D-pad left press
+        std::cout << "DPAD-LEFT down\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+        // Handle D-pad right press
+        std::cout << "DPAD-RIGHT down\n";
+        break;
+
+    default:
+        // Handle other button presses or unknown buttons
+        break;
+    }
+
+}
+
+void GSIntro::OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonEvent)
+{
+    switch (buttonEvent.button)
+    {
+    case SDL_CONTROLLER_BUTTON_A:
+        // Handle A button up
+        std::cout << "A up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_B:
+        // Handle B button up
+        std::cout << "B up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_X:
+        // Handle X button up
+        std::cout << "X up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_Y:
+        // Handle Y button up
+        std::cout << "Y up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
+        // Handle left bumper up
+        std::cout << "LB up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
+        // Handle right bumper up
+        std::cout << "RB up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_BACK:
+        // Handle back button up
+        std::cout << "BACK up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_START:
+        // Handle start button up
+        std::cout << "START up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_GUIDE:
+        // Handle guide button up
+        std::cout << "GUIDE up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_LEFTSTICK:
+        // Handle left stick up
+        std::cout << "LSB up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_RIGHTSTICK:
+        // Handle right stick up
+        std::cout << "RSB up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_DPAD_UP:
+        // Handle D-pad up up
+        std::cout << "DPAD-UP up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+        // Handle D-pad down up
+        std::cout << "DPAD-DOWN up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+        // Handle D-pad left up
+        std::cout << "DPAD-LEFT up\n";
+        break;
+    case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+        // Handle D-pad right up
+        std::cout << "DPAD-RIGHT up\n";
+        break;
+
+    default:
+        // Handle other button up or unknown buttons
+        break;
+    }
+
+}
+
+void GSIntro::OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
+{
+    short value = triggerEvent.value;
+    float normalized = value >= 0 ? (float)value / 32767 : (float)value / 32768;
+    std::cout << "LT: " << normalized << "\n";
+}
+
+void GSIntro::OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
+{
+    short value = triggerEvent.value;
+    float normalized = value >= 0 ? (float)value / 32767 : (float)value / 32768;
+    std::cout << "RT: " << normalized << "\n";
 }
