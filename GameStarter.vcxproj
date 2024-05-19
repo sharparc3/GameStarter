@@ -39,6 +39,7 @@
     <ClCompile Include="src\SpriteAnimation.cpp" />
     <ClCompile Include="src\Text.cpp" />
     <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseObject.h" />
@@ -63,6 +64,7 @@
     <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\Text.h" />
     <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\Vertex.h" />
   </ItemGroup>
   <ItemGroup>

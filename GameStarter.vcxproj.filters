@@ -91,6 +91,9 @@
     <ClCompile Include="src\Text.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
+    <ClCompile Include="src\Logger.cpp">
+      <Filter>GameStarter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameStateMachine.h">
@@ -161,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="src\Text.h">
       <Filter>GameStarter\GameMaterials</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Logger.h">
+      <Filter>GameStarter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

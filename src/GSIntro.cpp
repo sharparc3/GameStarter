@@ -4,6 +4,7 @@
 #include "GameStateMachine.h"
 #include "ResourceManager.h"
 #include "Sprite2D.h"
+#include "Game.h"
 
 #include <random>
 #include <chrono>
@@ -109,6 +110,36 @@ void GSIntro::OnKeyDown(const SDL_KeyboardEvent& keyevent)
 
 void GSIntro::OnKeyUp(const SDL_KeyboardEvent& keyevent)
 {
+    auto gameIns = Game::GetInstance();
+    switch (keyevent.keysym.sym)
+    {
+    case SDLK_t:
+        // test resize windows
+        gameIns->SetWindowResolution(1600, 900);
+        m_camera->SetOrthographicProjection(0.f, gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        break;
+    case SDLK_f:
+        gameIns->SetFullScreen();
+        m_camera->SetOrthographicProjection(0.f, gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        break;
+    case SDLK_g:
+        gameIns->SetFullScreenBorderless();
+        m_camera->SetOrthographicProjection(0.f , gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        break;
+    case SDLK_1:
+        gameIns->SetWindowResolution(1920, 1080);
+        m_camera->SetOrthographicProjection(0.f, gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        break;
+    case SDLK_2:
+        gameIns->SetWindowResolution(2560, 1440);
+        m_camera->SetOrthographicProjection(0.f, gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        break;
+    case SDLK_ESCAPE:
+        gameIns->SetWindowWindowed();
+        break;
+    default:
+        break;
+    }
 }
 
 void GSIntro::OnMouseDown(const SDL_MouseButtonEvent& mouseevent)

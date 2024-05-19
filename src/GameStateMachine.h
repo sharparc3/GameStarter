@@ -18,7 +18,7 @@ public:
 	void Exit();
 	bool HasState();
 	std::shared_ptr<GameStateBase> GetCurrentState();
-	inline bool IsRunning() { return !m_exit; };
+	inline bool IsRunning() const { return !m_exit; };
 
 private:
 	std::stack<std::shared_ptr<GameStateBase>> m_stateStack;
