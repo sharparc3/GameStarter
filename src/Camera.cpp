@@ -44,7 +44,7 @@ void Camera::SetPerspectiveProjection(float fov_deg, float aspectRatio, float ne
     m_projectionMatrix = glm::perspective(glm::radians(fov_deg), aspectRatio, near, far);
 }
 
-void Camera::SetOrthographicProjection(float left, float right, float bottom, float top, float near, float far)
+void Camera::SetOrthographicProjection(float left, float right, float top, float bottom, float near, float far)
 {
     m_projectionMatrix = glm::ortho(left, right, bottom, top, near, far);
 }

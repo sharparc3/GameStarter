@@ -18,7 +18,7 @@ public:
     void Translate(const glm::vec3& offset);
 
     void SetPerspectiveProjection(float aspectRatio, float fov_deg = 45.0f, float near = 0.1f, float far = 100.f);
-    void SetOrthographicProjection(float left = 0.f, float right = (float)Screen::WIDTH, float bottom = Screen::HEIGHT, float top = 0.f, float near = -1.f, float far = 10.f);
+    void SetOrthographicProjection(float left, float right, float top, float bottom, float near = -1.f, float far = 100.f);
     void CalculateViewMatrix();
 
     glm::vec3 GetPosition() const;

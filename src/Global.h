@@ -4,12 +4,6 @@
 #define OPENGL_MAJOR_VERSION 4
 #define OPENGL_MINOR_VERSION 6
 
-namespace Screen
-{
-	const int WIDTH = 1600;
-	const int HEIGHT = 900;
-}
-
 namespace ResourcesPath
 {
 	const std::string TEXTURE = "./Resources/Textures/";
