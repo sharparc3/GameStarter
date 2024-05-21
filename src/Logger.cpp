@@ -26,7 +26,7 @@ void LogInfo(const char* format, ...)
     va_start(args, format);
 
     // Print the formatted error message to stderr
-    vfprintf(stderr, format, args);
+    vfprintf(stdout, format, args);
 
     // Clean up the argument list
     va_end(args);
@@ -41,7 +41,7 @@ void LogWarning(const char* format, ...)
     va_start(args, format);
 
     // Print the formatted error message to stderr
-    vfprintf(stderr, format, args);
+    vfprintf(stdout, format, args);
 
     // Clean up the argument list
     va_end(args);
@@ -56,7 +56,7 @@ void LogSuccess(const char* format, ...)
     va_start(args, format);
 
     // Print the formatted error message to stderr
-    vfprintf(stderr, format, args);
+    vfprintf(stdout, format, args);
 
     // Clean up the argument list
     va_end(args);
