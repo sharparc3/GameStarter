@@ -10,7 +10,7 @@ class GSIntro final : public GameStateBase
 {
 public:
 	using GameStateBase::GameStateBase;
-	GSIntro();
+	GSIntro() = delete;
 	~GSIntro() override;
 
 	void Init() override;

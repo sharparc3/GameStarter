@@ -1,9 +1,5 @@
 #include "GSPlay.h"
 
-GSPlay::GSPlay()
-{
-}
-
 GSPlay::~GSPlay()
 {
 }

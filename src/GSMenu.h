@@ -14,7 +14,7 @@ class GSMenu final : public GameStateBase
 {
 public:
 	using GameStateBase::GameStateBase;
-	GSMenu();
+	GSMenu() = delete;
 	~GSMenu() override;
 
 	void Init() override;

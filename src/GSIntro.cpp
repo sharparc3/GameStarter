@@ -21,10 +21,6 @@ static int GetInt(int from, int to) {
     return distribution(generator);
 }
 
-GSIntro::GSIntro()
-{
-}
-
 GSIntro::~GSIntro()
 {
 }
@@ -47,7 +43,10 @@ void GSIntro::Init()
     
     // set up camera
     m_camera = std::make_shared<Camera>();
-    m_camera->SetOrthographicProjection();
+    auto game = Game::GetInstance();
+    int sWidth = game->GetWindowWidth();
+    int sHeight = game->GetWindowHeight();
+    m_camera->SetOrthographicProjection(0.f, sWidth, 0.f, sHeight);
 
     // set up renderer
     m_renderer = std::make_shared<Renderer>(m_camera, shader);
@@ -68,7 +67,7 @@ void GSIntro::Init()
     m_sprite2->SetRotation(0.0f);
     m_sprite2->SetScale(206.f, 180.f);
 
-    m_renderer->AddObject(m_sprite2);
+    //m_renderer->AddObject(m_sprite2);
 
     //for (int i = 2; i < 1500; i++)
     //{
@@ -84,7 +83,10 @@ void GSIntro::Init()
 
 void GSIntro::Update(float deltaTime)
 {
-
+    auto game = Game::GetInstance();
+    int sWidth = game->GetWindowWidth();
+    int sHeight = game->GetWindowHeight();
+    m_camera->SetOrthographicProjection(0.f, (float)sWidth, 0.f, (float)sHeight);
 }
 
 void GSIntro::Draw()
@@ -116,23 +118,23 @@ void GSIntro::OnKeyUp(const SDL_KeyboardEvent& keyevent)
     case SDLK_t:
         // test resize windows
         gameIns->SetWindowResolution(1600, 900);
-        m_camera->SetOrthographicProjection(0.f, gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        m_camera->SetOrthographicProjection(0.f, (float)gameIns->GetWindowWidth(), 0.f, (float)gameIns->GetWindowHeight());
         break;
     case SDLK_f:
         gameIns->SetFullScreen();
-        m_camera->SetOrthographicProjection(0.f, gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        m_camera->SetOrthographicProjection(0.f, (float)gameIns->GetWindowWidth(), 0.f, (float)gameIns->GetWindowHeight());
         break;
     case SDLK_g:
         gameIns->SetFullScreenBorderless();
-        m_camera->SetOrthographicProjection(0.f , gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        m_camera->SetOrthographicProjection(0.f, (float)gameIns->GetWindowWidth(), 0.f, (float)gameIns->GetWindowHeight());
         break;
     case SDLK_1:
         gameIns->SetWindowResolution(1920, 1080);
-        m_camera->SetOrthographicProjection(0.f, gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        m_camera->SetOrthographicProjection(0.f, (float)gameIns->GetWindowWidth(), 0.f, (float)gameIns->GetWindowHeight());
         break;
     case SDLK_2:
         gameIns->SetWindowResolution(2560, 1440);
-        m_camera->SetOrthographicProjection(0.f, gameIns->GetWindowWidth(), gameIns->GetWindowHeight());
+        m_camera->SetOrthographicProjection(0.f, (float)gameIns->GetWindowWidth(), 0.f, (float)gameIns->GetWindowHeight());
         break;
     case SDLK_ESCAPE:
         gameIns->SetWindowWindowed();

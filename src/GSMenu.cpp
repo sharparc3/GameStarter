@@ -9,6 +9,7 @@
 #include "Sound.h"
 #include "SoundPlayer.h"
 #include "Text.h"
+#include "Game.h"
 
 #include <random>
 #include <chrono>
@@ -23,11 +24,6 @@ static int GetInt(int from, int to) {
 
 	// Generate a random number within the range
 	return distribution(generator);
-}
-
-
-GSMenu::GSMenu()
-{
 }
 
 GSMenu::~GSMenu()
@@ -60,7 +56,8 @@ void GSMenu::Init()
 	auto texture2 = ResourceManager::GetInstance()->GetTexture("compiling.png");
 	m_animation = std::make_shared<SpriteAnimation>(2, mesh, texture, 0.1f, 6);
 	m_camera = std::make_shared<Camera>();
-	m_camera->SetOrthographicProjection();
+	auto game = Game::GetInstance();
+	m_camera->SetOrthographicProjection(0.f, (float)game->GetWindowWidth(), 0.f, (float)game->GetWindowHeight());
 
 	m_animationRenderer = std::make_shared<Renderer>(m_camera, shader_anm);
 	m_spriteRenderer = std::make_shared<Renderer>(m_camera, shader_sprite);
@@ -99,6 +96,10 @@ void GSMenu::Init()
 
 void GSMenu::Update(float deltaTime)
 {
+	auto game = Game::GetInstance();
+	int sWidth = game->GetWindowWidth();
+	int sHeight = game->GetWindowHeight();
+	m_camera->SetOrthographicProjection(0.f, (float)sWidth, 0.f, (float)sHeight);
 	m_animation->Update(deltaTime);
 	m_textObj->UpdateText();
 }

@@ -5,7 +5,7 @@ class GSPlay final : public GameStateBase
 {
 public:
 	using GameStateBase::GameStateBase;
-	GSPlay();
+	GSPlay() = delete;
 	~GSPlay() override;
 
 	void Init() override;
