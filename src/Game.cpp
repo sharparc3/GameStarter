@@ -103,14 +103,7 @@ int Game::InitOpenGL()
 
 int Game::GameInit()
 {
-    // init singleton classes
-    ResourceManager::Construct();
-    GameStateMachine::Construct();
-    SoundPlayer::Construct();
-    SoundPlayer::GetInstance()->Init();
-    GameStateMachine::GetInstance()->Init();
-    GameStateMachine::GetInstance()->PushState(GameStateType::STATE_INTRO);
-
+    // start ticking
     m_lastTime = m_currentTime = std::chrono::steady_clock::now();
 
     // default clear color is white
@@ -128,11 +121,20 @@ int Game::GameInit()
     // set window title
     SetWindowTitle("GAME");
 
+    // set window resolution
     m_ScreenWidth = 1600;
     m_ScreenHeight = 900;
     SetWindowResolution(m_ScreenWidth, m_ScreenHeight);
 
     m_GameRunning = true;
+
+    // init singleton classes
+    ResourceManager::Construct();
+    GameStateMachine::Construct();
+    SoundPlayer::Construct();
+    SoundPlayer::GetInstance()->Init();
+    GameStateMachine::GetInstance()->Init();
+    GameStateMachine::GetInstance()->PushState(GameStateType::STATE_INTRO);
 
     return 0;
 }
@@ -383,7 +385,7 @@ bool Game::SetIgnoreWindowsScaling(bool enabled)
 void Game::SetWindowResolution(int width, int height)
 {
     SDL_SetWindowSize(m_pWindow, width, height);
-    SetViewport();
+    SetDefaultViewport();
 }
 
 void Game::SetWindowBorderless()
@@ -399,7 +401,7 @@ void Game::SetWindowWindowed()
         LogError("Set fullscreen failed, %s", SDL_GetError());
         SDL_ClearError();
     }
-    SetViewport();
+    SetDefaultViewport();
 }
 
 int Game::SetFullScreen()
@@ -411,7 +413,7 @@ int Game::SetFullScreen()
         SDL_ClearError();
         return -1;
     }
-    SetViewport();
+    SetDefaultViewport();
     return 0;
 }
 
@@ -424,7 +426,7 @@ int Game::SetFullScreenBorderless()
         SDL_ClearError();
         return -1;
     }
-    SetViewport();
+    SetDefaultViewport();
     return 0;
 }
 
@@ -595,8 +597,13 @@ void Game::OnControllerDisconnected()
     }
 }
 
-void Game::SetViewport()
+void Game::SetDefaultViewport()
 {
     SDL_GetWindowSize(m_pWindow, &m_ScreenWidth, &m_ScreenHeight);
     glViewport(0, 0, m_ScreenWidth, m_ScreenHeight);
+}
+
+void Game::SetViewport(int x, int y, int width, int height)
+{
+    glViewport(x, y, width, height);
 }

@@ -6,7 +6,7 @@
 #include "Global.h"
 #include "SingletonDclp.h"
 
-class Game : public SingletonDclp<Game>
+class Game final : public SingletonDclp<Game>
 {
 public:
 	int InitSDL();
@@ -29,6 +29,8 @@ public:
 	void SetFPSLimit(float FPS);
 	int GetWindowWidth() const;
 	int GetWindowHeight() const;
+	void SetDefaultViewport();
+	void SetViewport(int x, int y, int width, int height);
 
 private:
 	SDL_Window* m_pWindow;
@@ -61,5 +63,4 @@ private:
 	void OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent);
 	void OnControllerConnected();
 	void OnControllerDisconnected();
-	void SetViewport();
 };
