@@ -9,12 +9,8 @@
 class Game final : public SingletonDclp<Game>
 {
 public:
-	int InitSDL();
-	int InitOpenGL();
-	int GameInit();
 	void CleanUp();
 	void Run();
-	void HandleEvent(SDL_Event& e);
 
 	// Utilities
 	void SetWindowTitle(const char* name);
@@ -45,6 +41,11 @@ private:
 	bool m_GameRunning;
 
 private:
+	int InitSDL();
+	int InitOpenGL();
+	int GameInit();
+	void HandleEvent(SDL_Event& e);
+
 	void Draw();
 	void Update(float deltaTime);
 	void OnKeyDown(const SDL_KeyboardEvent& keyevent);

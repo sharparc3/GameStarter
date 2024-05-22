@@ -10,6 +10,7 @@ public:
 	void Update(GLfloat deltaTime);
 	void SetRepeat(bool repeat);
 	inline bool IsRepeat() const { return m_repeat; }
+	void SendUniformData(std::map<std::string, GLint>& uniformLocationData) override;
 public:
 	bool m_done;
 

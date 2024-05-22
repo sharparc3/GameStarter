@@ -85,14 +85,14 @@
     <ClCompile Include="src\Sound.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
-    <ClCompile Include="src\SoundPlayer.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClCompile>
     <ClCompile Include="src\Text.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
     <ClCompile Include="src\Logger.cpp">
-      <Filter>GameStarter</Filter>
+      <Filter>GameStarter\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundPlayer.cpp">
+      <Filter>GameStarter\GameManagers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,14 +159,14 @@
     <ClInclude Include="src\Sound.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
-    <ClInclude Include="src\SoundPlayer.h">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClInclude>
     <ClInclude Include="src\Text.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
     <ClInclude Include="src\Logger.h">
-      <Filter>GameStarter</Filter>
+      <Filter>GameStarter\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundPlayer.h">
+      <Filter>GameStarter\GameManagers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

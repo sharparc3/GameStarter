@@ -11,7 +11,7 @@ class Shader;
 class Renderer
 {
 public:
-	Renderer();
+	Renderer() = delete;
 	Renderer(const std::shared_ptr<Camera> camera, const std::shared_ptr<Shader> shader);
 	~Renderer();
 	void SetShader(const std::shared_ptr<Shader> shader);

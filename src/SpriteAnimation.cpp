@@ -28,3 +28,15 @@ void SpriteAnimation::SetRepeat(bool repeat)
 {
 	m_repeat = repeat;
 }
+
+void SpriteAnimation::SendUniformData(std::map<std::string, GLint>& uniformLocationData)
+{
+	if (uniformLocationData["currentFrame"] != -1)
+	{
+		glUniform1f(uniformLocationData["currentFrame"], static_cast<GLfloat>(this->GetCurrentFrameIndex()));
+	}
+	if (uniformLocationData["frameCount"] != -1)
+	{
+		glUniform1f(uniformLocationData["frameCount"], static_cast<GLfloat>(this->GetNumFrames()));
+	}
+}

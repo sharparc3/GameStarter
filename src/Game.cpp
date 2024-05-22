@@ -163,7 +163,6 @@ void Game::CleanUp()
     Mix_Quit();
     TTF_Quit();
     SDL_Quit();
-    ResourceManager::Destruct();
 }
 
 void Game::Run()

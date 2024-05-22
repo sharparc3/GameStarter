@@ -73,6 +73,11 @@ void BaseObject::RecalculateWorldMatrix()
 	m_needCalculateWorldMatrix = false;
 }
 
+void BaseObject::SendUniformData(std::map<std::string, GLint>& uniformLocationData)
+{
+
+}
+
 glm::vec3 BaseObject::GetPosition() const
 {
 	return m_position;

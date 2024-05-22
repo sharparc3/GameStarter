@@ -5,3 +5,7 @@ Sprite2D::Sprite2D(GLuint id, const std::shared_ptr<Mesh>& mesh, const std::shar
 {
 
 }
+
+void Sprite2D::SendUniformData(std::map<std::string, GLint>& uniformLocationData)
+{
+}

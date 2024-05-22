@@ -17,6 +17,7 @@ public:
 	void SetScale(const glm::vec3& scale);
 	void SetScale(GLfloat x, GLfloat y, GLfloat z = 1.0f);
 	void RecalculateWorldMatrix();
+	virtual void SendUniformData(std::map<std::string, GLint>& uniformLocationData);
 
 	glm::vec3 GetPosition() const;
 	glm::vec3 GetScale() const;

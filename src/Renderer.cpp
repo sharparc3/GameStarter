@@ -4,10 +4,6 @@
 #include "SpriteAnimation.h"
 #include "Shader.h"
 
-Renderer::Renderer()
-{
-}
-
 Renderer::Renderer(const std::shared_ptr<Camera> camera, const std::shared_ptr<Shader> shader) : 
 	m_camera(camera), m_shader(shader)
 {
@@ -85,7 +81,7 @@ void Renderer::Render()
 			obj.second->m_texture->Bind();
 		}
 
-		// send uniform data
+		// send WVP matrix uniform data
 		auto uniformLocs = m_shader->m_uniformLocations;
 		if (uniformLocs["u_mvpMatrix"] != -1)
 		{
@@ -96,16 +92,9 @@ void Renderer::Render()
 			worldMatrix = projectionMatrix * viewMatrix * worldMatrix;
 			glUniformMatrix4fv(uniformLocs["u_mvpMatrix"], 1, GL_FALSE, &worldMatrix[0][0]);
 		}
-		if (uniformLocs["currentFrame"] != -1)
-		{
-			auto anim = std::dynamic_pointer_cast<SpriteAnimation>(obj.second);
-			glUniform1f(uniformLocs["currentFrame"], static_cast<GLfloat>(anim->GetCurrentFrameIndex()));
-		}
-		if (uniformLocs["frameCount"] != -1)
-		{
-			auto anim = std::dynamic_pointer_cast<SpriteAnimation>(obj.second);
-			glUniform1f(uniformLocs["frameCount"], static_cast<GLfloat>(anim->GetNumFrames()));
-		}
+
+		// let object send other uniform data
+		obj.second->SendUniformData(uniformLocs);
 
 		// Draw	
 		glDrawElements(GL_TRIANGLES, obj.second->m_mesh->GetNumIndices(), GL_UNSIGNED_INT, 0);
