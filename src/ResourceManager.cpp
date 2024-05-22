@@ -1,11 +1,11 @@
 #include "ResourceManager.h"
 
-//#include <SDL2/SDL_ttf.h>
 #include "Mesh.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "Global.h"
 #include "Sound.h"
+#include "Logger.h"
 
 void ResourceManager::LoadMesh(const std::string& name)
 {
@@ -54,20 +54,31 @@ void ResourceManager::LoadSound(const std::string& name)
     }
 }
 
-//void ResourceManager::LoadFont(const std::string& name)
-//{
-//    std::string path = ResourcesPath::FONT + name;
-//
-//    if (m_FontList.count(name) == 0)
-//    {
-//        std::shared_ptr<TTF_Font> font = std::make_shared<TTF_Font>(path);
-//        if (!font)
-//        {
-//            std::cerr << "Error loading font " << name << ": " << TTF_GetError();
-//        }
-//        m_FontList[name] = font;
-//    }
-//}
+void ResourceManager::LoadFont(const std::string& name, int size)
+{
+    std::string path = ResourcesPath::FONT + name;
+
+    auto findFont = [&](const std::string& name, int size) 
+        {
+        return std::find_if(m_FontList.begin(), m_FontList.end(),
+            [&](const std::tuple<std::string, int, TTF_Font*>& font) 
+            {
+                return std::get<0>(font) == name && std::get<1>(font) == size;
+            });
+        };
+
+    auto it = findFont(name, size);
+
+    if (it == m_FontList.end())
+    {
+        TTF_Font* font = TTF_OpenFont(path.c_str(), size);
+        if (!font)
+        {
+            LogError("Error loading font %s, %s", name.c_str(), TTF_GetError());
+        }
+        m_FontList.push_back(std::make_tuple(name, size, font));
+    }
+}
 
 std::shared_ptr<Mesh> ResourceManager::GetMesh(const std::string& name)
 {
@@ -109,15 +120,26 @@ std::shared_ptr<Sound> ResourceManager::GetSound(const std::string& name)
     return nullptr;
 }
 
-//std::shared_ptr<TTF_Font> ResourceManager::GetFont(const std::string& name)
-//{
-//    auto it = m_FontList.find(name);
-//    if (it != m_FontList.end())
-//    {
-//        return it->second;
-//    }
-//    return nullptr;
-//}
+TTF_Font* ResourceManager::GetFont(const std::string& name, int size)
+{
+    auto findFont = [&](const std::string& name, int size) 
+        {
+        return std::find_if(m_FontList.begin(), m_FontList.end(),
+            [&](const std::tuple<std::string, int, TTF_Font*>& font) 
+            {
+                return std::get<0>(font) == name && std::get<1>(font) == size;
+            });
+        };
+
+    auto it = findFont(name, size);
+
+    if (it != m_FontList.end())
+    {
+        return std::get<2>(*it);
+    }
+
+    return nullptr;
+}
 
 void ResourceManager::FreeMesh(const std::string& name)
 {
@@ -139,10 +161,60 @@ void ResourceManager::FreeSound(const std::string& name)
     m_SoundList.erase(name);
 }
 
+void ResourceManager::FreeFont(const std::string& name, int size)
+{
+    if (!size)
+    {
+        DeleteFontByName(name);
+    }
+    else
+    {
+        DeleteFontByNameAndSize(name, size);
+    }
+}
+
 void ResourceManager::FreeAllResources()
 {
     m_MeshList.clear();
     m_ShaderList.clear();
     m_TextureList.clear();
     m_SoundList.clear();
+    for (auto it = m_FontList.begin(); it != m_FontList.end(); it++)
+    {
+        TTF_CloseFont(std::get<2>(*it));
+    }
+    m_FontList.clear();
+}
+
+void ResourceManager::DeleteFontByName(const std::string& name)
+{
+    auto it = std::remove_if(m_FontList.begin(), m_FontList.end(),
+        [&](const std::tuple<std::string, int, TTF_Font*>& font) 
+        {
+            if (std::get<0>(font) == name)
+            {
+                TTF_CloseFont(std::get<2>(font)); // Close the font
+                return true;
+            }
+            return false;
+        });
+
+    m_FontList.erase(it, m_FontList.end());
+
+}
+
+void ResourceManager::DeleteFontByNameAndSize(const std::string& name, int size)
+{
+    auto it = std::remove_if(m_FontList.begin(), m_FontList.end(),
+        [&](const std::tuple<std::string, int, TTF_Font*>& font)
+        {
+            if (std::get<0>(font) == name && std::get<1>(font) == size)
+            {
+                TTF_CloseFont(std::get<2>(font)); // Close the font
+                return true;
+            }
+            return false;
+        });
+
+    m_FontList.erase(it, m_FontList.end());
 }
