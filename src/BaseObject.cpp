@@ -102,3 +102,7 @@ GLuint BaseObject::GetID() const
 {
 	return m_objectId;
 }
+
+BaseObject::BaseObject()
+{
+}

@@ -16,7 +16,6 @@ public:
 
 	void Compile(const std::string& vertexSource, const std::string& fragmentSource);
 	void Use();
-	const std::map<std::string, GLint>& GetUniformLocationData();
 	GLuint GetProgramID() const;
 
 public:

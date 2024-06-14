@@ -29,6 +29,7 @@ public:
 	friend class Renderer;
 	friend class BatchRenderer;
 protected:
+	BaseObject();
 	GLuint m_objectId;
 
 	glm::vec3 m_position;

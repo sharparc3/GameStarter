@@ -1,9 +1,11 @@
 #include "Mesh.h"
+#include "Logger.h"
 
 Mesh::Mesh()
 {
     m_iIBO = 0;
     m_iVBO = 0;
+    m_iVAO = 0;
     m_numIndices = 0;
 }
 
@@ -11,6 +13,21 @@ Mesh::~Mesh()
 {
     glDeleteBuffers(1, &m_iVBO);
     glDeleteBuffers(1, &m_iIBO);
+}
+
+Mesh::Mesh(std::vector<Vertex>&& vertices, std::vector<GLuint>&& indices) : 
+    m_vertices(std::move(vertices)), m_indices(std::move(m_indices)), m_iVAO(0), m_iVBO(0), m_iIBO(0)
+{
+    m_numIndices = (int)m_indices.size();
+}
+
+Mesh::Mesh(const Mesh& other)
+{
+    m_vertices = other.m_vertices;
+    m_indices = other.m_indices;
+    m_numIndices = other.m_numIndices;
+
+    GenerateGLBuffer();
 }
 
 GLboolean Mesh::LoadMesh(const std::string& filename)
@@ -44,44 +61,7 @@ GLboolean Mesh::LoadMesh(const std::string& filename)
         m_indices.push_back(indice);
     }
 
-    // send VBO to GPU and generate the VAO
-    glGenBuffers(1, &m_iVBO);
-    glGenVertexArrays(1, &m_iVAO);
-    glBindVertexArray(m_iVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, m_iVBO);
-
-    // VBO setup
-    glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(Vertex), m_vertices.data(), GL_STATIC_DRAW);
-    GLenum error = glGetError();
-    if (error != GL_NO_ERROR)
-    {
-        std::cerr << "OpenGL Error during glBufferData: " << error << std::endl;
-    }
-    
-    // VAO setup
-    // Position attribute (location = 0)
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-
-    // Texture coordinate attribute (location = 1)
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(glm::vec3)));
-
-    // unbind VBO
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    // unbind VAO
-    glBindVertexArray(0);
-
-    // send IBO data to GPU
-    glGenBuffers(1, &m_iIBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iIBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices.data(), GL_STATIC_DRAW);
-    error = glGetError();
-    if (error != GL_NO_ERROR)
-    {
-        std::cerr << "OpenGL Error during glBufferData: " << error << std::endl;
-    }
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    GenerateGLBuffer();
 
     fclose(file);
     return GL_TRUE;
@@ -105,4 +85,54 @@ GLuint Mesh::GetVAOId() const
 GLuint Mesh::GetNumIndices() const
 {
     return m_numIndices;
+}
+
+void Mesh::GenerateGLBuffer(bool freeOld)
+{
+    if (freeOld)
+    {
+        glDeleteBuffers(1, &m_iVAO);
+        glDeleteBuffers(1, &m_iVBO);
+        glDeleteBuffers(1, &m_iIBO);
+        m_iVAO = m_iVBO = m_iIBO = 0;
+    }
+
+    // send VBO to GPU and generate the VAO
+    glGenVertexArrays(1, &m_iVAO);
+    glBindVertexArray(m_iVAO);
+    glGenBuffers(1, &m_iVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_iVBO);
+
+    // VBO setup
+    glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), m_vertices.data(), GL_STATIC_DRAW);
+    GLenum error = glGetError();
+    if (error != GL_NO_ERROR)
+    {
+        LogError("OpenGL Error during glBufferData: %s", error);
+    }
+
+    // VAO setup
+    // Position attribute (location = 0)
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+
+    // Texture coordinate attribute (location = 1)
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(glm::vec3)));
+
+    // unbind VBO
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    // unbind VAO
+    glBindVertexArray(0);
+
+    // send IBO data to GPU
+    glGenBuffers(1, &m_iIBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iIBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices.data(), GL_STATIC_DRAW);
+    error = glGetError();
+    if (error != GL_NO_ERROR)
+    {
+        LogError("OpenGL Error during glBufferData: %s", error);
+    }
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }

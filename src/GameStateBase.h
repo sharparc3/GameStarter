@@ -5,11 +5,11 @@
 class GameStateBase
 {
 public:
-	GameStateBase();
+	GameStateBase() = delete;
 	GameStateBase(GameStateType stateType);
 	virtual ~GameStateBase();
 
-	GameStateType GetStateType();
+	GameStateType GetStateType() const;
 
 	virtual void Init() = 0;
 	virtual void Update(float deltaTime) = 0;

@@ -1,11 +1,6 @@
 #include "GameStateBase.h"
 #include "Global.h"
 
-GameStateBase::GameStateBase()
-{
-	m_GameStateType = GameStateType::UNDEFINED;
-}
-
 GameStateBase::GameStateBase(GameStateType stateType) : m_GameStateType(stateType)
 {
 }
@@ -14,7 +9,7 @@ GameStateBase::~GameStateBase()
 {
 }
 
-GameStateType GameStateBase::GetStateType()
+GameStateType GameStateBase::GetStateType() const
 {
 	return m_GameStateType;
 }

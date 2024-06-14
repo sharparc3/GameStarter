@@ -188,5 +188,6 @@
     <None Include="Resources\Shaders\quad_batch.vert">
       <Filter>Resources\Shaders</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

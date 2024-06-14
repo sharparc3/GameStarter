@@ -68,6 +68,7 @@
     <ClInclude Include="src\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Resources\Shaders\animation.frag" />
     <None Include="Resources\Shaders\animation.vert" />
     <None Include="Resources\Shaders\quad.frag" />

@@ -36,8 +36,8 @@ void GSIntro::Init()
     ResourceManager::GetInstance()->LoadTexture("compiling.png");
 
     // get resources
-    auto mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
-    auto mesh_center = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+    //auto mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+    //auto mesh_center = ResourceManager::GetInstance()->GetMesh("quad.nfg");
     auto shader = ResourceManager::GetInstance()->GetShader("quad");
     auto texture = ResourceManager::GetInstance()->GetTexture("compiling.png");
     
@@ -46,13 +46,13 @@ void GSIntro::Init()
     auto game = Game::GetInstance();
     int sWidth = game->GetWindowWidth();
     int sHeight = game->GetWindowHeight();
-    m_camera->SetOrthographicProjection(0.f, sWidth, 0.f, sHeight);
+    m_camera->SetOrthographicProjection(0.f, (float)sWidth, 0.f, (float)sHeight);
 
     // set up renderer
     m_renderer = std::make_shared<Renderer>(m_camera, shader);
 
     // create a sprite 
-    m_sprite = std::make_shared<Sprite2D>(0, mesh, texture);
+    m_sprite = std::make_shared<Sprite2D>(0, texture);
 
     // set up sprite
     m_sprite->SetPosition(0.f, 0.f, 0.0f);
@@ -62,7 +62,7 @@ void GSIntro::Init()
     // add to renderer 
     m_renderer->AddObject(m_sprite);
 
-    m_sprite2 = std::make_shared<Sprite2D>(1, mesh, texture);
+    m_sprite2 = std::make_shared<Sprite2D>(1, texture);
     m_sprite2->SetPosition(480.f, 270.f, 0.f);
     m_sprite2->SetRotation(0.0f);
     m_sprite2->SetScale(206.f, 180.f);

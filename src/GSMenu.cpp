@@ -54,7 +54,7 @@ void GSMenu::Init()
 	texture->SetFilter(1);
 	auto batchshader = ResourceManager::GetInstance()->GetShader("quad_batch");
 	auto texture2 = ResourceManager::GetInstance()->GetTexture("compiling.png");
-	m_animation = std::make_shared<SpriteAnimation>(2, mesh, texture, 0.1f, 6);
+	m_animation = std::make_shared<SpriteAnimation>(2, texture, 0.1f, 6);
 	m_camera = std::make_shared<Camera>();
 	auto game = Game::GetInstance();
 	m_camera->SetOrthographicProjection(0.f, (float)game->GetWindowWidth(), 0.f, (float)game->GetWindowHeight());
@@ -69,14 +69,14 @@ void GSMenu::Init()
 	m_animationRenderer->AddObject(m_animation);
 
 	m_batchRenderer = std::make_shared<BatchRenderer>(20000, m_camera, batchshader);
-	for (int i = 0; i < 1500; i++)
-	{
-		auto sprite = std::make_shared<Sprite2D>(i, mesh_center, texture2);
-		sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
-		sprite->SetRotation(0.0f);
-		sprite->SetScale(412.f, 360.f);
-		m_batchRenderer->AddObject(sprite);
-	}
+	//for (int i = 0; i < 1500; i++)
+	//{
+	//	auto sprite = std::make_shared<Sprite2D>(i, mesh_center, texture2);
+	//	sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
+	//	sprite->SetRotation(0.0f);
+	//	sprite->SetScale(412.f, 360.f);
+	//	m_batchRenderer->AddObject(sprite);
+	//}
 
 	m_soundMouseDown = ResourceManager::GetInstance()->GetSound("mouse_down.wav");
 	m_soundMouseUp = ResourceManager::GetInstance()->GetSound("mouse_up.wav");
@@ -90,8 +90,16 @@ void GSMenu::Init()
 	m_text2 = std::make_shared<Text>(1, "This is another text using Roboto-Thin.ttf (size 36)", "Roboto-Thin.ttf", 36, textColor);
 	m_text2->SetPosition(100.f, 300.f);
 	m_textObj->SetPosition(100.f, 100.f);
+
+	ResourceManager::GetInstance()->LoadFont("Roboto-Bold.ttf", 48);
+	auto font3 = ResourceManager::GetInstance()->GetFont("Roboto-Bold.ttf", 48);
+	textColor = { 255, 215, 0, 255 };
+	std::shared_ptr<Text> text3 = std::make_shared<Text>(999, "Third text", font3, 48, textColor);
+	text3->SetPosition(200.f, 600.f);
+	
 	m_spriteRenderer->AddObject(m_textObj);
 	m_spriteRenderer->AddObject(m_text2);
+	m_spriteRenderer->AddObject(text3);
 }
 
 void GSMenu::Update(float deltaTime)
@@ -107,7 +115,7 @@ void GSMenu::Update(float deltaTime)
 void GSMenu::Draw()
 {
 	//m_batchRenderer->Render();
-	//m_animationRenderer->Render();
+	m_animationRenderer->Render();
 	m_spriteRenderer->Render();
 }
 

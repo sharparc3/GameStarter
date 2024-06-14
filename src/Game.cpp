@@ -136,6 +136,10 @@ int Game::GameInit()
     GameStateMachine::GetInstance()->Init();
     GameStateMachine::GetInstance()->PushState(GameStateType::STATE_INTRO);
 
+    ResourceManager::GetInstance()->LoadMesh("quad.nfg");
+    ResourceManager::GetInstance()->LoadMesh("quad_center.nfg");
+
+
     return 0;
 }
 

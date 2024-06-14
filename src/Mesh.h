@@ -14,6 +14,11 @@ public:
 	Mesh();
 	~Mesh();
 
+	Mesh(std::vector<Vertex>&& vertices, std::vector<GLuint>&& indices);
+
+	// copy contructor
+	Mesh(const Mesh& other);
+
 	GLboolean LoadMesh(const std::string& filename);
 	GLuint GetVBOId() const;
 	GLuint GetIBOId() const;
@@ -27,4 +32,6 @@ public:
 private:
 	GLuint m_iVBO, m_iIBO, m_iVAO;
 	GLuint m_numIndices;
+
+	void GenerateGLBuffer(bool freeOld = false);
 };

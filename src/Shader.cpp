@@ -91,11 +91,6 @@ void Shader::Use()
 	glUseProgram(m_iProgramId);
 }
 
-const std::map<std::string, GLint>& Shader::GetUniformLocationData()
-{
-	return m_uniformLocations;
-}
-
 GLuint Shader::GetProgramID() const
 {
 	return m_iProgramId;

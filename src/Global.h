@@ -18,5 +18,5 @@ enum class GameStateType
 	STATE_INTRO,
 	STATE_MENU,
 	STATE_PLAY,
-	UNDEFINED
+	STATE_COUNT
 };
