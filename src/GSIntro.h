@@ -36,6 +36,7 @@ public:
 	void OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonEvent) override;
 	void OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent) override;
 	void OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent) override;
+	void ImGuiDraw() override;
 
 private:
 	std::shared_ptr<Sprite2D> m_sprite, m_sprite2;

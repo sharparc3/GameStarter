@@ -3,6 +3,7 @@
 #include <string>
 #include <chrono>
 #include <vector>
+#include <glm/glm.hpp>
 #include "Config.h"
 #include "SingletonDclp.h"
 
@@ -30,7 +31,7 @@ public:
 
 private:
 	SDL_Window* m_pWindow;
-	SDL_GLContext m_pGLContext;
+	SDL_GLContext m_GLContext;
 	SDL_Event m_event;
 	std::vector<SDL_GameController*> m_controllerArray;
 	std::chrono::steady_clock::time_point m_lastTime, m_currentTime;
@@ -44,6 +45,7 @@ private:
 	int InitSDL();
 	int InitOpenGL();
 	int GameInit();
+	int InitImGUI();
 	void HandleEvent(SDL_Event& e);
 
 	void Draw();

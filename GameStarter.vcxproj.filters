@@ -102,9 +102,6 @@
     <ClInclude Include="src\GameStateBase.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="src\Global.h">
-      <Filter>GameStarter\Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="src\SingletonDclp.h">
       <Filter>GameStarter\Utilities</Filter>
     </ClInclude>
@@ -167,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="src\SoundPlayer.h">
       <Filter>GameStarter\GameManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config.h">
+      <Filter>GameStarter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

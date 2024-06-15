@@ -34,7 +34,9 @@ public:
 	virtual void OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonEvent) = 0;
 	virtual void OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent) = 0;
 	virtual void OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent) = 0;
+	virtual void ImGuiDraw();
 
 protected:
 	GameStateType m_GameStateType;
+
 };

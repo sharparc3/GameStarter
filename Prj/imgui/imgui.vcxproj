@@ -18,69 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\BaseObject.cpp" />
-    <ClCompile Include="src\BatchRenderer.cpp" />
-    <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\GameStateBase.cpp" />
-    <ClCompile Include="src\GameStateMachine.cpp" />
-    <ClCompile Include="src\GSIntro.cpp" />
-    <ClCompile Include="src\GSMenu.cpp" />
-    <ClCompile Include="src\GSPlay.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Mesh.cpp" />
-    <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\ResourceManager.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\Sound.cpp" />
-    <ClCompile Include="src\SoundPlayer.cpp" />
-    <ClCompile Include="src\Sprite2D.cpp" />
-    <ClCompile Include="src\SpriteAnimation.cpp" />
-    <ClCompile Include="src\Text.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
-    <ClCompile Include="src\Logger.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\BaseObject.h" />
-    <ClInclude Include="src\BatchRenderer.h" />
-    <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\GameStateBase.h" />
-    <ClInclude Include="src\GameStateMachine.h" />
-    <ClInclude Include="src\Config.h" />
-    <ClInclude Include="src\GSIntro.h" />
-    <ClInclude Include="src\GSMenu.h" />
-    <ClInclude Include="src\GSPlay.h" />
-    <ClInclude Include="src\Mesh.h" />
-    <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\ResourceManager.h" />
-    <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\SingletonDclp.h" />
-    <ClInclude Include="src\Sound.h" />
-    <ClInclude Include="src\SoundPlayer.h" />
-    <ClInclude Include="src\Sprite2D.h" />
-    <ClInclude Include="src\SpriteAnimation.h" />
-    <ClInclude Include="src\stb_image.h" />
-    <ClInclude Include="src\Text.h" />
-    <ClInclude Include="src\Texture.h" />
-    <ClInclude Include="src\Logger.h" />
-    <ClInclude Include="src\Vertex.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="Resources\Shaders\animation.frag" />
-    <None Include="Resources\Shaders\animation.vert" />
-    <None Include="Resources\Shaders\quad.frag" />
-    <None Include="Resources\Shaders\quad.vert" />
-    <None Include="Resources\Shaders\quad_batch.frag" />
-    <None Include="Resources\Shaders\quad_batch.vert" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{07529283-ee65-41ff-8bc2-229e25d27faf}</ProjectGuid>
-    <RootNamespace>GameStarter</RootNamespace>
+    <ProjectGuid>{f1934e2e-fa27-4294-b6af-2e464281c562}</ProjectGuid>
+    <RootNamespace>imgui</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -98,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -129,8 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)BIN\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -166,14 +107,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Include;$(SolutionDir)Prj\imgui\imgui;$(SolutionDir)Prj\imgui\sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>D:\Documents\source\GameStarter\Include\SDL2;$(SolutionDir)Prj\imgui\sources;$(SolutionDir)Prj\imgui\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Lib\;$(SolutionDir)\Prj\imgui\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>soloud_static.lib;box2d.lib;SDL2_mixer.lib;SDL2_ttf.lib;glad.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;vld.lib;imgui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -184,7 +123,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -193,6 +131,23 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="sources\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="sources\imgui_impl_sdl2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="sources\imgui_impl_opengl3.h" />
+    <ClInclude Include="sources\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="sources\imgui_impl_sdl2.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

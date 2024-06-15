@@ -12,6 +12,9 @@
 #include "GameStateMachine.h"
 #include "ResourceManager.h"
 #include "SoundPlayer.h"
+#include <imgui.h>
+#include <imgui_impl_sdl2.h>
+#include <imgui_impl_opengl3.h>
 
 
 int Game::InitSDL()
@@ -48,6 +51,14 @@ int Game::InitSDL()
         return 1;
     }
 
+    // for imgui
+    if (SDL_Init(SDL_INIT_TIMER))
+    {
+        LogError("SDL timer initialization failed, %s", SDL_GetError());
+        SDL_ClearError();
+        return 1;
+    }
+
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, OPENGL_MAJOR_VERSION);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, OPENGL_MINOR_VERSION);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -67,9 +78,9 @@ int Game::InitOpenGL()
     }
 
     // Create an OpenGL context
-    m_pGLContext = SDL_GL_CreateContext(m_pWindow);
+    m_GLContext = SDL_GL_CreateContext(m_pWindow);
 
-    if (!m_pGLContext)
+    if (!m_GLContext)
     {
         LogError("Failed to create OpenGL context, %s", SDL_GetError());
         SDL_ClearError();
@@ -81,11 +92,13 @@ int Game::InitOpenGL()
     if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
     {
         LogError("Failed to initialize GLAD");
-        SDL_GL_DeleteContext(m_pGLContext);
+        SDL_GL_DeleteContext(m_GLContext);
         SDL_DestroyWindow(m_pWindow);
         SDL_Quit();
         return -1;
     }
+
+    SDL_GL_MakeCurrent(m_pWindow, m_GLContext);
 
     // Set the initial viewport to match the window size
     SDL_GetWindowSize(m_pWindow, &m_ScreenWidth, &m_ScreenHeight);
@@ -146,9 +159,9 @@ int Game::GameInit()
 void Game::CleanUp()
 {
     // Destroy the OpenGL context and window
-    if (m_pGLContext)
+    if (m_GLContext)
     {
-        SDL_GL_DeleteContext(m_pGLContext);
+        SDL_GL_DeleteContext(m_GLContext);
     }
     if (m_pWindow)
     {
@@ -163,6 +176,11 @@ void Game::CleanUp()
     SoundPlayer::GetInstance()->Deinit();
     SoundPlayer::Destruct();
 
+    // ImGUI quit
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+
     // Quit SDL
     Mix_Quit();
     TTF_Quit();
@@ -176,6 +194,7 @@ void Game::Run()
     error |= InitSDL();
     error |= InitOpenGL();
     error |= GameInit();
+    error |= InitImGUI();
 
     // quit if any error occurs
     if (error)
@@ -199,13 +218,29 @@ void Game::Run()
         m_deltaTime = m_durationMicro.count() / 1000000.f;
         m_lastTime = m_currentTime;
 
+        // Start the Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+
+        // state ImGui draw
+        if (GameStateMachine::GetInstance()->HasState())
+        {
+            GameStateMachine::GetInstance()->GetCurrentState()->ImGuiDraw();
+        }
+
         // update the game
         Update(m_deltaTime);
 
         // render
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // game draw
         Draw();
+
+        // ImGui render
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         // display on screen
         SDL_GL_SwapWindow(m_pWindow);
@@ -220,29 +255,67 @@ void Game::HandleEvent(SDL_Event& e)
 {
     while (SDL_PollEvent(&e))
     {
+        ImGui_ImplSDL2_ProcessEvent(&e);
+        
+        ImGuiIO& io = ImGui::GetIO();
+
         switch (e.type)
         {
         case SDL_MOUSEMOTION:
+            // event is consumed by ImGui so skip it
+            if (io.WantCaptureMouse)
+            {
+                break;
+            }
             // mouse movement
             OnMouseMove(e.motion);
             break;
 
         case SDL_MOUSEBUTTONDOWN:
+            // event is consumed by ImGui so skip it
+            if (io.WantCaptureMouse)
+            {
+                break;
+            }
             // mouse button pressed
             OnMouseDown(e.button);
             break;
 
         case SDL_MOUSEBUTTONUP:
+            // event is consumed by ImGui so skip it
+            if (io.WantCaptureMouse)
+            {
+                break;
+            }
             // mouse button released
             OnMouseUp(e.button);
             break;
 
+        case SDL_MOUSEWHEEL:
+            // event is consumed by ImGui so skip it
+            if (io.WantCaptureMouse)
+            {
+                break;
+            }
+            OnMouseScroll(e.wheel);
+            break;
+
         case SDL_KEYDOWN:
+            // event is consumed by ImGui so skip it
+            if (io.WantCaptureKeyboard)
+            {
+                break;
+            }
             // key pressed
             OnKeyDown(e.key);
             break;
 
         case SDL_KEYUP:
+            // event is consumed by ImGui so skip it
+            if (io.WantCaptureKeyboard)
+            {
+                break;
+            }
             // key released
             OnKeyUp(e.key);
             break;
@@ -494,6 +567,37 @@ void Game::OnMouseDown(const SDL_MouseButtonEvent& mouseevent)
     {
         GameStateMachine::GetInstance()->GetCurrentState()->OnMouseDown(mouseevent);
     }
+}
+
+int Game::InitImGUI()
+{
+    // needed for ImGUI to work
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+    //ImGui::StyleColorsLight();
+
+    // Setup Platform/Renderer backends
+    bool success = true;
+    const char* glsl_version = "#version 130";
+    success &= ImGui_ImplSDL2_InitForOpenGL(m_pWindow, m_GLContext);
+    success &= ImGui_ImplOpenGL3_Init(glsl_version);
+
+    if (success)
+    {
+        return 0;
+    }
+    return 1;
 }
 
 void Game::OnMouseUp(const SDL_MouseButtonEvent& mouseevent)

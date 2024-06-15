@@ -1,13 +1,17 @@
 #include "GSIntro.h"
+
+#include <random>
+#include <chrono>
+#include <imgui.h>
+#include <imgui_impl_opengl3.h>
+#include <imgui_impl_sdl2.h>
+
 #include "Renderer.h"
 #include "Camera.h"
 #include "GameStateMachine.h"
 #include "ResourceManager.h"
 #include "Sprite2D.h"
 #include "Game.h"
-
-#include <random>
-#include <chrono>
 
 static int GetInt(int from, int to) {
     // Initialize random number engine with a non-deterministic seed 
@@ -66,6 +70,12 @@ void GSIntro::Init()
     m_sprite2->SetPosition(480.f, 270.f, 0.f);
     m_sprite2->SetRotation(0.0f);
     m_sprite2->SetScale(206.f, 180.f);
+
+    auto sprite3 = std::make_shared<Sprite2D>(2, texture);
+    sprite3->SetPosition(0.f, 0.f);
+    sprite3->SetRotation(0.f);
+    sprite3->SetScale(100.f, 100.f);
+    m_renderer->AddObject(sprite3);
 
     //m_renderer->AddObject(m_sprite2);
 
@@ -374,4 +384,33 @@ void GSIntro::OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
     short value = triggerEvent.value;
     float normalized = value >= 0 ? (float)value / 32767 : (float)value / 32768;
     std::cout << "RT: " << normalized << "\n";
+}
+
+void GSIntro::ImGuiDraw()
+{
+    auto& io = ImGui::GetIO();
+    {
+        static bool a, b;
+        static float f = 0.0f;
+        static int counter = 0;
+        static char textfield[64] = "";
+
+        ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+        ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+        ImGui::Checkbox("Demo Window", &a);      // Edit bools storing our window open/close state
+        ImGui::Checkbox("Another Window", &b);
+
+        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+        //ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+
+        if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+            counter++;
+        ImGui::SameLine();
+        ImGui::Text("counter = %d", counter);
+        ImGui::InputText("Enter text here", textfield, IM_ARRAYSIZE(textfield));
+
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+        ImGui::End();
+    }
 }
