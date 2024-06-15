@@ -1,7 +1,7 @@
 #include "Text.h"
 #include <string>
 #include <glad/glad.h>
-#include "Global.h"
+#include "Config.h"
 #include "ResourceManager.h"
 
 Text::Text(GLuint id, const std::string& text, const std::string& fontPath, int fontSize, const SDL_Color& color, int filtermode) :

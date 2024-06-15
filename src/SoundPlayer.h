@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "SingletonDclp.h"
-#include "Global.h"
+#include "Config.h"
 
 namespace SoLoud
 {

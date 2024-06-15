@@ -2,7 +2,7 @@
 #include <stack>
 #include <memory>
 #include "SingletonDclp.h"
-#include "Global.h"
+#include "Config.h"
 #include "GameStateBase.h"
 
 class GameStateBase;

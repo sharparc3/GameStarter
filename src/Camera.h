@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Global.h"
+#include "Config.h"
 
 class Camera 
 {

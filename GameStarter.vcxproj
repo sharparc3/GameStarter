@@ -48,7 +48,7 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameStateBase.h" />
     <ClInclude Include="src\GameStateMachine.h" />
-    <ClInclude Include="src\Global.h" />
+    <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\GSIntro.h" />
     <ClInclude Include="src\GSMenu.h" />
     <ClInclude Include="src\GSPlay.h" />

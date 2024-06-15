@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 #include <vector>
-#include "Global.h"
+#include "Config.h"
 #include "SingletonDclp.h"
 
 class Game final : public SingletonDclp<Game>

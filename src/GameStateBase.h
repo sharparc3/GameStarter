@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL2/SDL_events.h>
-#include "Global.h"
+#include "Config.h"
 
 class GameStateBase
 {

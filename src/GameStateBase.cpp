@@ -1,5 +1,5 @@
 #include "GameStateBase.h"
-#include "Global.h"
+#include "Config.h"
 
 GameStateBase::GameStateBase(GameStateType stateType) : m_GameStateType(stateType)
 {
