@@ -20,7 +20,7 @@ public:
 	void RemoveObject(const std::shared_ptr<BaseObject> object);
 	void RemoveObject(GLuint id);
 	void ClearRenderer();
-	void Render();
+	void Render(bool frustumCulling = true);
 
 private:
 	std::map<GLuint, std::shared_ptr<BaseObject>> m_RenderObjects;

@@ -42,11 +42,19 @@ void Camera::Translate(const glm::vec3& offset)
 void Camera::SetPerspectiveProjection(float fov_deg, float aspectRatio, float near, float far)
 {
     m_projectionMatrix = glm::perspective(glm::radians(fov_deg), aspectRatio, near, far);
+    m_cameraType = "perspective";
 }
 
 void Camera::SetOrthographicProjection(float left, float right, float top, float bottom, float near, float far)
 {
     m_projectionMatrix = glm::ortho(left, right, bottom, top, near, far);
+    m_cameraType = "orthographic";
+    m_frustum.left = left;
+    m_frustum.right = right;
+    m_frustum.top = top;
+    m_frustum.bottom = bottom;
+    m_frustum.near = near;
+    m_frustum.far = far;
 }
 
 glm::vec3 Camera::GetPosition() const

@@ -4,6 +4,16 @@
 
 #include "Config.h"
 
+struct OrthoFrustum
+{
+    float left;
+    float right;
+    float top;
+    float bottom;
+    float near;
+    float far;
+};
+
 class Camera 
 {
 public:
@@ -14,12 +24,12 @@ public:
     void SetTarget(const glm::vec3& target);
     void SetUpVector(const glm::vec3& up);
 
-    // void rotate(GLfloat pitch, GLfloat yaw);
     void Translate(const glm::vec3& offset);
 
     void SetPerspectiveProjection(float aspectRatio, float fov_deg = 45.0f, float near = 0.1f, float far = 100.f);
     void SetOrthographicProjection(float left, float right, float top, float bottom, float near = -1.f, float far = 100.f);
     void CalculateViewMatrix();
+    const OrthoFrustum& GetCameraFrustum() { return m_frustum; };
 
     glm::vec3 GetPosition() const;
     glm::mat4 GetViewMatrix() const;
@@ -35,4 +45,6 @@ private:
     glm::mat4 m_viewMatrix;
     glm::mat4 m_projectionMatrix;
 
+    OrthoFrustum m_frustum;
+    std::string m_cameraType;
 };

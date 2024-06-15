@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "SpriteAnimation.h"
 #include "Shader.h"
+#include "Logger.h"
 
 Renderer::Renderer(const std::shared_ptr<Camera> camera, const std::shared_ptr<Shader> shader) : 
 	m_camera(camera), m_shader(shader)
@@ -44,7 +45,7 @@ void Renderer::ClearRenderer()
 	m_RenderObjects.clear();
 }
 
-void Renderer::Render()
+void Renderer::Render(bool frustumCulling)
 {
 	if (m_camera->needCalculateViewMatrix)
 	{
@@ -56,11 +57,36 @@ void Renderer::Render()
 
 	std::shared_ptr<Texture> lastTexture;
 
+	OrthoFrustum cameraFrustum = m_camera->GetCameraFrustum();
+
 	for (auto& obj : m_RenderObjects)
 	{
 		if (obj.second->m_needCalculateWorldMatrix)
 		{
 			obj.second->RecalculateWorldMatrix();
+		}
+
+		if (frustumCulling)
+		{
+			auto isObjectVisible = [&cameraFrustum](const glm::vec3& pos, const glm::vec3& size) -> bool {
+				// Calculate object's bounds
+				glm::vec3 objectMin = pos;
+				glm::vec3 objectMax = pos + size;
+
+				// Check for intersection with the frustum
+				bool isVisible = (objectMax.x >= cameraFrustum.left && objectMin.x <= cameraFrustum.right) &&
+					(objectMax.y >= cameraFrustum.top && objectMin.y <= cameraFrustum.bottom) &&
+					(objectMax.z >= cameraFrustum.near && objectMin.z <= cameraFrustum.far);
+
+				return isVisible;
+				};
+
+			bool isVisible = isObjectVisible(obj.second->GetPosition(), obj.second->GetScale());
+			if (!isVisible)
+			{
+				//LogInfo("Culled object with id: %d", obj.second->GetID());
+				continue;
+			}
 		}
 
 		// bind VAO
