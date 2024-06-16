@@ -12,11 +12,3 @@ namespace ResourcesPath
 	const std::string SOUND = "./Resources/Sounds/";
 	const std::string FONT = "./Resources/Fonts/";
 }
-
-enum class GameStateType
-{
-	STATE_INTRO,
-	STATE_MENU,
-	STATE_PLAY,
-	STATE_COUNT
-};
