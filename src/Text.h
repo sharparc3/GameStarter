@@ -9,8 +9,8 @@
 class Text : public BaseObject
 {
 public:
-    Text(GLuint id, const std::string& text, const std::string& fontPath, int fontSize, const SDL_Color& color = { 0, 0, 0, 255 }, int filtermode = GL_LINEAR);
-    Text(GLuint id, const std::string& text, TTF_Font* font, int fontSize, const SDL_Color& color = { 0, 0, 0, 255 }, int filtermode = GL_LINEAR);
+    Text(const std::string& text, const std::string& fontPath, int fontSize, const SDL_Color& color = { 0, 0, 0, 255 }, int filtermode = GL_LINEAR);
+    Text(const std::string& text, TTF_Font* font, int fontSize, const SDL_Color& color = { 0, 0, 0, 255 }, int filtermode = GL_LINEAR);
     Text() = delete;
     ~Text();
 

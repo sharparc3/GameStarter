@@ -168,6 +168,9 @@
     <ClInclude Include="src\Game.h">
       <Filter>GameStarter\GameManagers</Filter>
     </ClInclude>
+    <ClInclude Include="src\IDGenerator.h">
+      <Filter>GameStarter\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\quad.frag">

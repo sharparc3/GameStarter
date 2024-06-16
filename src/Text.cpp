@@ -3,15 +3,18 @@
 #include <glad/glad.h>
 #include "Config.h"
 #include "ResourceManager.h"
+#include "Logger.h"
+#include "IDGenerator.h"
 
-Text::Text(GLuint id, const std::string& text, const std::string& fontPath, int fontSize, const SDL_Color& color, int filtermode) :
-	BaseObject(id, nullptr, nullptr), m_text(text), m_fontPath(fontPath), m_fontSize(fontSize), m_color(color), m_filterMode(filtermode)
+Text::Text(const std::string& text, const std::string& fontPath, int fontSize, const SDL_Color& color, int filtermode) :
+	BaseObject(nullptr, nullptr), m_text(text), m_fontPath(fontPath), m_fontSize(fontSize), m_color(color), m_filterMode(filtermode)
 {
+	m_objectId = getUniqueID();
 	std::string path_to_font = ResourcesPath::FONT + fontPath;
 	m_font = TTF_OpenFont(path_to_font.c_str(), m_fontSize);
 	if (!m_font)
 	{
-		std::cerr << "Error loading font: " << m_font << "\n";
+		LogError("Error loading font: %s", m_font);
 		return;
 	}
 	m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
@@ -23,13 +26,15 @@ Text::Text(GLuint id, const std::string& text, const std::string& fontPath, int 
 
 	m_needCalculateWorldMatrix = true;
 	m_textNeedUpdate = true;
+	m_objectType = "text";
 
 	UpdateText();
 }
 
-Text::Text(GLuint id, const std::string& text, TTF_Font* font, int fontSize, const SDL_Color& color, int filtermode) :
-	BaseObject(id, nullptr, nullptr), m_text(text), m_fontSize(fontSize), m_color(color), m_filterMode(filtermode), m_font(font)
+Text::Text(const std::string& text, TTF_Font* font, int fontSize, const SDL_Color& color, int filtermode) :
+	BaseObject(nullptr, nullptr), m_text(text), m_fontSize(fontSize), m_color(color), m_filterMode(filtermode), m_font(font)
 {
+	m_objectId = getUniqueID();
 	m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 	if (!m_mesh)
 	{
@@ -39,6 +44,7 @@ Text::Text(GLuint id, const std::string& text, TTF_Font* font, int fontSize, con
 
 	m_needCalculateWorldMatrix = true;
 	m_textNeedUpdate = true;
+	m_objectType = "text";
 
 	UpdateText();
 }
@@ -101,14 +107,14 @@ void Text::UpdateText()
 
 	if (m_font == nullptr || m_mesh == nullptr)
 	{
-		std::cerr << "Error create text texture: font or mesh is null\n";
+		LogError("Error create text texture: font or mesh is null");
 		return;
 	}
 
 	SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(m_font, m_text.c_str(), m_color, 0);
 	if (textSurface == nullptr) 
 	{
-		std::cerr << "Rendering font error: " << TTF_GetError();
+		LogError("Rendering font error: %s", TTF_GetError());
 		return;
 	}
 

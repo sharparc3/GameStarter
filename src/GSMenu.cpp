@@ -54,7 +54,7 @@ void GSMenu::Init()
 	texture->SetFilter(1);
 	auto batchshader = ResourceManager::GetInstance()->GetShader("quad_batch");
 	auto texture2 = ResourceManager::GetInstance()->GetTexture("compiling.png");
-	m_animation = std::make_shared<SpriteAnimation>(2, texture, 0.1f, 6);
+	m_animation = std::make_shared<SpriteAnimation>(texture, 0.1f, 6);
 	m_camera = std::make_shared<Camera>();
 	auto game = Game::GetInstance();
 	m_camera->SetOrthographicProjection(0.f, (float)game->GetWindowWidth(), 0.f, (float)game->GetWindowHeight());
@@ -85,16 +85,16 @@ void GSMenu::Init()
 	//ResourceManager::GetInstance()->LoadFont("Roboto-Regular.ttf");
 	//auto font = ResourceManager::GetInstance()->GetFont("Roboto-Regular.ttf");
 	SDL_Color textColor = { 255, 0, 0, 255 };
-	m_textObj = std::make_shared<Text>(0, "Hello\nThis is text using font \nRoboto-Regular.ttf (size 48)", "Roboto-Regular.ttf", 48, textColor);
+	m_textObj = std::make_shared<Text>("Hello\nThis is text using font \nRoboto-Regular.ttf (size 48)", "Roboto-Regular.ttf", 48, textColor);
 	textColor = { 0, 0, 255, 255 };
-	m_text2 = std::make_shared<Text>(1, "This is another text using Roboto-Thin.ttf (size 36)", "Roboto-Thin.ttf", 36, textColor);
+	m_text2 = std::make_shared<Text>("This is another text using Roboto-Thin.ttf (size 36)", "Roboto-Thin.ttf", 36, textColor);
 	m_text2->SetPosition(100.f, 300.f);
 	m_textObj->SetPosition(100.f, 100.f);
 
 	ResourceManager::GetInstance()->LoadFont("Roboto-Bold.ttf", 48);
 	auto font3 = ResourceManager::GetInstance()->GetFont("Roboto-Bold.ttf", 48);
 	textColor = { 255, 215, 0, 255 };
-	std::shared_ptr<Text> text3 = std::make_shared<Text>(999, "Third text", font3, 48, textColor);
+	std::shared_ptr<Text> text3 = std::make_shared<Text>("Third text", font3, 48, textColor);
 	text3->SetPosition(200.f, 600.f);
 	
 	m_spriteRenderer->AddObject(m_textObj);

@@ -8,7 +8,7 @@
 class BaseObject
 {
 public:
-	BaseObject(GLuint id, std::shared_ptr<Mesh> mesh, std::shared_ptr<Texture> texture);
+	BaseObject(std::shared_ptr<Mesh> mesh, std::shared_ptr<Texture> texture);
 	virtual ~BaseObject();
 	void SetPosition(GLfloat x, GLfloat y, GLfloat z = 0.f);
 	void SetPosition(const glm::vec3& position);
@@ -30,7 +30,7 @@ public:
 	friend class BatchRenderer;
 protected:
 	BaseObject();
-	GLuint m_objectId;
+	int m_objectId;
 
 	glm::vec3 m_position;
 	glm::vec3 m_rotationAngle;

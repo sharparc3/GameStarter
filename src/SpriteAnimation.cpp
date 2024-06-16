@@ -1,10 +1,11 @@
 #include "SpriteAnimation.h"
 #include "ResourceManager.h"
+#include "IDGenerator.h"
 
-SpriteAnimation::SpriteAnimation(GLuint id, const std::shared_ptr<Texture> texture, float frameTime, int frameCount) :
+SpriteAnimation::SpriteAnimation(const std::shared_ptr<Texture> texture, float frameTime, int frameCount) :
 	m_frameCount(frameCount), m_secondBtFrame(frameTime)
 {
-	m_objectId = id;
+	m_objectId = getUniqueID();
 	m_texture = texture;
 	m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 	m_repeat = true;
@@ -14,10 +15,10 @@ SpriteAnimation::SpriteAnimation(GLuint id, const std::shared_ptr<Texture> textu
 	m_objectType = "animation";
 }
 
-SpriteAnimation::SpriteAnimation(GLuint id, const std::shared_ptr<Mesh> mesh, const std::shared_ptr<Texture> texture, float frameTime, int frameCount) :
+SpriteAnimation::SpriteAnimation(const std::shared_ptr<Mesh> mesh, const std::shared_ptr<Texture> texture, float frameTime, int frameCount) :
 	m_frameCount(frameCount), m_secondBtFrame(frameTime)
 {
-	m_objectId = id;
+	m_objectId = getUniqueID();
 	m_texture = texture;
 	m_currentFrame = 0;
 	m_done = false;

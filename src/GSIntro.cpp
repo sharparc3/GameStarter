@@ -56,7 +56,7 @@ void GSIntro::Init()
     m_renderer = std::make_shared<Renderer>(m_camera, shader);
 
     // create a sprite 
-    m_sprite = std::make_shared<Sprite2D>(0, texture);
+    m_sprite = std::make_shared<Sprite2D>(texture);
 
     // set up sprite
     m_sprite->SetPosition(400.f, 400.f);
@@ -66,12 +66,12 @@ void GSIntro::Init()
     // add to renderer 
     m_renderer->AddObject(m_sprite);
 
-    m_sprite2 = std::make_shared<Sprite2D>(1, texture);
+    m_sprite2 = std::make_shared<Sprite2D>(texture);
     m_sprite2->SetPosition(480.f, 270.f, 0.f);
     m_sprite2->SetRotation(0.0f);
     m_sprite2->SetScale(206.f, 180.f);
 
-    auto sprite3 = std::make_shared<Sprite2D>(2, texture);
+    auto sprite3 = std::make_shared<Sprite2D>(texture);
     sprite3->SetPosition(400.f, 400.f);
     sprite3->SetRotation(0.f);
     sprite3->SetScale(413.0f, 360.0f);
@@ -81,7 +81,7 @@ void GSIntro::Init()
 
     for (int i = 3; i < 3000; i++)
     {
-        auto sprite = std::make_shared<Sprite2D>(i, texture);
+        auto sprite = std::make_shared<Sprite2D>(texture);
         sprite->SetPosition((float)-500.f, 0.f);
         sprite->SetRotation(0.0f);
         sprite->SetScale(412.f, 360.f);

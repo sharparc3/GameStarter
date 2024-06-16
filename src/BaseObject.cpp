@@ -1,10 +1,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "BaseObject.h"
+#include "IDGenerator.h"
 
 
-BaseObject::BaseObject(GLuint id, std::shared_ptr<Mesh> mesh, std::shared_ptr<Texture> texture) : 
-	m_mesh(mesh), m_texture(texture), m_objectId(id)
+BaseObject::BaseObject(std::shared_ptr<Mesh> mesh, std::shared_ptr<Texture> texture) : 
+	m_mesh(mesh), m_texture(texture)
 {
+	m_objectId = getUniqueID();
 	m_position = glm::vec3(0.f, 0.f, 0.f);
 	m_rotationAngle = glm::vec3(0.f, 0.f, 0.f);
 	m_scale = glm::vec3(0.f, 0.f, 0.f);

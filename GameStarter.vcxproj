@@ -52,6 +52,7 @@
     <ClInclude Include="src\GSIntro.h" />
     <ClInclude Include="src\GSMenu.h" />
     <ClInclude Include="src\GSPlay.h" />
+    <ClInclude Include="src\IDGenerator.h" />
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\ResourceManager.h" />
