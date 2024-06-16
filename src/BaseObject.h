@@ -38,4 +38,5 @@ protected:
 	glm::mat4 m_worldMatrix;
 	std::shared_ptr<Mesh> m_mesh;
 	std::shared_ptr<Texture> m_texture;
+	std::string m_objectType;
 };

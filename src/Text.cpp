@@ -14,11 +14,11 @@ Text::Text(GLuint id, const std::string& text, const std::string& fontPath, int 
 		std::cerr << "Error loading font: " << m_font << "\n";
 		return;
 	}
-	m_mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+	m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 	if (!m_mesh)
 	{
-		ResourceManager::GetInstance()->LoadMesh("quad.nfg");
-		m_mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+		ResourceManager::GetInstance()->LoadMesh("quad_center.nfg");
+		m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 	}
 
 	m_needCalculateWorldMatrix = true;
@@ -30,11 +30,11 @@ Text::Text(GLuint id, const std::string& text, const std::string& fontPath, int 
 Text::Text(GLuint id, const std::string& text, TTF_Font* font, int fontSize, const SDL_Color& color, int filtermode) :
 	BaseObject(id, nullptr, nullptr), m_text(text), m_fontSize(fontSize), m_color(color), m_filterMode(filtermode), m_font(font)
 {
-	m_mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+	m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 	if (!m_mesh)
 	{
-		ResourceManager::GetInstance()->LoadMesh("quad.nfg");
-		m_mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+		ResourceManager::GetInstance()->LoadMesh("quad_center.nfg");
+		m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 	}
 
 	m_needCalculateWorldMatrix = true;

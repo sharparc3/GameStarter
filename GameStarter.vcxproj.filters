@@ -17,17 +17,17 @@
     <Filter Include="GameStarter\Utilities">
       <UniqueIdentifier>{5a5732d7-4e51-4d59-93b2-5b5194b8dc76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameStarter\GL">
-      <UniqueIdentifier>{97d6675c-b5f4-4e52-9581-960026260989}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{47589cab-3a1c-4015-976c-c8baa591453c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Models">
-      <UniqueIdentifier>{cc68db0b-be10-42a2-8943-538c5dc05e5b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{d7399330-afa5-4684-bc64-fb96f6fcb374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStarter\GameMaterials\CoreComponents">
+      <UniqueIdentifier>{19568075-7d08-4314-bf57-1256aa1bb855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStarter\GameMaterials\GameComponents">
+      <UniqueIdentifier>{efcda315-fbaa-44bc-98c0-2b6194c385df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,9 +40,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>GameStarter</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game.cpp">
-      <Filter>GameStarter</Filter>
-    </ClCompile>
     <ClCompile Include="src\GSIntro.cpp">
       <Filter>GameStarter\GameStates</Filter>
     </ClCompile>
@@ -52,46 +49,49 @@
     <ClCompile Include="src\GSPlay.cpp">
       <Filter>GameStarter\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh.cpp">
-      <Filter>GameStarter\GL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Shader.cpp">
-      <Filter>GameStarter\GL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Texture.cpp">
-      <Filter>GameStarter\GL</Filter>
-    </ClCompile>
     <ClCompile Include="src\ResourceManager.cpp">
       <Filter>GameStarter\GameManagers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BaseObject.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
-    <ClCompile Include="src\Sprite2D.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SpriteAnimation.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClCompile>
     <ClCompile Include="src\BatchRenderer.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Sound.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Text.cpp">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClCompile>
     <ClCompile Include="src\Logger.cpp">
       <Filter>GameStarter\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\SoundPlayer.cpp">
+      <Filter>GameStarter\GameManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseObject.cpp">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite2D.cpp">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteAnimation.cpp">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Text.cpp">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sound.cpp">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
       <Filter>GameStarter\GameManagers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -105,9 +105,6 @@
     <ClInclude Include="src\SingletonDclp.h">
       <Filter>GameStarter\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game.h">
-      <Filter>GameStarter</Filter>
-    </ClInclude>
     <ClInclude Include="src\GSIntro.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
@@ -117,46 +114,16 @@
     <ClInclude Include="src\GSPlay.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh.h">
-      <Filter>GameStarter\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Shader.h">
-      <Filter>GameStarter\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Texture.h">
-      <Filter>GameStarter\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Vertex.h">
-      <Filter>GameStarter\GL</Filter>
-    </ClInclude>
     <ClInclude Include="src\stb_image.h">
       <Filter>GameStarter\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\ResourceManager.h">
       <Filter>GameStarter\GameManagers</Filter>
     </ClInclude>
-    <ClInclude Include="src\BaseObject.h">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Camera.h">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClInclude>
     <ClInclude Include="src\Renderer.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
-    <ClInclude Include="src\Sprite2D.h">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SpriteAnimation.h">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClInclude>
     <ClInclude Include="src\BatchRenderer.h">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Sound.h">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Text.h">
       <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
     <ClInclude Include="src\Logger.h">
@@ -167,6 +134,39 @@
     </ClInclude>
     <ClInclude Include="src\Config.h">
       <Filter>GameStarter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseObject.h">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Text.h">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sprite2D.h">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteAnimation.h">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sound.h">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vertex.h">
+      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>GameStarter\GameManagers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

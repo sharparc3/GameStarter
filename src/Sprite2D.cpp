@@ -5,7 +5,8 @@ Sprite2D::Sprite2D(GLuint id, const std::shared_ptr<Texture>& texture)
 {
 	m_objectId = id;
 	m_texture = texture;
-	m_mesh = ResourceManager::GetInstance()->GetMesh("quad.nfg");
+	m_objectType = "sprite";
+	m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
 }
 
 Sprite2D::Sprite2D(GLuint id, const std::shared_ptr<Mesh> mesh, const std::shared_ptr<Texture> texture)
@@ -13,6 +14,7 @@ Sprite2D::Sprite2D(GLuint id, const std::shared_ptr<Mesh> mesh, const std::share
 	m_objectId = id;
 	m_mesh = mesh;
 	m_texture = texture;
+	m_objectType = "sprite";
 }
 
 void Sprite2D::SendUniformData(std::map<std::string, GLint>& uniformLocationData)

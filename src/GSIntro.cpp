@@ -59,8 +59,8 @@ void GSIntro::Init()
     m_sprite = std::make_shared<Sprite2D>(0, texture);
 
     // set up sprite
-    m_sprite->SetPosition(0.f, 0.f, 0.0f);
-    m_sprite->SetRotation(0.0f);
+    m_sprite->SetPosition(400.f, 400.f);
+    m_sprite->SetRotation(45.0f);
     m_sprite->SetScale(413.0f, 360.0f);
 
     // add to renderer 
@@ -72,9 +72,9 @@ void GSIntro::Init()
     m_sprite2->SetScale(206.f, 180.f);
 
     auto sprite3 = std::make_shared<Sprite2D>(2, texture);
-    sprite3->SetPosition(0.f, 0.f);
+    sprite3->SetPosition(400.f, 400.f);
     sprite3->SetRotation(0.f);
-    sprite3->SetScale(100.f, 100.f);
+    sprite3->SetScale(413.0f, 360.0f);
     m_renderer->AddObject(sprite3);
 
     //m_renderer->AddObject(m_sprite2);
