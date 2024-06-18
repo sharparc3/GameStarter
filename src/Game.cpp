@@ -122,8 +122,8 @@ int Game::GameInit()
     // default clear color is white
     SetClearColor();
 
-    // default FPS limit is 60
-    m_LimitFPS = 60.f;
+    // default FPS limit is screen refresh rate
+    m_LimitFPS = 0.f;
 
     // enable VSync by default
     SetVSync(1);
@@ -409,7 +409,7 @@ void Game::SetWindowTitle(const char* name)
 
 bool Game::SetVSync(int mode)
 {
-    if (SDL_GL_SetSwapInterval(1) < 0)
+    if (SDL_GL_SetSwapInterval(mode) < 0)
     {
         LogError("Failed to set VSync to mode %d, %s", mode, SDL_GetError());
         SDL_ClearError();
@@ -513,7 +513,7 @@ void Game::SetClearColor(float r, float g, float b, float a)
 
 void Game::SetFPSLimit(float FPS)
 {
-    float m_LimitFPS = FPS;
+    m_LimitFPS = FPS;
 }
 
 int Game::GetWindowWidth() const
