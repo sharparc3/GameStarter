@@ -45,3 +45,5 @@ private:
 	void DeleteFontByName(const std::string& name);
 	void DeleteFontByNameAndSize(const std::string& name, int size);
 };
+
+#define RESOURCE() ResourceManager::GetInstance()

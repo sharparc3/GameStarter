@@ -62,7 +62,6 @@
     <ClInclude Include="src\SoundPlayer.h" />
     <ClInclude Include="src\Sprite2D.h" />
     <ClInclude Include="src\SpriteAnimation.h" />
-    <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\Text.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Logger.h" />

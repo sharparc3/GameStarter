@@ -267,3 +267,5 @@ private:
 	void OnControllerConnected();
 	void OnControllerDisconnected();
 };
+
+#define GAME() Game::GetInstance()

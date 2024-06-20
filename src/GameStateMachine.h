@@ -133,3 +133,5 @@ private:
  * specified type.
  */
 std::shared_ptr<GameStateBase> CreateGameState(GameStateType gameStateType);
+
+#define GSM() GameStateMachine::GetInstance()

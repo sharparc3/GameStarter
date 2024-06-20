@@ -29,6 +29,9 @@
     <Filter Include="GameStarter\GameMaterials\GameComponents">
       <UniqueIdentifier>{efcda315-fbaa-44bc-98c0-2b6194c385df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameStarter\GameMaterials\Engines">
+      <UniqueIdentifier>{e82bf745-f907-4828-a86b-0e89fb8e34de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameStateBase.cpp">
@@ -52,20 +55,8 @@
     <ClCompile Include="src\ResourceManager.cpp">
       <Filter>GameStarter\GameManagers</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BatchRenderer.cpp">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClCompile>
     <ClCompile Include="src\Logger.cpp">
       <Filter>GameStarter\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SoundPlayer.cpp">
-      <Filter>GameStarter\GameManagers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BaseObject.cpp">
-      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
     </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
@@ -94,6 +85,18 @@
     <ClCompile Include="src\Game.cpp">
       <Filter>GameStarter\GameManagers</Filter>
     </ClCompile>
+    <ClCompile Include="src\BatchRenderer.cpp">
+      <Filter>GameStarter\GameMaterials\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>GameStarter\GameMaterials\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundPlayer.cpp">
+      <Filter>GameStarter\GameMaterials\Engines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseObject.cpp">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameStateMachine.h">
@@ -114,29 +117,14 @@
     <ClInclude Include="src\GSPlay.h">
       <Filter>GameStarter\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="src\stb_image.h">
-      <Filter>GameStarter\Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="src\ResourceManager.h">
       <Filter>GameStarter\GameManagers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Renderer.h">
-      <Filter>GameStarter\GameMaterials</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BatchRenderer.h">
-      <Filter>GameStarter\GameMaterials</Filter>
     </ClInclude>
     <ClInclude Include="src\Logger.h">
       <Filter>GameStarter\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\SoundPlayer.h">
-      <Filter>GameStarter\GameManagers</Filter>
-    </ClInclude>
     <ClInclude Include="src\Config.h">
       <Filter>GameStarter</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BaseObject.h">
-      <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
     </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>GameStarter\GameMaterials\CoreComponents</Filter>
@@ -170,6 +158,18 @@
     </ClInclude>
     <ClInclude Include="src\IDGenerator.h">
       <Filter>GameStarter\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BatchRenderer.h">
+      <Filter>GameStarter\GameMaterials\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer.h">
+      <Filter>GameStarter\GameMaterials\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundPlayer.h">
+      <Filter>GameStarter\GameMaterials\Engines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseObject.h">
+      <Filter>GameStarter\GameMaterials\GameComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
