@@ -95,14 +95,6 @@ void Renderer::Render(bool frustumCulling)
 		GLuint VAOid = obj.second->m_mesh->GetVAOId();
 		glBindVertexArray(VAOid);
 
-		// bind VBO
-		//GLuint VBOid = obj.second->m_mesh->GetVBOId();
-		//glBindBuffer(GL_ARRAY_BUFFER, VBOid);
-
-		// bind IBO
-		GLuint IBOid = obj.second->m_mesh->GetIBOId();
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBOid);
-
 		if (lastTexture != obj.second->m_texture)
 		{
 			// bind texture
@@ -114,6 +106,7 @@ void Renderer::Render(bool frustumCulling)
 		if (uniformLocs["u_mvpMatrix"] != -1)
 		{
 			// get the world matrix
+			// and perform calculating MVP matrix on CPU side
 			auto worldMatrix = obj.second->GetWorldMatrix();
 			auto viewMatrix = m_camera->GetViewMatrix();
 			auto projectionMatrix = m_camera->GetProjectionMatrix();
