@@ -120,11 +120,6 @@ void Mesh::GenerateGLBuffer(bool freeOld)
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(glm::vec3)));
 
-    // unbind VBO
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    // unbind VAO
-    glBindVertexArray(0);
-
     // send IBO data to GPU
     glGenBuffers(1, &m_iIBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iIBO);
@@ -134,5 +129,6 @@ void Mesh::GenerateGLBuffer(bool freeOld)
     {
         LogError("OpenGL Error during glBufferData: %s", error);
     }
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    
+    glBindVertexArray(0);
 }

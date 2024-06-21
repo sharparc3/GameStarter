@@ -4,6 +4,8 @@
 #include "SpriteAnimation.h"
 #include "Shader.h"
 #include "Logger.h"
+#include "Game.h"
+#include "ResourceManager.h"
 
 Renderer::Renderer(const std::shared_ptr<Camera> camera, const std::shared_ptr<Shader> shader) : 
 	m_camera(camera), m_shader(shader)
@@ -93,14 +95,6 @@ void Renderer::Render(bool frustumCulling)
 		GLuint VAOid = obj.second->m_mesh->GetVAOId();
 		glBindVertexArray(VAOid);
 
-		// bind VBO
-		//GLuint VBOid = obj.second->m_mesh->GetVBOId();
-		//glBindBuffer(GL_ARRAY_BUFFER, VBOid);
-
-		// bind IBO
-		GLuint IBOid = obj.second->m_mesh->GetIBOId();
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBOid);
-
 		if (lastTexture != obj.second->m_texture)
 		{
 			// bind texture
@@ -112,6 +106,7 @@ void Renderer::Render(bool frustumCulling)
 		if (uniformLocs["u_mvpMatrix"] != -1)
 		{
 			// get the world matrix
+			// and perform calculating MVP matrix on CPU side
 			auto worldMatrix = obj.second->GetWorldMatrix();
 			auto viewMatrix = m_camera->GetViewMatrix();
 			auto projectionMatrix = m_camera->GetProjectionMatrix();
@@ -131,3 +126,20 @@ void Renderer::Render(bool frustumCulling)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+Renderer::Renderer()
+{
+}
+
+SpriteRenderer::SpriteRenderer()
+{
+	m_camera = std::make_shared<Camera>();
+	m_camera->SetOrthographicProjection(0.f, (float)GAME()->GetWindowWidth(), 0.f, (float)GAME()->GetWindowHeight());
+	m_shader = RESOURCE()->GetShader("quad");
+}
+
+AnimationRenderer::AnimationRenderer()
+{
+	m_camera = std::make_shared<Camera>();
+	m_camera->SetOrthographicProjection(0.f, (float)GAME()->GetWindowWidth(), 0.f, (float)GAME()->GetWindowHeight());
+	m_shader = RESOURCE()->GetShader("animation");
+}
