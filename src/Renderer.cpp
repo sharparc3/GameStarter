@@ -4,6 +4,8 @@
 #include "SpriteAnimation.h"
 #include "Shader.h"
 #include "Logger.h"
+#include "Game.h"
+#include "ResourceManager.h"
 
 Renderer::Renderer(const std::shared_ptr<Camera> camera, const std::shared_ptr<Shader> shader) : 
 	m_camera(camera), m_shader(shader)
@@ -131,3 +133,20 @@ void Renderer::Render(bool frustumCulling)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+Renderer::Renderer()
+{
+}
+
+SpriteRenderer::SpriteRenderer()
+{
+	m_camera = std::make_shared<Camera>();
+	m_camera->SetOrthographicProjection(0.f, (float)GAME()->GetWindowWidth(), 0.f, (float)GAME()->GetWindowHeight());
+	m_shader = RESOURCE()->GetShader("quad");
+}
+
+AnimationRenderer::AnimationRenderer()
+{
+	m_camera = std::make_shared<Camera>();
+	m_camera->SetOrthographicProjection(0.f, (float)GAME()->GetWindowWidth(), 0.f, (float)GAME()->GetWindowHeight());
+	m_shader = RESOURCE()->GetShader("animation");
+}

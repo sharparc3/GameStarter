@@ -147,10 +147,10 @@ int Game::GameInit()
     SoundPlayer::Construct();
     SoundPlayer::GetInstance()->Init();
     GameStateMachine::GetInstance()->Init();
-    GameStateMachine::GetInstance()->PushState(GameStateType::STATE_INTRO);
+    GSM()->PushState(GameStateType::STATE_INTRO);
 
-    ResourceManager::GetInstance()->LoadMesh("quad.nfg");
-    ResourceManager::GetInstance()->LoadMesh("quad_center.nfg");
+    RESOURCE()->LoadMesh("quad.nfg");
+    RESOURCE()->LoadMesh("quad_center.nfg");
 
 
     return 0;
@@ -169,11 +169,15 @@ void Game::CleanUp()
     }
 
     // free singleton classes
-    GameStateMachine::GetInstance()->CleanUp();
+    while (GSM()->HasState())
+    {
+
+    }
+    GSM()->CleanUp();
     GameStateMachine::Destruct();
-    ResourceManager::GetInstance()->FreeAllResources();
+    RESOURCE()->FreeAllResources();
     ResourceManager::Destruct();
-    SoundPlayer::GetInstance()->Deinit();
+    SOUNDPLAYER()->Deinit();
     SoundPlayer::Destruct();
 
     // ImGUI quit
@@ -224,9 +228,9 @@ void Game::Run()
         ImGui::NewFrame();
 
         // state ImGui draw
-        if (GameStateMachine::GetInstance()->HasState())
+        if (GSM()->HasState())
         {
-            GameStateMachine::GetInstance()->GetCurrentState()->ImGuiDraw();
+            GSM()->GetCurrentState()->ImGuiDraw();
         }
 
         // update the game
@@ -245,7 +249,7 @@ void Game::Run()
         // display on screen
         SDL_GL_SwapWindow(m_pWindow);
 
-        m_GameRunning = GameStateMachine::GetInstance()->IsRunning();
+        m_GameRunning = GSM()->IsRunning();
     }
 
     CleanUp();
@@ -321,7 +325,7 @@ void Game::HandleEvent(SDL_Event& e)
             break;
 
         case SDL_QUIT:
-            GameStateMachine::GetInstance()->Exit();
+            GSM()->Exit();
             break;
 
         case SDL_CONTROLLERDEVICEADDED:
@@ -528,44 +532,44 @@ int Game::GetWindowHeight() const
 
 void Game::Draw()
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->Draw();
+        GSM()->GetCurrentState()->Draw();
     }
 }
 
 void Game::Update(float deltaTime)
 {
     // update state change
-    GameStateMachine::GetInstance()->Update();
+    GSM()->Update();
     // get current game state and update
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->Update(deltaTime);
+        GSM()->GetCurrentState()->Update(deltaTime);
     }
 }
 
 void Game::OnKeyDown(const SDL_KeyboardEvent& keyevent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnKeyDown(keyevent);
+        GSM()->GetCurrentState()->OnKeyDown(keyevent);
     }
 }
 
 void Game::OnKeyUp(const SDL_KeyboardEvent& keyevent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnKeyUp(keyevent);
+        GSM()->GetCurrentState()->OnKeyUp(keyevent);
     }
 }
 
 void Game::OnMouseDown(const SDL_MouseButtonEvent& mouseevent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnMouseDown(mouseevent);
+        GSM()->GetCurrentState()->OnMouseDown(mouseevent);
     }
 }
 
@@ -602,105 +606,105 @@ int Game::InitImGUI()
 
 void Game::OnMouseUp(const SDL_MouseButtonEvent& mouseevent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnMouseUp(mouseevent);
+        GSM()->GetCurrentState()->OnMouseUp(mouseevent);
     }
 }
 
 void Game::OnMouseMove(const SDL_MouseMotionEvent& motionevent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnMouseMove(motionevent);
+        GSM()->GetCurrentState()->OnMouseMove(motionevent);
     }
 }
 
 void Game::OnMouseScroll(const SDL_MouseWheelEvent& wheelevent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnMouseScroll(wheelevent);
+        GSM()->GetCurrentState()->OnMouseScroll(wheelevent);
     }
 }
 
 void Game::OnControllerButtonDown(const SDL_ControllerButtonEvent& buttonevent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerButtonDown(buttonevent);
+        GSM()->GetCurrentState()->OnControllerButtonDown(buttonevent);
     }
 }
 
 void Game::OnControllerButtonUp(const SDL_ControllerButtonEvent& buttonevent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerButtonUp(buttonevent);
+        GSM()->GetCurrentState()->OnControllerButtonUp(buttonevent);
     }
 }
 
 void Game::OnControllerLeftJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerLeftJoystickMotionX(joystickEvent);
+        GSM()->GetCurrentState()->OnControllerLeftJoystickMotionX(joystickEvent);
     }
 }
 
 void Game::OnControllerLeftJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerLeftJoystickMotionY(joystickEvent);
+        GSM()->GetCurrentState()->OnControllerLeftJoystickMotionY(joystickEvent);
     }
 }
 
 void Game::OnControllerRightJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerRightJoystickMotionX(joystickEvent);
+        GSM()->GetCurrentState()->OnControllerRightJoystickMotionX(joystickEvent);
     }
 }
 
 void Game::OnControllerRightJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerRightJoystickMotionY(joystickEvent);
+        GSM()->GetCurrentState()->OnControllerRightJoystickMotionY(joystickEvent);
     }
 }
 
 void Game::OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnLeftTriggerMotion(triggerEvent);
+        GSM()->GetCurrentState()->OnLeftTriggerMotion(triggerEvent);
     }
 }
 
 void Game::OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent)
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnRightTriggerMotion(triggerEvent);
+        GSM()->GetCurrentState()->OnRightTriggerMotion(triggerEvent);
     }
 }
 
 void Game::OnControllerConnected()
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerConnected();
+        GSM()->GetCurrentState()->OnControllerConnected();
     }
 }
 
 void Game::OnControllerDisconnected()
 {
-    if (GameStateMachine::GetInstance()->HasState())
+    if (GSM()->HasState())
     {
-        GameStateMachine::GetInstance()->GetCurrentState()->OnControllerDisconnected();
+        GSM()->GetCurrentState()->OnControllerDisconnected();
     }
 }
 

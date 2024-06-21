@@ -42,7 +42,7 @@ unsigned int SoundPlayer::Play(std::shared_ptr<Sound> sound)
     return handle;
 }
 
-void SoundPlayer::SetPlayerVolume(int handle, float volume)
+void SoundPlayer::SetVolume(int handle, float volume)
 {
     m_SoloudPlayer->setVolume(handle, volume);
 }

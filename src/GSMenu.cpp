@@ -36,6 +36,8 @@ void GSMenu::Init()
 {
 	std::cout << "Switched to menu state.\n";
 
+	GAME()->SetFPSLimit(100);
+
 	ResourceManager::GetInstance()->LoadShader("animation");
 	ResourceManager::GetInstance()->LoadTexture("cat_anim.png");
 	ResourceManager::GetInstance()->LoadShader("quad_batch");
@@ -59,8 +61,10 @@ void GSMenu::Init()
 	auto game = Game::GetInstance();
 	m_camera->SetOrthographicProjection(0.f, (float)game->GetWindowWidth(), 0.f, (float)game->GetWindowHeight());
 
-	m_animationRenderer = std::make_shared<Renderer>(m_camera, shader_anm);
-	m_spriteRenderer = std::make_shared<Renderer>(m_camera, shader_sprite);
+	//m_animationRenderer = std::make_shared<Renderer>(m_camera, shader_anm);
+	//m_spriteRenderer = std::make_shared<Renderer>(m_camera, shader_sprite);
+	m_animationRenderer = std::make_shared<AnimationRenderer>();
+	m_spriteRenderer = std::make_shared<SpriteRenderer>();
 
 	m_animation->SetPosition(0.f, 0.f, 0.f);
 	m_animation->SetRotation(0.f, 0.f);
