@@ -36,6 +36,8 @@ void GSMenu::Init()
 {
 	std::cout << "Switched to menu state.\n";
 
+	GAME()->SetFPSLimit(100);
+
 	ResourceManager::GetInstance()->LoadShader("animation");
 	ResourceManager::GetInstance()->LoadTexture("cat_anim.png");
 	ResourceManager::GetInstance()->LoadShader("quad_batch");

@@ -131,3 +131,6 @@ void Renderer::Render(bool frustumCulling)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+SpriteRenderer::SpriteRenderer()
+{
+}

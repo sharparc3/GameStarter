@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BaseObject" Collapsed="true">
-    <Position X="5.25" Y="8" Width="1.5" />
+    <Position X="14.25" Y="10.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAQAAECCAACAAAAAgwEABAAAAAghAIBCAAgAAAIA=</HashCode>
+      <HashCode>QAAAAQAAECCAACAAAAAgwEARAAAAAghAIBCAAgAAAIA=</HashCode>
       <FileName>src\BaseObject.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,25 +17,25 @@
   <Class Name="Camera" Collapsed="true">
     <Position X="14" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAACQABAACECAAAAQAAAAASAACAAAwgAAAAEgAAAAAI=</HashCode>
+      <HashCode>CAACQABAACECAAAAQQAAAASAACAAAwgAAAAEgAAAAQo=</HashCode>
       <FileName>src\Camera.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Game" Collapsed="true">
+  <Class Name="Game">
     <Position X="9.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CBQKEAAEAACAAlBBQACUCACCQNoFAQAE6AgAAMAKoAo=</HashCode>
+      <HashCode>CBQKEAAEAACAAlBBQACUCACCQNoFAQAE6AgEAMAKogI=</HashCode>
       <FileName>src\Game.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameStateBase" Collapsed="true">
-    <Position X="5.25" Y="5" Width="1.5" />
+    <Position X="2.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQqACAAAACAAgBAAgCEAAAAANKBAQAAYAACAAgCAAA=</HashCode>
+      <HashCode>AAQqACAAAACAAgBAAgiEAAAAANKBAQAAYAACAAgCAAA=</HashCode>
       <FileName>src\GameStateBase.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GameStateMachine" Collapsed="true">
+  <Class Name="GameStateMachine">
     <Position X="3" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAwAAIgAAAAAAAAAAIACQAAgAAIAAAAAIAACAECAAAA=</HashCode>
@@ -43,21 +43,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GSIntro" Collapsed="true">
-    <Position X="3" Y="6.25" Width="1.5" />
+    <Position X="0.5" Y="9" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIQqAAAhAACABoBAAACEAAAgANIBAQAAYAACASgCAAA=</HashCode>
+      <HashCode>AIQqAAAhAACABoBAAAiEAAAgANIBAQAAYAACASgCAAA=</HashCode>
       <FileName>src\GSIntro.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GSMenu" Collapsed="true">
-    <Position X="5.25" Y="6.25" Width="1.5" />
+    <Position X="2.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEQqIAAAAACAAoBABACEgQAiANIBAQAE4AAmAAgCAAA=</HashCode>
       <FileName>src\GSMenu.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GSPlay" Collapsed="true">
-    <Position X="7.5" Y="6.25" Width="1.5" />
+    <Position X="5" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQqAAAAAACAAgBAAACEAQAAANIBAQAAYAACgAgCAAA=</HashCode>
       <FileName>src\GSPlay.h</FileName>
@@ -66,7 +66,7 @@
   <Class Name="Mesh" Collapsed="true">
     <Position X="15.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQAAIAABAkAAgBAAAAQAAAEAAAAAgAAAQAACAAAAAA=</HashCode>
+      <HashCode>AQQAAIAABAkABgBAAAAQAAAEAAAAAgAAAQAACAAAAAA=</HashCode>
       <FileName>src\Mesh.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -77,7 +77,7 @@
       <FileName>src\Renderer.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ResourceManager" Collapsed="true">
+  <Class Name="ResourceManager">
     <Position X="7.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAnAAAKBAABBCAACkAAACAIAAgBAgAAAABAJAAAAAg=</HashCode>
@@ -87,7 +87,7 @@
   <Class Name="Shader" Collapsed="true">
     <Position X="14" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAACAAAAIAAAAAAAAAAAAAggEAAAABBABAAAAAMA=</HashCode>
+      <HashCode>QAAAAACAAAAAAAAAAAAAAAAAAggEAAAABBABAAAAAMA=</HashCode>
       <FileName>src\Shader.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -105,29 +105,29 @@
       <FileName>src\Sound.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SoundPlayer" Collapsed="true">
+  <Class Name="SoundPlayer">
     <Position X="5.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAEAAAAAAAAEAAAgAEAAAAAAAQAAoAACABgACAA=</HashCode>
       <FileName>src\SoundPlayer.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sprite2D" Collapsed="true">
-    <Position X="3" Y="9.25" Width="1.5" />
+  <Class Name="Sprite2D">
+    <Position X="12" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>src\Sprite2D.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SpriteAnimation" Collapsed="true">
-    <Position X="5.25" Y="9.25" Width="1.5" />
+    <Position X="14.25" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>UAQAAAQAIAEACAAABAAAAAAAAIAAAAAAAIgAAAABAAA=</HashCode>
       <FileName>src\SpriteAnimation.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Text" Collapsed="true">
-    <Position X="7.5" Y="9.25" Width="1.5" />
+    <Position X="16.5" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAECAAIEgAAgAIAIAACACAAAAAAAABAAgACAgAAAg=</HashCode>
       <FileName>src\Text.h</FileName>
@@ -151,7 +151,7 @@
     <Position X="12.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAAgAAAAAAAAAAAAEAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>src\Global.h</FileName>
+      <FileName>src\GameStateBase.h</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

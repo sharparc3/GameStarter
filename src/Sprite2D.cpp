@@ -8,6 +8,7 @@ Sprite2D::Sprite2D(const std::shared_ptr<Texture>& texture)
 	m_texture = texture;
 	m_objectType = "sprite";
 	m_mesh = ResourceManager::GetInstance()->GetMesh("quad_center.nfg");
+	SetRotation(0.f);
 }
 
 Sprite2D::Sprite2D(const std::shared_ptr<Mesh> mesh, const std::shared_ptr<Texture> texture)
