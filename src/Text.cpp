@@ -151,7 +151,7 @@ void Text::UpdateText()
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textSurface->w, textSurface->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, textSurface->pixels);
 	SetPosition(0.f, 0.f);
-	SetScale((float)textSurface->w, (float)textSurface->h);
+	SetSize((float)textSurface->w, (float)textSurface->h);
 	SetRotation(0.f);
 
 	if (m_needCalculateWorldMatrix)

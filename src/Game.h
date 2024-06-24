@@ -268,4 +268,8 @@ private:
 	void OnControllerDisconnected();
 };
 
+/**
+ * @def GAME
+ * @brief Macro to get the singleton instance of the Game class.
+ */
 #define GAME() Game::GetInstance()

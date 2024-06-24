@@ -134,4 +134,8 @@ private:
  */
 std::shared_ptr<GameStateBase> CreateGameState(GameStateType gameStateType);
 
+/**
+ * @def GSM
+ * @brief Macro to get the singleton instance of the GameStateMachine.
+ */
 #define GSM() GameStateMachine::GetInstance()

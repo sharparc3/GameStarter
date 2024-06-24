@@ -10,10 +10,6 @@ Sound::Sound(const std::string& filename)
 	LoadSound(filename.c_str());
 }
 
-Sound::Sound()
-{
-}
-
 Sound::~Sound()
 {
 	m_sound = nullptr;

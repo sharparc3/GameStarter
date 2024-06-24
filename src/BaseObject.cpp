@@ -44,13 +44,13 @@ void BaseObject::SetRotation(GLfloat z, GLfloat x, GLfloat y)
 	m_needCalculateWorldMatrix = true;
 }
 
-void BaseObject::SetScale(const glm::vec3& scale)
+void BaseObject::SetSize(const glm::vec3& scale)
 {
 	m_scale = scale;
 	m_needCalculateWorldMatrix = true;
 }
 
-void BaseObject::SetScale(GLfloat x, GLfloat y, GLfloat z)
+void BaseObject::SetSize(GLfloat x, GLfloat y, GLfloat z)
 {
 	m_scale = glm::vec3(x, y, z);
 	m_needCalculateWorldMatrix = true;

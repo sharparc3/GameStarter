@@ -68,7 +68,7 @@ void GSMenu::Init()
 
 	m_animation->SetPosition(0.f, 0.f, 0.f);
 	m_animation->SetRotation(0.f, 0.f);
-	m_animation->SetScale(250.f, 200.f);
+	m_animation->SetSize(250.f, 200.f);
 
 	m_animationRenderer->AddObject(m_animation);
 
@@ -78,7 +78,7 @@ void GSMenu::Init()
 	//	auto sprite = std::make_shared<Sprite2D>(i, mesh_center, texture2);
 	//	sprite->SetPosition((float)GetInt(0, 960), (float)GetInt(0, 540), 0.f);
 	//	sprite->SetRotation(0.0f);
-	//	sprite->SetScale(412.f, 360.f);
+	//	sprite->SetSize(412.f, 360.f);
 	//	m_batchRenderer->AddObject(sprite);
 	//}
 
