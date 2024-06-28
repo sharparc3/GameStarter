@@ -147,11 +147,13 @@ int Game::GameInit()
     SoundPlayer::Construct();
     SoundPlayer::GetInstance()->Init();
     GameStateMachine::GetInstance()->Init();
-    GSM()->PushState(GameStateType::STATE_INTRO);
 
     RESOURCE()->LoadMesh("quad.nfg");
     RESOURCE()->LoadMesh("quad_center.nfg");
+    RESOURCE()->LoadShader("quad");
+    RESOURCE()->LoadShader("animation");
 
+    GSM()->PushState(GameStateType::STATE_INTRO);
 
     return 0;
 }
