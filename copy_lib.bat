@@ -1,10 +1,13 @@
 @echo off
 
 set sourceDir=.\Lib
-set destDir=.\BIN\x64\Debug
+set destDebugDir=.\BIN\x64\Debug
+set destReleaseDir=.\BIN\x64\Release
 
-if not exist %destDir% mkdir %destDir%
+if not exist %destDebugDir% mkdir %destDebugDir%
+if not exist %destReleaseDir% mkdir %destReleaseDir%
 
-copy %sourceDir%\*.dll %destDir%
+copy %sourceDir%\*.dll %destDebugDir%
+copy %sourceDir%\*.dll %destReleaseDir%
 
 echo DLL files copied successfully.

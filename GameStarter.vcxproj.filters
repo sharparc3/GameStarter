@@ -171,6 +171,9 @@
     <ClInclude Include="src\BaseObject.h">
       <Filter>GameStarter\GameMaterials\GameComponents</Filter>
     </ClInclude>
+    <ClInclude Include="src\Collision.h">
+      <Filter>GameStarter\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\quad.frag">

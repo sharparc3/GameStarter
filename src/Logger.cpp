@@ -62,3 +62,16 @@ void LogSuccess(const char* format, ...)
     va_end(args);
     printf("\n" RESET);
 }
+
+void Log(const char* format, ...)
+{
+    // Initialize the argument list
+    va_list args;
+    va_start(args, format);
+
+    // Print the formatted error message to stderr
+    vfprintf(stdout, format, args);
+
+    // Clean up the argument list
+    va_end(args);
+}

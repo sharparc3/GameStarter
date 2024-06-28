@@ -22,3 +22,4 @@ void LogError(const char* format, ...);
 void LogInfo(const char* format, ...);
 void LogWarning(const char* format, ...);
 void LogSuccess(const char* format, ...);
+void Log(const char* format, ...);

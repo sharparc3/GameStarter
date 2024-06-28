@@ -5,6 +5,7 @@
 class Renderer;
 class Camera;
 class Sprite2D;
+class Sound;
 
 class GSIntro final : public GameStateBase
 {
@@ -39,8 +40,5 @@ public:
 	void ImGuiDraw() override;
 
 private:
-	std::shared_ptr<Sprite2D> m_sprite, m_sprite2;
-	std::shared_ptr<Renderer> m_renderer;
-	std::shared_ptr<Camera> m_camera;
-	short joyLeftX, joyLeftY, joyRightX, joyRightY;
+
 };
