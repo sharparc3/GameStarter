@@ -169,10 +169,6 @@ void Game::CleanUp()
     }
 
     // free singleton classes
-    while (GSM()->HasState())
-    {
-
-    }
     GSM()->CleanUp();
     GameStateMachine::Destruct();
     RESOURCE()->FreeAllResources();
