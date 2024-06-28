@@ -118,33 +118,22 @@ void GSIntro::OnControllerDisconnected()
 
 void GSIntro::OnControllerLeftJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
 {
-    joyLeftX = joystickEvent.value;
-    glm::vec2 directionVec(joyLeftX, joyLeftY);
-    directionVec = glm::normalize(directionVec);
+
 
 }
 
 void GSIntro::OnControllerLeftJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
 {
-    joyLeftY = joystickEvent.value;
-    glm::vec2 directionVec(joyLeftX, joyLeftY);
-    directionVec = glm::normalize(directionVec);
 
 }
 
 void GSIntro::OnControllerRightJoystickMotionX(const SDL_ControllerAxisEvent& joystickEvent)
 {
-    joyRightX = joystickEvent.value;
-    glm::vec2 directionVec(joyRightX, joyRightY);
-    directionVec = glm::normalize(directionVec);
 
 }
 
 void GSIntro::OnControllerRightJoystickMotionY(const SDL_ControllerAxisEvent& joystickEvent)
 {
-    joyRightY = joystickEvent.value;
-    glm::vec2 directionVec(joyRightX, joyRightY);
-    directionVec = glm::normalize(directionVec);
 
 }
 

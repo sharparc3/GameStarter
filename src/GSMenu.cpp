@@ -13,6 +13,7 @@
 
 #include <random>
 #include <chrono>
+#include "Logger.h"
 
 GSMenu::~GSMenu()
 {

@@ -74,4 +74,5 @@ void Log(const char* format, ...)
 
     // Clean up the argument list
     va_end(args);
+    printf("\n");
 }

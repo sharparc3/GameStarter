@@ -41,6 +41,6 @@ public:
 	void OnLeftTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent) override;
 	void OnRightTriggerMotion(const SDL_ControllerAxisEvent& triggerEvent) override;
 
-private
+private:
 
 };

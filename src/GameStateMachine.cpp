@@ -37,14 +37,17 @@ void GameStateMachine::PushState(GameStateType stateType)
 
 void GameStateMachine::PopState()
 {
-    if (m_stateStack.empty()) return;
+    if (m_stateStack.empty())
+    {
+        m_exit = true;
+        return;
+    }
 
     m_pActiveState->Exit();
     m_stateStack.pop();
     if (m_stateStack.empty())
     {
         m_pActiveState = nullptr;
-        m_exit = true;
     }
     else
     {
