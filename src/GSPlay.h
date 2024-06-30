@@ -1,5 +1,17 @@
 #pragma once
+
+#include <memory>
+
 #include "GameStateBase.h"
+
+class SpriteAnimation;
+class Renderer;
+class SpriteRenderer;
+class AnimationRenderer;
+class Camera;
+class BatchRenderer;
+class Sound;
+class Text;
 
 class GSPlay final : public GameStateBase
 {

@@ -1,11 +1,17 @@
 #pragma once
-#include <iostream>
+
+#include <memory>
+
 #include "GameStateBase.h"
 
+class SpriteAnimation;
 class Renderer;
+class SpriteRenderer;
+class AnimationRenderer;
 class Camera;
-class Sprite2D;
+class BatchRenderer;
 class Sound;
+class Text;
 
 class GSIntro final : public GameStateBase
 {

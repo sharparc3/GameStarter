@@ -13,12 +13,12 @@ class BatchRenderer;
 class Sound;
 class Text;
 
-class GSMenu final : public GameStateBase
+class GSTemplate final : public GameStateBase
 {
 public:
 	using GameStateBase::GameStateBase;
-	GSMenu() = delete;
-	~GSMenu() override;
+	GSTemplate() = delete;
+	~GSTemplate() override;
 
 	void Init() override;
 	void Update(float deltaTime) override;
