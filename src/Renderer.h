@@ -2,7 +2,8 @@
 
 #include <glad/glad.h>
 #include <memory>
-#include <map>
+#include <string>
+#include <queue>
 
 class BaseObject;
 class Camera;
@@ -70,14 +71,20 @@ public:
 	 */
 	virtual void Render(bool frustumCulling = true);
 
+	const std::string& GetRendererType() const
+	{
+		return m_rendererType;
+	}
+
 protected:
 	/**
 	 * @brief Default constructor for custom renderer.
 	 */
 	Renderer();
-	std::map<GLuint, std::shared_ptr<BaseObject>> m_RenderObjects;		///< Map of objects to render, keyed by their ID.
+	std::queue<std::shared_ptr<BaseObject>> m_RenderObjects;		///< Map of objects to render, keyed by their ID.
 	std::shared_ptr<Camera> m_camera;									///< The camera used for rendering.
 	std::shared_ptr<Shader> m_shader;									///< The shader used for rendering.
+	std::string m_rendererType;
 };
 
 
