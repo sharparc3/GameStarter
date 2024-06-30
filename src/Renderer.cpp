@@ -14,7 +14,7 @@ Renderer::Renderer(const std::shared_ptr<Camera> camera, const std::shared_ptr<S
 
 Renderer::~Renderer()
 {
-	m_RenderObjects.clear();
+	ClearRenderer();
 }
 
 void Renderer::SetShader(const std::shared_ptr<Shader> shader)
@@ -29,22 +29,47 @@ void Renderer::SetCamera(const std::shared_ptr<Camera> camera)
 
 void Renderer::AddObject(const std::shared_ptr<BaseObject> object)
 {
-	m_RenderObjects[object->GetID()] = object;
+	m_RenderObjects.push(object);
 }
 
 void Renderer::RemoveObject(const std::shared_ptr<BaseObject> object)
 {
-	m_RenderObjects.erase(object->GetID());
+	std::queue<std::shared_ptr<BaseObject>> newQueue;
+
+	while (!m_RenderObjects.empty()) 
+	{
+		auto& currentObject = m_RenderObjects.front();
+		m_RenderObjects.pop();
+		if (currentObject != object) 
+		{
+			newQueue.push(currentObject);
+}
+	}
+
+	std::swap(m_RenderObjects, newQueue);
 }
 
 void Renderer::RemoveObject(GLuint id)
 {
-	m_RenderObjects.erase(id);
+	std::queue<std::shared_ptr<BaseObject>> newQueue;
+
+	while (!m_RenderObjects.empty()) 
+	{
+		auto& currentObject = m_RenderObjects.front();
+		m_RenderObjects.pop();
+		if (currentObject->GetID() != id)
+		{
+			newQueue.push(currentObject);
+}
+	}
+
+	std::swap(m_RenderObjects, newQueue);
 }
 
 void Renderer::ClearRenderer()
 {
-	m_RenderObjects.clear();
+	std::queue<std::shared_ptr<BaseObject>> empty;
+	std::swap(m_RenderObjects, empty);
 }
 
 void Renderer::Render(bool frustumCulling)
@@ -61,11 +86,13 @@ void Renderer::Render(bool frustumCulling)
 
 	OrthoFrustum cameraFrustum = m_camera->GetCameraFrustum();
 
-	for (auto& obj : m_RenderObjects)
+	while (!m_RenderObjects.empty())
 	{
-		if (obj.second->m_needCalculateWorldMatrix)
+		auto& obj = m_RenderObjects.front();
+		m_RenderObjects.pop();
+		if (obj->m_needCalculateWorldMatrix)
 		{
-			obj.second->RecalculateWorldMatrix();
+			obj->RecalculateWorldMatrix();
 		}
 
 		if (frustumCulling)
@@ -83,7 +110,7 @@ void Renderer::Render(bool frustumCulling)
 				return isVisible;
 				};
 
-			bool isVisible = isObjectVisible(obj.second->GetPosition(), obj.second->GetScale());
+			bool isVisible = isObjectVisible(obj->GetPosition(), obj->GetScale());
 			if (!isVisible)
 			{
 				//LogInfo("Culled object with id: %d", obj.second->GetID());
@@ -92,13 +119,13 @@ void Renderer::Render(bool frustumCulling)
 		}
 
 		// bind VAO
-		GLuint VAOid = obj.second->m_mesh->GetVAOId();
+		GLuint VAOid = obj->m_mesh->GetVAOId();
 		glBindVertexArray(VAOid);
 
 		if (lastTexture != obj.second->m_texture)
 		{
 			// bind texture
-			obj.second->m_texture->Bind();
+			obj->m_texture->Bind();
 		}
 
 		// send WVP matrix uniform data
@@ -107,7 +134,7 @@ void Renderer::Render(bool frustumCulling)
 		{
 			// get the world matrix
 			// and perform calculating MVP matrix on CPU side
-			auto worldMatrix = obj.second->GetWorldMatrix();
+			auto worldMatrix = obj->GetWorldMatrix();
 			auto viewMatrix = m_camera->GetViewMatrix();
 			auto projectionMatrix = m_camera->GetProjectionMatrix();
 			worldMatrix = projectionMatrix * viewMatrix * worldMatrix;
@@ -115,10 +142,10 @@ void Renderer::Render(bool frustumCulling)
 		}
 
 		// let object send other uniform data
-		obj.second->SendUniformData(uniformLocs);
+		obj->SendUniformData(uniformLocs);
 
 		// Draw	
-		glDrawElements(GL_TRIANGLES, obj.second->m_mesh->GetNumIndices(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, obj->m_mesh->GetNumIndices(), GL_UNSIGNED_INT, 0);
 	}
 
 	glBindVertexArray(0);
@@ -135,6 +162,7 @@ SpriteRenderer::SpriteRenderer()
 	m_camera = std::make_shared<Camera>();
 	m_camera->SetOrthographicProjection(0.f, (float)GAME()->GetWindowWidth(), 0.f, (float)GAME()->GetWindowHeight());
 	m_shader = RESOURCE()->GetShader("quad");
+	m_rendererType = "sprite_renderer";
 }
 
 AnimationRenderer::AnimationRenderer()
@@ -142,4 +170,5 @@ AnimationRenderer::AnimationRenderer()
 	m_camera = std::make_shared<Camera>();
 	m_camera->SetOrthographicProjection(0.f, (float)GAME()->GetWindowWidth(), 0.f, (float)GAME()->GetWindowHeight());
 	m_shader = RESOURCE()->GetShader("animation");
+	m_rendererType = "animation_renderer";
 }
