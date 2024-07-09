@@ -178,7 +178,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Lib\;$(SolutionDir)\Prj\imgui\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>soloud_static.lib;box2d.lib;SDL2_mixer.lib;SDL2_ttf.lib;glad.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;vld.lib;imgui.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>soloud_static.lib;box2d_D.lib;SDL2_mixer.lib;SDL2_ttf.lib;glad.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;vld.lib;imgui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -198,7 +198,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Lib\;$(SolutionDir)\Prj\imgui\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>soloud_static.lib;box2d.lib;SDL2_mixer.lib;SDL2_ttf.lib;glad.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;vld.lib;imgui.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>soloud_static.lib;box2d_R.lib;SDL2_mixer.lib;SDL2_ttf.lib;glad.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;vld.lib;imgui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
