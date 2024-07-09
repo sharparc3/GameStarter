@@ -59,18 +59,21 @@ void Text::SetText(const std::string& newText)
 {
 	m_text = newText;
 	m_textNeedUpdate = true;
+	UpdateText();
 }
 
 void Text::SetFontSize(int fontSize)
 {
 	m_fontSize = fontSize;
 	m_textNeedUpdate = true;
+	UpdateText();
 }
 
 void Text::SetColor(const SDL_Color& color)
 {
 	m_color = color;
 	m_textNeedUpdate = true;
+	UpdateText();
 }
 
 void Text::SetFilterMode(int filtermode)
@@ -80,12 +83,14 @@ void Text::SetFilterMode(int filtermode)
 		m_filterMode = filtermode;
 		m_textNeedUpdate = true;
 	}
+	UpdateText();
 }
 
 void Text::SetFont(TTF_Font* font)
 {
 	m_font = font;
 	m_textNeedUpdate = true;
+	UpdateText();
 }
 
 const std::string& Text::GetText() const
